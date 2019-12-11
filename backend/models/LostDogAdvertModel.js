@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
+const schema = require('./schemas/AdvertSchema');
 
-// TODO Описать схему и методы модели
-
-module.exports = mongoose.model('LostDogAdvert', LostDogAdvertSchema)
+module.exports = mongoose.model('LostDogAdvert', schema);
