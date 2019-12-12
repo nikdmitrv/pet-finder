@@ -56,25 +56,25 @@ class FoundForm extends Component {
             <div>{this.state.message}</div>
             <form onSubmit={this.handleSubmit}>
                 <label for='dog-breed'>Порода:</label>
-                <input name='dogBreed' id='dog-breed' type='text' />
+                <input onChange={this.handleInput} name='dogBreed' id='dog-breed' type='text' />
 
                 <label for='dog-description'>Описание:</label>
-                <input name='dogDescription' id='dog-description' type='text' />
+                <input onChange={this.handleInput} name='dogDescription' id='dog-description' type='text' />
 
                 <label for='dog-sex'>Пол:</label>
-                <input name='dogSex' id='dog-sex' />
+                <input onChange={this.handleInput} name='dogSex' id='dog-sex' />
 
                 <label for='author-name'>Имя:</label>
-                <input name='authorName' id='author-name' />
+                <input onChange={this.handleInput} name='authorName' id='author-name' />
 
                 <label for='author-email'>Email:</label>
-                <input name='authorEmail' id='author-email' />
+                <input onChange={this.handleInput} name='authorEmail' id='author-email' />
 
                 <label for='author-phoneNumber'>Телефонный номер:</label>
-                <input name='authorPhoneNumber' id='author-phoneNumber' />
+                <input onChange={this.handleInput} name='authorPhoneNumber' id='author-phoneNumber' />
 
                 <label for='author-address'>Адрес:</label>
-                <input name='authorAddress' id='author-address' />
+                <input onChange={this.handleInput} name='authorAddress' id='author-address' />
 
                 <button>Submit</button>
             </form>
