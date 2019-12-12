@@ -5,6 +5,11 @@ class LostAdd extends Component {
         super(props);
         
     }
+handleInput = (event) =>{
+    const data = {}
+    data 
+}
+
 handleSubmit=(e)=>{
     this.setState({
         Animal:{
