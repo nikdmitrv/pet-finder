@@ -55,25 +55,25 @@ class FoundForm extends Component {
         return (<div>
             <div>{this.state.message}</div>
             <form onSubmit={this.handleSubmit}>
-                <label for='dog-breed'>Breed:</label>
+                <label for='dog-breed'>Порода:</label>
                 <input name='dogBreed' id='dog-breed' type='text' />
 
-                <label for='dog-description'>Description:</label>
+                <label for='dog-description'>Описание:</label>
                 <input name='dogDescription' id='dog-description' type='text' />
 
-                <label for='dog-sex'>Sex:</label>
+                <label for='dog-sex'>Пол:</label>
                 <input name='dogSex' id='dog-sex' />
 
-                <label for='author-name'>Name:</label>
+                <label for='author-name'>Имя:</label>
                 <input name='authorName' id='author-name' />
 
                 <label for='author-email'>Email:</label>
                 <input name='authorEmail' id='author-email' />
 
-                <label for='author-phoneNumber'>Phone number:</label>
+                <label for='author-phoneNumber'>Телефонный номер:</label>
                 <input name='authorPhoneNumber' id='author-phoneNumber' />
 
-                <label for='author-address'>Adress:</label>
+                <label for='author-address'>Адрес:</label>
                 <input name='authorAddress' id='author-address' />
 
                 <button>Submit</button>
