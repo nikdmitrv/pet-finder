@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     const newAdvert = new FoundDogAdvertModel(
         {
             dogData: new Animal(
-                dogData.breed,git,
+                dogData.breed,
                 dogData.description,
                 dogData.sex
             ),

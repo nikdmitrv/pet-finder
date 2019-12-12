@@ -2,16 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchFoundDogsAC } from "../../redux/actions";
 
-export default class FoundDogsList extends Component {
-  state = {
-    foundDogsList: []
-  };
+class FoundDogsList extends Component {
   componentDidMount() {
-    // this.props.requestFoundDogs();
-    fetch("/api/found")
-      .then(response => response.json())
-      .then(result => this.setState({ foundDogsList: result }))
-      .catch(error => error);
+    this.props.requestFoundDogs();
   }
 
   renderList(advert) {
@@ -35,23 +28,23 @@ export default class FoundDogsList extends Component {
   render() {
     return (
       <ul>
-        {this.state.foundDogsList &&
-          this.state.foundDogsList.map(advert => this.renderList(advert))}
+        {this.props.foundDogsList &&
+          this.props.foundDogsList.map(advert => this.renderList(advert))}
       </ul>
     );
   }
 }
 
-// function mapStateToProps(store) {
-//   return {
-//     foundDogsList: store.foundDogsList
-//   };
-// }
+function mapStateToProps(store) {
+  return {
+    foundDogsList: store.foundDogsList
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     requestFoundDogs: () => dispatch(fetchFoundDogsAC())
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    requestFoundDogs: () => dispatch(fetchFoundDogsAC())
+  };
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(FoundDogsList);
+export default connect(mapStateToProps, mapDispatchToProps)(FoundDogsList);
