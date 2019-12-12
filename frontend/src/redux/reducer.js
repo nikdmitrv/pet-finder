@@ -1,4 +1,9 @@
-import { ADD_LOST_DOG, REQUEST_LOST_DOGS } from "./types";
+import {
+  ADD_LOST_DOG,
+  ADD_FOUND_DOG,
+  REQUEST_LOST_DOGS,
+  REQUEST_FOUND_DOGS
+} from "./types";
 
 const initialState = {
   lostDogsList: [],
@@ -11,6 +16,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         lostDogsList: action.lostDogsList
+      };
+    }
+    case REQUEST_FOUND_DOGS: {
+      return {
+        ...state,
+        foundDogsList: action.foundDogsList
+      };
+    }
+    case ADD_FOUND_DOG: {
+      return {
+        ...state
       };
     }
     default:
