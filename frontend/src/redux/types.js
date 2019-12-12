@@ -1,1 +1,2 @@
 export const ADD_LOST_DOG = "ADD_LOST_DOG";
+export const REQUEST_LOST_DOGS = "REQUEST_LOST_DOGS";

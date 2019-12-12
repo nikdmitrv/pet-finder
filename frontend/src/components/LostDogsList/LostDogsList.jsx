@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class LostDogsList extends Component {
+  componentDidMount() {
+    this.props.requestLostDogs();
+  }
   render() {
     return (
       <ul>
@@ -23,4 +27,10 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps)(LostDogsList);
+function mapDispatchToProps(dispatch) {
+  return {
+    requestLostDogs: () => dispatch(requestLostDogsAC())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LostDogsList);
