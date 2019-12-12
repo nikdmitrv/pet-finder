@@ -1,16 +1,16 @@
 const express = require('express');
 
-const FoundDogAdvertModel = require('../../models/FoundDogAdvertModel')
+const LostDogAdvertModel = require('../../models/LostDogAdvertModel')
 const { Animal, Author } = require('../../models/schemas/AdvertSchema')
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    res.json(await FoundDogAdvertModel.getAll());
+    res.json(await LostDogAdvertModel.getAll());
 })
 
 router.post('/', async (req, res) => {
     const { dogData, authorData } = req.body
-    const newAdvert = new FoundDogAdvertModel(
+    const newAdvert = new LostDogAdvertModel(
         {
             dogData: new Animal(
                 dogData.breed,git,
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
             res.json({ status: true, message: 'Saved!', newAdvert });
         })
         .catch((err) => {
-            res.json({ status: false, message: err })
+            res.json({ statis: false, message: err })
         })
 })
 
