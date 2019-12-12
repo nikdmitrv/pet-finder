@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { requestLostDogsAC } from "../../redux/actions";
 
 class LostDogsList extends Component {
   componentDidMount() {
