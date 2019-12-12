@@ -84,7 +84,7 @@ class FoundForm extends Component {
 
 mapDispatchToProps = (dispatch) => {
     return {
-        createAdvert: () => createFoundAdvertAC(dispatch)
+        createAdvert: advert => dispatch(createFoundAdvertAC(advert))
     }
 }
 
