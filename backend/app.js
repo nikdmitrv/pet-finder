@@ -7,7 +7,8 @@ mongoose.connect("mongodb://localhost/pet-finder", {
     useUnifiedTopology: true
 });
 
-const dogsAPIRouter = require('./routes/dogsAPI');
+const dogsFoundRouter = require('./routes/adverts/found');
+const dogsLostRouter = require('./routes/adverts/lost')
 
 const app = express();
 
@@ -19,7 +20,8 @@ app.use(logger('dev'));
 // Установка заголовков запросов
 app.use(require('./middleware/headers'));
 
-app.use('/api', dogsAPIRouter);
+app.use('/api/found', dogsFoundRouter);
+app.use('/api/lost', dogsLostRouter);
 
 
 module.exports = app;
