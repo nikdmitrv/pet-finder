@@ -5,7 +5,7 @@ const { Animal, Author } = require('../../models/schemas/AdvertSchema')
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    res.json(FoundDogAdvertModel.getAll());
+    res.json(await FoundDogAdvertModel.getAll());
 })
 
 router.post('/', async (req, res) => {
