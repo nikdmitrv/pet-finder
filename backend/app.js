@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost/pet-finder", {
 });
 
 const dogsFoundRouter = require('./routes/adverts/found');
-const dogsLostRouter = require('./routes/adverts/lost')
+const dogsLostRouter = require('./routes/adverts/lost');
 
 const app = express();
 

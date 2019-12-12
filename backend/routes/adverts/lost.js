@@ -9,11 +9,12 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    
     const { dogData, authorData } = req.body
     const newAdvert = new LostDogAdvertModel(
         {
             dogData: new Animal(
-                dogData.breed,git,
+                dogData.breed,
                 dogData.description,
                 dogData.sex
             ),
