@@ -6,9 +6,9 @@ const { Animal, Author } = require('../schemas/AdvertSchema')
 
 
 const userSchema = new mongoose.Schema({
-    login: String,
+    name: String,
     password: String,
-    contacts: String,
+    email: String,
     myAdverts: [{ type: ObjectId, ref: "Advert" }],
 
 });
