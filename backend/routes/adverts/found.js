@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
             res.json({ status: true, message: 'Saved!', newAdvert });
         })
         .catch((err) => {
-            res.json({ statis: false, message: err })
+            res.json({ status: false, message: err })
         })
 })
 
