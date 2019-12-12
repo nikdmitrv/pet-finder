@@ -22,5 +22,26 @@ const AdvertSchema = mongoose.Schema({
     createdAt: Date,
 });
 
+class Animal {
+    constructor(breed, description, sex) {
+        this.breed = breed;
+        this.description = description
+        this.sex = sex
+    }
+}
 
-module.exports = AdvertSchema;
+class Author {
+    constructor(name, email, phoneNumber, address) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+}
+
+AdvertSchema.statics.getAll = async function () {
+    return await this.find();
+}
+
+
+module.exports = { AdvertSchema, Animal, Author };

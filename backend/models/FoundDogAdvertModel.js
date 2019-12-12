@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
-const schema = require('./schemas/AdvertSchema');
+const { AdvertSchema } = require('./schemas/AdvertSchema');
 
-module.exports = mongoose.model('FoundDogAdvert', schema);
+module.exports = mongoose.model('FoundDogAdvert', AdvertSchema);
