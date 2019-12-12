@@ -9,7 +9,8 @@ class FoundForm extends Component {
 
     handleInput = (event) => {
         const data = {}
-        data[field] = event.target.name
+        const field = event.target.name
+        data[field] = event.target.value
         this.setState(data)
     }
 
