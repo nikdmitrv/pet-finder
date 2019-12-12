@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createFoundAdvertAC } from '../../redux/actions';
 
 class FoundForm extends Component {
     state = {
@@ -17,7 +19,7 @@ class FoundForm extends Component {
         const { dogBreed, dogDescription, dogSex,
             authorName, authorEmail, authorPhoneNumber, authorAddress } = this.state
 
-        const body = JSON.stringify({
+        const advert = JSON.stringify({
             dogData: {
                 breed: dogBreed,
                 description: dogDescription,
@@ -32,17 +34,21 @@ class FoundForm extends Component {
             createdAt: Date.now(),
         })
 
-        const request = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body,
-        }
+        this.props.createAdvert(advert);
 
-        fetch('/api/found', request)
-            .then((response) => response.json())
-            .then((data) => this.setState({ message: data.message }))
+
+
+        // const request = {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body,
+        // }
+
+        // fetch('/api/found', request)
+        //     .then((response) => response.json())
+        //     .then((data) => this.setState({ message: data.message }))
     }
 
     render() {
@@ -76,4 +82,10 @@ class FoundForm extends Component {
     }
 }
 
-export default FoundForm;
+mapDispatchToProps = (dispatch) => {
+    return {
+        createAdvert: () => createFoundAdvertAC(dispatch)
+    }
+}
+
+export default connect(null, mapDispatchToProps)(FoundForm);
