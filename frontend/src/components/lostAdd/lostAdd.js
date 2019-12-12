@@ -1,64 +1,78 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 class LostAdd extends Component {
-    constructor(props) {
-        super(props);
-        
+    state ={
+        message: null
     }
-handleInput = (event) =>{
+
+
+
+handleInput = (event) => {
     const data = {}
-    data 
+    const field = event.target.name
+    data[field] = event.target.value
+    this.setState(data);
 }
 
-handleSubmit=(e)=>{
-    this.setState({
-        Animal:{
-        breed: e.target.value,
-        description: e.target.value,
-        sex: e.target.value,
-        },
-        Author:{
-            name: e.target.value,
-            email: e.target.value,
-            phoneNumber: e.target.value,
-            address: e.target.value,
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        const { dogBreed, dogDescription, dogSex,
+            authorName, authorEmail, authorPhoneNumber, authorAddress } = this.state
+
+        const advert = {
+            dogData: {
+                breed: dogBreed,
+                description: dogDescription,
+                sex: dogSex,
+            },
+            authorData: {
+                name: authorName,
+                email: authorEmail,
+                phoneNumber: authorPhoneNumber,
+                adress: authorAddress,
+            }
         }
-    })
-    console.log(this.state);
-}
+    axios.post('api/lost', advert)
+    .then(res=>console.log("собака на месте ")
+    )
     
+}
 
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.handleSubmit} >
-                    <label>Порода</label>
-                    <input name="breed" type="text"
-                    value={this..breed}
-                    />
-                    <label>Описание собаки</label>
-                    <input name="description" type="text"
-                    value={this.state.Animal.description} />
-                    <lebel>Пол</lebel>
-                    <input name="sex" type="text"
-                    value={this.state.Animal.sex}/>
-                    <lebel>Ваше Имя</lebel>
-                    <input name="name" type="text"
-                    value={this.state.Author.name}/>
-                    <lebel>Ваш email</lebel>
-                    <input name="email" type="text"
-                    value={this.state.Author.email}/>
-                    <lebel>Ваш номер телефона</lebel>
-                    <input name="phoneNumber" type="text"
-                    value={this.state.Author.phoneNumber}/>
-                    <lebel>Где был найден пес</lebel>
-                    <input name="adress" type="text"
-                    value={this.state.Author.address}/>
-                </form>
-            </div>
-        )
-    }
+
+render() {
+    return (
+        <div>
+               <form onSubmit={this.handleSubmit}>
+                <label for='dog-breed'>Порода:</label>
+                <input onChange={this.handleInput} name='dogBreed' id='dog-breed' type='text' />
+
+                <label for='dog-description'>Описание:</label>
+                <input onChange={this.handleInput} name='dogDescription' id='dog-description' type='text' />
+
+                <label for='dog-sex'>Пол:</label>
+                <input onChange={this.handleInput} name='dogSex' id='dog-sex' />
+
+                <label for='author-name'>Имя:</label>
+                <input onChange={this.handleInput} name='authorName' id='author-name' />
+
+                <label for='author-email'>Email:</label>
+                <input onChange={this.handleInput} name='authorEmail' id='author-email' />
+
+                <label for='author-phoneNumber'>Телефонный номер:</label>
+                <input onChange={this.handleInput} name='authorPhoneNumber' id='author-phoneNumber' />
+
+                <label for='author-address'>Адрес:</label>
+                <input onChange={this.handleInput} name='authorAddress' id='author-address' />
+
+                <button>Submit</button>
+            </form>
+            
+        </div>
+    )
+}
 }
 
 

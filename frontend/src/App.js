@@ -5,7 +5,6 @@ import Home from "./components/Home/Home";
 import LostDogsList from "./components/LostDogsList/LostDogsList";
 import FoundDogsList from "./components/FoundDogsList/FoundDogsList";
 import "./App.css";
-import "./components/lostAdd/lostAdd"
 import LostAdd from "./components/lostAdd/lostAdd";
 
 function App() {
@@ -21,6 +20,7 @@ function App() {
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
           <Route exact path="/found-dogs" render={() => <FoundDogsList />} />
+          <Route exact path="/lostAdd" render={() => <LostAdd />} />
         </Switch>
       </div>
     </Router>
