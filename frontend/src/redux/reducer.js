@@ -1,8 +1,8 @@
 import { ADD_LOST_DOG } from "./types";
 
 const initialState = {
-  lostDogList: [],
-  foundDogList: []
+  lostDogsList: [],
+  foundDogsList: []
 };
 
 export default function(state = initialState, action) {

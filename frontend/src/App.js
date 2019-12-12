@@ -10,9 +10,11 @@ function App() {
       <div className="App">
         <nav>
           <Link to="/">Главная</Link>
+          <Link to="/lost-dogs">Объявления о пропаже</Link>
         </nav>
         <Switch>
-          <Route exact path="/" render={props => <Home {...props} />} />
+          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
         </Switch>
       </div>
     </Router>
