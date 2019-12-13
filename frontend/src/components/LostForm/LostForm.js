@@ -14,14 +14,16 @@ class LostForm extends Component {
       authorName,
       authorEmail,
       authorPhoneNumber,
-      authorAddress
+      authorAddress,
+      date
     } = event.target;
 
     const advert = JSON.stringify({
       dogData: {
         breed: dogBreed.value,
         description: dogDescription.value,
-        sex: dogSex.value
+        sex: dogSex.value,
+        date: date.value
       },
       authorData: {
         name: authorName.value,
@@ -83,6 +85,12 @@ class LostForm extends Component {
             onChange={this.handleInput}
             name="authorAddress"
             id="author-address"
+          />
+          <label htmlFor="date-lost">Дата пропажи: </label>
+          <input 
+          type="date"
+          name="date"
+          id="date-lost"
           />
 
           <button>Submit</button>
