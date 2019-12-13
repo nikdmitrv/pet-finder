@@ -43,6 +43,8 @@ class LostDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
+        <div>Дата потери:</div>
+    <div>{advert.dogData.date}</div>
       </li>
     );
   }
