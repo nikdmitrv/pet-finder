@@ -2,7 +2,9 @@ import {
   ADD_LOST_DOG,
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
-  REQUEST_FOUND_DOGS
+  REQUEST_FOUND_DOGS,
+  REGISTER_USER,
+  LOGIN_USER
 } from "./types";
 
 export const requestLostDogsAC = lostDogsList => {
@@ -51,17 +53,17 @@ export const fetchFoundDogsAC = () => {
   };
 };
 
-export const addFoundDogAC = () => {
+export const addFoundDogAC = (dog, message) => {
   return {
-    type: ADD_FOUND_DOG
+    type: ADD_FOUND_DOG,
+    dog,
+    message
   };
 };
 
 export const createFoundAdvertAC = advert => {
   return async dispatch => {
     try {
-      console.log(advert);
-      
       const request = {
         method: "POST",
         headers: {
@@ -70,9 +72,97 @@ export const createFoundAdvertAC = advert => {
         body: advert
       };
       const response = await fetch("/api/found", request);
+      const result = await response.json();
+      if (response.status === 200) {
+        dispatch(addFoundDogAC(result.newAdvert, result.message));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addLostDogAC = (dog, message) => {
+  return {
+    type: ADD_LOST_DOG,
+    dog,
+    message
+  };
+};
+
+export const createLostAdvertAC = advert => {
+  return async dispatch => {
+    try {
+      const response = await fetch("api/lost", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: advert
+      });
       if (response.status === 200) {
         const result = await response.json();
-        dispatch(addFoundDogAC());
+        dispatch(addLostDogAC(result.newAdvert, result.message));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const registerUserAC = message => {
+  return {
+    type: REGISTER_USER,
+    message
+  };
+};
+
+export const requestRegisterAC = user => {
+  return async dispatch => {
+    try {
+      const response = await fetch("users/registration", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: user
+      });
+      if (response.status === 200) {
+        const result = await response.json();
+        dispatch(registerUserAC(result.message));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const loginUserAC = message => {
+  return {
+    type: LOGIN_USER,
+    message
+  };
+};
+
+export const requestLoginAC = user => {
+  return async dispatch => {
+    try {
+      const response = await fetch("users/login", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: user
+      });
+      if (response.status === 200) {
+        const result = await response.json();
+        dispatch(loginUserAC(result.message));
       } else {
         console.log(response);
       }

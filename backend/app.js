@@ -9,6 +9,9 @@ mongoose.connect("mongodb://localhost/pet-finder", {
 
 const dogsFoundRouter = require('./routes/adverts/found');
 const dogsLostRouter = require('./routes/adverts/lost');
+const accountRouter = require('./routes/account/account');
+const RegistrationRouter = require('./routes/users/registration');
+const LoginRouter = require('./routes/users/login');
 
 const app = express();
 
@@ -22,6 +25,9 @@ app.use(require('./middleware/headers'));
 
 app.use('/api/found', dogsFoundRouter);
 app.use('/api/lost', dogsLostRouter);
+app.use('/api/account', accountRouter);
+app.use('/users', RegistrationRouter);
+app.use('/users', LoginRouter);
 
 
 module.exports = app;

@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import { createFoundAdvertAC } from "../../redux/actions";
 
 class FoundForm extends Component {
-  state = {
-    message: null
-  };
-
   handleSubmit = event => {
     event.preventDefault();
 
@@ -41,9 +37,9 @@ class FoundForm extends Component {
   render() {
     return (
       <div>
-        <div>{this.state.message}</div>
+        <div>{this.props.message}</div>
         <form onSubmit={this.handleSubmit}>
-          <label for="dog-breed">Порода:</label>
+          <label htmlFor="dog-breed">Порода:</label>
           <input
             onChange={this.handleInput}
             name="dogBreed"
@@ -51,7 +47,7 @@ class FoundForm extends Component {
             type="text"
           />
 
-          <label for="dog-description">Описание:</label>
+          <label htmlFor="dog-description">Описание:</label>
           <input
             onChange={this.handleInput}
             name="dogDescription"
@@ -59,31 +55,31 @@ class FoundForm extends Component {
             type="text"
           />
 
-          <label for="dog-sex">Пол:</label>
+          <label htmlFor="dog-sex">Пол:</label>
           <input onChange={this.handleInput} name="dogSex" id="dog-sex" />
 
-          <label for="author-name">Имя:</label>
+          <label htmlFor="author-name">Имя:</label>
           <input
             onChange={this.handleInput}
             name="authorName"
             id="author-name"
           />
 
-          <label for="author-email">Email:</label>
+          <label htmlFor="author-email">Email:</label>
           <input
             onChange={this.handleInput}
             name="authorEmail"
             id="author-email"
           />
 
-          <label for="author-phoneNumber">Телефонный номер:</label>
+          <label htmlFor="author-phoneNumber">Телефонный номер:</label>
           <input
             onChange={this.handleInput}
             name="authorPhoneNumber"
             id="author-phoneNumber"
           />
 
-          <label for="author-address">Адрес:</label>
+          <label htmlFor="author-address">Адрес:</label>
           <input
             onChange={this.handleInput}
             name="authorAddress"
@@ -97,10 +93,16 @@ class FoundForm extends Component {
   }
 }
 
+function mapStateToProps(store) {
+  return {
+    message: store.message
+  };
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     createFoundAdvert: advert => dispatch(createFoundAdvertAC(advert))
   };
 };
 
-export default connect(null, mapDispatchToProps)(FoundForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FoundForm);
