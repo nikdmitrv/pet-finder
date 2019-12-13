@@ -1,10 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchLostDogsAC } from "../../redux/actions";
+import FilterForm from "../Filtration/FilterForm";
 
 class LostDogsList extends Component {
+  state = {
+    allAdverts: [],
+  }
+
+  handleFiltration = (options) => {
+    let { allAdverts } = this.state;
+    if (options.byBreed) {
+      allAdverts = allAdverts.filter(advert => advert.dogData.breed === options.byBreed)
+    }
+    if (options.bySex) {
+      allAdverts = allAdverts.filter(advert => advert.dogData.sex === options.bySex)
+    }
+    if (options.byDate) {
+      allAdverts = allAdverts.filter(advert => advert.createdAt === options.byDate)
+    }
+    this.setState({ filtered: allAdverts })
+  }
   componentDidMount() {
     this.props.requestLostDogs();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    !this.state.allAdverts.length && this.setState({ allAdverts: this.props.lostDogsList })
   }
 
   renderList(advert) {
@@ -26,12 +47,17 @@ class LostDogsList extends Component {
     );
   }
   render() {
-    console.log(this.props);
     return (
-      <ul>
-        {this.props.lostDogsList &&
-          this.props.lostDogsList.map(advert => this.renderList(advert))}
-      </ul>
+      <div>
+        <FilterForm handleFiltration={this.handleFiltration} />
+        <ul>
+          {
+            this.state.allAdverts && this.state.filtered
+              ? this.state.filtered.map(advert => this.renderList(advert))
+              : this.state.allAdverts.map(advert => this.renderList(advert))
+          }
+        </ul>
+      </div>
     );
   }
 }
