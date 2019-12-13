@@ -26,8 +26,8 @@ app.use(require('./middleware/headers'));
 app.use('/api/found', dogsFoundRouter);
 app.use('/api/lost', dogsLostRouter);
 app.use('/api/account', accountRouter);
-app.use('/users', RegistrationRouter);
-app.use('/users', LoginRouter);
+app.use('/users/registration', RegistrationRouter);
+app.use('/users/login', LoginRouter);
 
 
 module.exports = app;

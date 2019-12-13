@@ -8,7 +8,7 @@ class Login extends Component {
     message: ""
   };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const user = JSON.stringify({
@@ -22,7 +22,7 @@ class Login extends Component {
       <>
         <h1>Вход в профиль</h1>
         <div>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <p>
               <label>Email</label>
               <input name="email" type="email" required></input>
@@ -50,7 +50,7 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginUser: () => dispatch(requestLoginAC())
+    loginUser: user => dispatch(requestLoginAC(user))
   };
 }
 

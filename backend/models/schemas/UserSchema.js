@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Advert = require("../FoundDogAdvertModel");
+const Found = require("../FoundDogAdvertModel");
+const Lost = require("../LostDogAdvertModel");
 const { ObjectId } = mongoose.Schema.Types;
 const { Animal, Author } = require('../schemas/AdvertSchema')
 
@@ -9,11 +10,12 @@ const userSchema = new mongoose.Schema({
     name: String,
     password: String,
     email: String,
-    myAdverts: [{ type: ObjectId, ref: "Advert" }],
+    myLost: [{ type: ObjectId, ref: "LostDogAdvert" }],
+    myFound: [{ type: ObjectId, ref: "FoundDogAdvert" }],
 
 });
 
-userSchema.methods.addAdvert = async function (
+userSchema.methods.addLost = async function (
     breed,
     description,
     sex,
@@ -23,16 +25,38 @@ userSchema.methods.addAdvert = async function (
     phoneNumber,
     adress,
 ) {
-    let AdvertGenerated = new Advert({
+    let lostGenereted = new Lost({
         dogData: new Animal(breed, description, sex, date),
         authorData: new Author(name,
             email,
             phoneNumber,
             adress)
     });
-    this.myAdverts.push(AdvertGenerated);
-    await AdvertGenerated.save();
+    this.myLost.push(lostGenereted);
+    await lostGenereted.save();
     await this.save();
 };
+userSchema.methods.addFound = async function (
+    breed,
+    description,
+    sex,
+    date,
+    name,
+    email,
+    phoneNumber,
+    adress,
+) {
+let foundGenereted = new Found({
+    dogData: new Animal(breed, description, sex, date),
+    authorData: new Author(name,
+        email,
+        phoneNumber,
+        adress)
+});
+this.myFound.push(foundGenereted);
+await foundGenereted.save();
+await this.save();
+};
+
 
 module.exports = mongoose.model('User', userSchema);
