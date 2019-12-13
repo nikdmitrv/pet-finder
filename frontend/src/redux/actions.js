@@ -3,7 +3,8 @@ import {
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
   REQUEST_FOUND_DOGS,
-  REGISTER_USER
+  REGISTER_USER,
+  LOGIN_USER
 } from "./types";
 
 export const requestLostDogsAC = lostDogsList => {
@@ -123,7 +124,7 @@ export const registerUserAC = message => {
 export const requestRegisterAC = user => {
   return async dispatch => {
     try {
-      const response = await fetch("api/lost", {
+      const response = await fetch("users/registration", {
         method: "POST",
         headers: {
           "content-type": "application/json"
@@ -133,6 +134,35 @@ export const requestRegisterAC = user => {
       if (response.status === 200) {
         const result = await response.json();
         dispatch(registerUserAC(result.message));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const loginUserAC = message => {
+  return {
+    type: LOGIN_USER,
+    message
+  };
+};
+
+export const requestLoginAC = user => {
+  return async dispatch => {
+    try {
+      const response = await fetch("users/login", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: user
+      });
+      if (response.status === 200) {
+        const result = await response.json();
+        dispatch(loginUserAC(result.message));
       } else {
         console.log(response);
       }

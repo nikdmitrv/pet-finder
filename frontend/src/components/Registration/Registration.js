@@ -8,7 +8,7 @@ class Registration extends Component {
     message: ""
   };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     if (event.target.password.value !== event.target.confirmPassword.value) {
       this.setState({ message: "Пароли не совпадают" });
@@ -20,24 +20,24 @@ class Registration extends Component {
       });
       this.props.registerUser(user);
     }
-  }
+  };
   render() {
     return (
       <>
         <h1>Форма регистрация</h1>
         <div>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <p>
               <label>Имя</label>
-              <input name="name"></input>
+              <input name="name" required></input>
             </p>
             <p>
               <label>Email</label>
-              <input name="email" type="email"></input>
+              <input name="email" type="email" required></input>
             </p>
             <p>
               <label>Пароль</label>
-              <input name="password" type="password"></input>
+              <input name="password" type="password" required></input>
             </p>
             <p>
               <label>Подтвердите пароль</label>

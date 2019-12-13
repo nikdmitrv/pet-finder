@@ -3,7 +3,8 @@ import {
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
   REQUEST_FOUND_DOGS,
-  REGISTER_USER
+  REGISTER_USER,
+  LOGIN_USER
 } from "./types";
 
 const initialState = {
@@ -43,6 +44,12 @@ export default function(state = initialState, action) {
       };
     }
     case REGISTER_USER: {
+      return {
+        ...state,
+        message: action.message
+      };
+    }
+    case LOGIN_USER: {
       return {
         ...state,
         message: action.message
