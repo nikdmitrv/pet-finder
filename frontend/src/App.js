@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Home from "./components/Home/Home";
 import Registration from "./components/Registration/Registration";
@@ -12,7 +13,7 @@ import Account from "./components/account/account";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import "./App.css";
 
-function App() {
+function App(props) {
   return (
     <Router>
       <div className="App">
@@ -34,11 +35,21 @@ function App() {
           <Route exact path="/add-lost-dog" render={() => <LostForm />} />
           <Route exact path="/add-found-dog" render={() => <FoundForm />} />
           <Route exact path="/account/:id" component={Account} />
-          <Route exact path="/found-dogs/map" component={FoundDogsMap} />
+          <Route
+            exact
+            path="/found-dogs/map"
+            render={() => <FoundDogsMap foundDogsList={props.foundDogsList} />}
+          />
         </Switch>
       </div>
     </Router>
   );
 }
 
-export default App;
+function mapStateToProps(store) {
+  return {
+    foundDogsList: store.foundDogsList
+  };
+}
+
+export default connect(mapStateToProps)(App);

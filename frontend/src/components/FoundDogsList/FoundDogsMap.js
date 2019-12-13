@@ -1,52 +1,30 @@
 import React, { Component } from "react";
-import { compose, withStateHandlers } from "recompose";
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
-export default class FoundDogsMap extends Component {
-  initMap = () => {
-    const Map = compose(
-      withStateHandlers(
-        () => ({
-          isMarkerShown: false,
-          markerPosition: null
-        }),
-        {
-          onMapClick: ({ isMarkerShown }) => e => ({
-            markerPosition: e.latLng,
-            isMarkerShown: true
-          })
-        }
-      ),
-      withScriptjs,
-      withGoogleMap
-    )(props => (
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 55.752376, lng: 37.6722358 }}
-        onClick={props.onMapClick}
-      >
-        {props.isMarkerShown && <Marker position={props.markerPosition} />}
-      </GoogleMap>
-    ));
-    return Map;
-  };
-
+class FoundDogsMap extends Component {
   render() {
-    const Map = this.initMap();
+    console.log(this.props);
+
     return (
-      <div style={{ height: "80vh", width: "80vw", padding: "30px" }}>
-        <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU&language=ru&region=RU"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
-      </div>
+      <Map
+        google={this.props.google}
+        zoom={10}
+        style={{ width: "90vw", height: "90vh", margin: "30px" }}
+        initialCenter={{ lat: 55.752376, lng: 37.6722358 }}
+      >
+        {this.props.foundDogsList &&
+          this.props.foundDogsList.map(dog => (
+            <Marker
+              key={dog._id}
+              id={dog._id}
+              position={{ lat: dog.location.lat, lng: dog.location.lng }}
+            />
+          ))}
+      </Map>
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU"
+})(FoundDogsMap);

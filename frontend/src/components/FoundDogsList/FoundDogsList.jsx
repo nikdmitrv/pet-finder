@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { fetchFoundDogsAC } from "../../redux/actions";
