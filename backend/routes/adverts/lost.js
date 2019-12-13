@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const { dogData, authorData, location } = req.body;
   const newAdvert = new LostDogAdvertModel({
-    dogData: new Animal(dogData.breed, dogData.description, dogData.sex),
+    dogData: new Animal(dogData.breed, dogData.description, dogData.sex, dogData.date),
     authorData: new Author(
       authorData.name,
       authorData.email,
