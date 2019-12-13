@@ -2,7 +2,9 @@ import {
   ADD_LOST_DOG,
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
-  REQUEST_FOUND_DOGS
+  REQUEST_FOUND_DOGS,
+  REGISTER_USER,
+  LOGIN_USER
 } from "./types";
 
 const initialState = {
@@ -38,6 +40,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         lostDogsList: [...state.lostDogsList, action.dog],
+        message: action.message
+      };
+    }
+    case REGISTER_USER: {
+      return {
+        ...state,
+        message: action.message
+      };
+    }
+    case LOGIN_USER: {
+      return {
+        ...state,
         message: action.message
       };
     }

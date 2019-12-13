@@ -17,13 +17,14 @@ userSchema.methods.addAdvert = async function (
     breed,
     description,
     sex,
+    date,
     name,
     email,
     phoneNumber,
     adress,
 ) {
     let AdvertGenerated = new Advert({
-        dogData: new Animal(breed, description, sex),
+        dogData: new Animal(breed, description, sex, date),
         authorData: new Author(name,
             email,
             phoneNumber,
