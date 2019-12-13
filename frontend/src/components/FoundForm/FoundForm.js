@@ -13,7 +13,9 @@ class FoundForm extends Component {
       authorName,
       authorEmail,
       authorPhoneNumber,
-      authorAddress
+      authorAddress,
+      locationLat,
+      locationLng
     } = event.target;
 
     const advert = JSON.stringify({
@@ -28,10 +30,15 @@ class FoundForm extends Component {
         phoneNumber: authorPhoneNumber.value,
         adress: authorAddress.value
       },
-      createdAt: Date.now()
+      location: { lat: locationLat.value, lng: locationLng.value }
     });
 
     this.props.createFoundAdvert(advert);
+  };
+
+  getLocation = location => {
+    document.getElementById("location-input-lat").value = location.lat;
+    document.getElementById("location-input-lng").value = location.lng;
   };
 
   render() {
@@ -45,6 +52,7 @@ class FoundForm extends Component {
             name="dogBreed"
             id="dog-breed"
             type="text"
+            required
           />
 
           <label htmlFor="dog-description">Описание:</label>
@@ -53,16 +61,23 @@ class FoundForm extends Component {
             name="dogDescription"
             id="dog-description"
             type="text"
+            required
           />
 
           <label htmlFor="dog-sex">Пол:</label>
-          <input onChange={this.handleInput} name="dogSex" id="dog-sex" />
+          <input
+            onChange={this.handleInput}
+            name="dogSex"
+            id="dog-sex"
+            required
+          />
 
           <label htmlFor="author-name">Имя:</label>
           <input
             onChange={this.handleInput}
             name="authorName"
             id="author-name"
+            required
           />
 
           <label htmlFor="author-email">Email:</label>
@@ -70,6 +85,7 @@ class FoundForm extends Component {
             onChange={this.handleInput}
             name="authorEmail"
             id="author-email"
+            required
           />
 
           <label htmlFor="author-phoneNumber">Телефонный номер:</label>
@@ -77,6 +93,7 @@ class FoundForm extends Component {
             onChange={this.handleInput}
             name="authorPhoneNumber"
             id="author-phoneNumber"
+            required
           />
 
           <label htmlFor="author-address">Адрес:</label>
@@ -84,10 +101,20 @@ class FoundForm extends Component {
             onChange={this.handleInput}
             name="authorAddress"
             id="author-address"
+            required
           />
+
+          <input
+            id="location-input-lat"
+            name="locationLat"
+            hidden
+            required
+          ></input>
+          <input id="location-input-lng" name="locationLng" hidden></input>
 
           <button>Submit</button>
         </form>
+        <Maps getLocation={this.getLocation} />
       </div>
     );
   }
