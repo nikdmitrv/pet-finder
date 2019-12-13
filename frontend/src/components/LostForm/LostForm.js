@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { createLostAdvertAC } from "../../redux/actions";
+import Maps from "../Maps/Maps";
 
 class LostForm extends Component {
   handleSubmit = event => {
@@ -15,7 +16,9 @@ class LostForm extends Component {
       authorEmail,
       authorPhoneNumber,
       authorAddress,
-      date
+      date,
+      locationLat,
+      locationLng
     } = event.target;
 
     const advert = JSON.stringify({
@@ -30,9 +33,15 @@ class LostForm extends Component {
         email: authorEmail.value,
         phoneNumber: authorPhoneNumber.value,
         adress: authorAddress.value
-      }
+      },
+      location: { lat: locationLat.value, lng: locationLng.value }
     });
     this.props.createLostAdvert(advert);
+  };
+
+  getLocation = location => {
+    document.getElementById("location-input-lat").value = location.lat;
+    document.getElementById("location-input-lng").value = location.lng;
   };
 
   render() {
@@ -46,6 +55,7 @@ class LostForm extends Component {
             name="dogBreed"
             id="dog-breed"
             type="text"
+            required
           />
 
           <label htmlFor="dog-description">Описание:</label>
@@ -54,16 +64,23 @@ class LostForm extends Component {
             name="dogDescription"
             id="dog-description"
             type="text"
+            required
           />
 
           <label htmlFor="dog-sex">Пол:</label>
-          <input onChange={this.handleInput} name="dogSex" id="dog-sex" />
+          <input
+            onChange={this.handleInput}
+            name="dogSex"
+            id="dog-sex"
+            required
+          />
 
           <label htmlFor="author-name">Имя:</label>
           <input
             onChange={this.handleInput}
             name="authorName"
             id="author-name"
+            required
           />
 
           <label htmlFor="author-email">Email:</label>
@@ -71,6 +88,7 @@ class LostForm extends Component {
             onChange={this.handleInput}
             name="authorEmail"
             id="author-email"
+            required
           />
 
           <label htmlFor="author-phoneNumber">Телефонный номер:</label>
@@ -78,6 +96,7 @@ class LostForm extends Component {
             onChange={this.handleInput}
             name="authorPhoneNumber"
             id="author-phoneNumber"
+            required
           />
 
           <label htmlFor="author-address">Адрес:</label>
@@ -85,6 +104,7 @@ class LostForm extends Component {
             onChange={this.handleInput}
             name="authorAddress"
             id="author-address"
+            required
           />
           <label htmlFor="date-lost">Дата пропажи: </label>
           <input 
@@ -93,8 +113,17 @@ class LostForm extends Component {
           id="date-lost"
           />
 
-          <button>Submit</button>
+          <input
+            id="location-input-lat"
+            name="locationLat"
+            hidden
+            required
+          ></input>
+          <input id="location-input-lng" name="locationLng" hidden></input>
+
+          <button>Отправить</button>
         </form>
+        <Maps getLocation={this.getLocation} />
       </div>
     );
   }
