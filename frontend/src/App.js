@@ -8,6 +8,7 @@ import LostDogsList from "./components/LostDogsList/LostDogsList";
 import FoundDogsList from "./components/FoundDogsList/FoundDogsList";
 import FoundForm from "./components/FoundForm/FoundForm";
 import LostForm from "./components/LostForm/LostForm";
+import Account from "./components/account/account"
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/found-dogs" render={() => <FoundDogsList />} />
           <Route exact path="/add-lost-dog" render={() => <LostForm />} />
           <Route exact path="/add-found-dog" render={() => <FoundForm />} />
+          <Route exact path="/account" render={() => <Account />} />
         </Switch>
       </div>
     </Router>
