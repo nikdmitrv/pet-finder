@@ -11,6 +11,8 @@ import LostForm from "./components/LostForm/LostForm";
 import Account from "./components/account/account"
 import "./App.css";
 
+import Advert from './components/Advert/Advert';
+
 function App() {
   return (
     <Router>
@@ -33,6 +35,12 @@ function App() {
           <Route exact path="/add-lost-dog" render={() => <LostForm />} />
           <Route exact path="/add-found-dog" render={() => <FoundForm />} />
           <Route exact path="/account" render={() => <Account />} />
+          <Route exact path='/advert/found/:id' render={(props) => {
+            return (<Advert {...props} advertType='found' />)
+          }} />
+          <Route exact path='/advert/lost/:id' render={(props) => {
+            return (<Advert {...props} advertType='lost' />)
+          }} />
         </Switch>
       </div>
     </Router>

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { fetchLostDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
 
+import { Link } from 'react-router-dom'
+
 class LostDogsList extends Component {
   state = {
     allAdverts: [],
@@ -21,6 +23,7 @@ class LostDogsList extends Component {
     }
     this.setState({ filtered: allAdverts })
   }
+
   componentDidMount() {
     this.props.requestLostDogs();
   }
@@ -43,6 +46,7 @@ class LostDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
+        <Link to={'/advert/lost/' + advert._id}>Перейти к объявлению</Link>
       </li>
     );
   }
