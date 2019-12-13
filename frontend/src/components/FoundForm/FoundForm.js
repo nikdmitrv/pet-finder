@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { createFoundAdvertAC } from "../../redux/actions";
+import Maps from "../Maps/Maps";
 
 class FoundForm extends Component {
   handleSubmit = event => {

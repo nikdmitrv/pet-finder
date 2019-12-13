@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { compose, withStateHandlers } from "recompose";
 import {
   withGoogleMap,
@@ -7,7 +7,7 @@ import {
   Marker
 } from "react-google-maps";
 
-export default class MapContainer extends React.Component {
+export default class FoundDogsMap extends Component {
   initMap = () => {
     const Map = compose(
       withStateHandlers(
@@ -31,19 +31,15 @@ export default class MapContainer extends React.Component {
         onClick={props.onMapClick}
       >
         {props.isMarkerShown && <Marker position={props.markerPosition} />}
-        {props.isMarkerShown && null === getMark(props.markerPosition)}
       </GoogleMap>
     ));
-    const getMark = location => {
-      this.props.getLocation({ lat: location.lat(), lng: location.lng() });
-    };
     return Map;
   };
 
   render() {
     const Map = this.initMap();
     return (
-      <div style={{ height: "400px", width: "500px", padding: "30px" }}>
+      <div style={{ height: "80vh", width: "80vw", padding: "30px" }}>
         <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU&language=ru&region=RU"
           loadingElement={<div style={{ height: `100%` }} />}
