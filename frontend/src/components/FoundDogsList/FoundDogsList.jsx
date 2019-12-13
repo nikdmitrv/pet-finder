@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { fetchFoundDogsAC } from "../../redux/actions";
@@ -52,6 +52,7 @@ class FoundDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
+        <Link to={'/advert/found/' + advert._id}>Перейти к объявлению</Link>
       </li>
     );
   }

@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const allFound = await FoundDogAdvertModel.getAll();
+  const allFound = await LostDogAdvertModel.getAll();
   const response = allFound.find(advert => advert.id === req.params.id);
   res.json(response)
 })
