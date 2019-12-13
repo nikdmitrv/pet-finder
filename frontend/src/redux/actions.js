@@ -133,7 +133,7 @@ export const requestRegisterAC = user => {
       });
       if (response.status === 200) {
         const result = await response.json();
-        dispatch(registerUserAC(result.message));
+        dispatch(registerUserAC(result.message, result.currentUser));
       } else {
         console.log(response);
       }
@@ -152,7 +152,7 @@ export const loginUserAC = message => {
 
 export const requestLoginAC = user => {
   return async dispatch => {
-    try {
+    try {      
       const response = await fetch("users/login", {
         method: "POST",
         headers: {
@@ -162,7 +162,8 @@ export const requestLoginAC = user => {
       });
       if (response.status === 200) {
         const result = await response.json();
-        dispatch(loginUserAC(result.message));
+        console.log(result);
+        dispatch(loginUserAC(result.message, result.currentUser));
       } else {
         console.log(response);
       }

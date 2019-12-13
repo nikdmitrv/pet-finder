@@ -19,6 +19,8 @@ class Registration extends Component {
         email: event.target.email.value
       });
       this.props.registerUser(user);
+      console.log();
+      
     }
   };
   render() {
@@ -47,6 +49,7 @@ class Registration extends Component {
               <button type="submit">Отправить</button>
             </p>
             <p>{this.state.message}</p>
+            <p>{this.props.message}</p>
           </form>
         </div>
       </>
@@ -62,7 +65,7 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    registerUser: () => dispatch(requestRegisterAC())
+    registerUser: user => dispatch(requestRegisterAC(user))
   };
 }
 

@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require('../../models/schemas/UserSchema');
 
-router.post('/login', async function (req, res) {
+router.post('/', async function (req, res) {
+    console.log(req.body);
+    
     let emailInput = req.body.email;
     let passwordInput = req.body.password;
     const currentUser=await User.findOne({
@@ -18,7 +20,7 @@ router.post('/login', async function (req, res) {
     } 
   else {
     // req.session.destroy();
-      res.json({ message: "пользователь не существует"}) 
+      res.json({ message: "Неверный email или пароль"}) 
   }});
   
   module.exports = router;

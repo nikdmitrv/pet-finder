@@ -26,13 +26,13 @@ function App() {
         </nav>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/registration" render={() => <Registration />} />
+          <Route exact path="/registration" component={Registration} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
           <Route exact path="/found-dogs" render={() => <FoundDogsList />} />
           <Route exact path="/add-lost-dog" render={() => <LostForm />} />
           <Route exact path="/add-found-dog" render={() => <FoundForm />} />
-          <Route exact path="/account" render={() => <Account />} />
+          <Route exact path="/account/:id" component={Account} />
         </Switch>
       </div>
     </Router>

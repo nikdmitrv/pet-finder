@@ -13,7 +13,7 @@ const AdvertSchema = mongoose.Schema({
         breed: String,
         description: String,
         sex: String,
-        date: Date,
+       
     },
     authorData: {
         name: String,
@@ -29,7 +29,6 @@ class Animal {
         this.breed = breed;
         this.description = description;
         this.sex = sex;
-        this.date = date;
     }
 }
 
