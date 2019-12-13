@@ -31,4 +31,10 @@ router.post("/", async (req, res) => {
     });
 });
 
+router.get('/:id', async (req, res) => {
+  const allFound = await FoundDogAdvertModel.getAll();
+  const response = allFound.find(advert => advert.id === req.params.id);
+  res.json(response)
+})
+
 module.exports = router;
