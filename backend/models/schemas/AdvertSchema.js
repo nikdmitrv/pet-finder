@@ -22,6 +22,7 @@ const AdvertSchema = mongoose.Schema({
         address: String,
     },
     createdAt: Date,
+    location: { lat: Number, lng: Number },
 });
 
 class Animal {
