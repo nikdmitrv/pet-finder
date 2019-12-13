@@ -13,7 +13,7 @@ const AdvertSchema = mongoose.Schema({
         breed: String,
         description: String,
         sex: String,
-       
+        date: Date
     },
     authorData: {
         name: String,
@@ -26,10 +26,11 @@ const AdvertSchema = mongoose.Schema({
 });
 
 class Animal {
-    constructor(breed, description, sex) {
+    constructor(breed, description, sex, date) {
         this.breed = breed;
         this.description = description;
         this.sex = sex;
+        this.date = date;
     }
 }
 

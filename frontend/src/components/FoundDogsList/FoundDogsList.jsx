@@ -52,6 +52,7 @@ class FoundDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
+        <Link to={'/advert/found/' + advert._id}>Перейти к объявлению</Link>
       </li>
     );
   }
