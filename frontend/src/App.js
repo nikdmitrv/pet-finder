@@ -8,7 +8,8 @@ import LostDogsList from "./components/LostDogsList/LostDogsList";
 import FoundDogsList from "./components/FoundDogsList/FoundDogsList";
 import FoundForm from "./components/FoundForm/FoundForm";
 import LostForm from "./components/LostForm/LostForm";
-import Account from "./components/account/account"
+import Account from "./components/account/account";
+import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import "./App.css";
 
 import Advert from './components/Advert/Advert';
@@ -28,17 +29,18 @@ function App() {
         </nav>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/registration" render={() => <Registration />} />
+          <Route exact path="/registration" component={Registration} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
           <Route exact path="/found-dogs" render={() => <FoundDogsList />} />
           <Route exact path="/add-lost-dog" render={() => <LostForm />} />
           <Route exact path="/add-found-dog" render={() => <FoundForm />} />
-          <Route exact path="/account" render={() => <Account />} />
-          <Route exact path='/advert/found/:id' render={(props) => {
+          <Route exact path="/account/:id" component={Account} />
+          <Route exact path="/found-dogs/map" component={FoundDogsMap} />
+          <Route exact path="/advert/found/:id" render={(props) => {
             return (<Advert {...props} advertType='found' />)
           }} />
-          <Route exact path='/advert/lost/:id' render={(props) => {
+          <Route exact path="/advert/lost/:id" render={(props) => {
             return (<Advert {...props} advertType='lost' />)
           }} />
         </Switch>

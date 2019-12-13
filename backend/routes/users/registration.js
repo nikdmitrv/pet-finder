@@ -5,7 +5,7 @@ const User = require('../../models/schemas/UserSchema');
 
 
 
-router.post('/registration', async function (req, res) {
+router.post('/', async function (req, res) {
   const currentUser=await User.findOne({
     email: req.body.email
   })

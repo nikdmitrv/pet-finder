@@ -25,22 +25,22 @@ async function seedall() {
 
 
   let DogOne = await User.findOne({ name: "l1" });
-  await DogOne.addAdvert(
-    "Запись1",
-    "Запись1",
-    "Запись1",
-    "Запись1",
-    "Запись1",
+  await DogOne.addLost(
+    "Чихуа",
+    "Отличный пес",
+    "так себе",
+    "Запись 1",
+    "Олег",
     "Запись1",
     "Запись1",
     
   );
 
-  let DogTwo = await User.findOne({ name: "l2" });
-  await DogOne.addAdvert(
-    "Запись2",
-    "Запись2",
-    "Запись2",
+  let DogTwo = await User.findOne({ name: "l1" });
+  await DogTwo.addFound(
+    "Овчарки",
+    "Умный пес",
+    "Да",
     "Запись2",
     "Запись2",
     "Запись2",

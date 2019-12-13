@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { BrowserRouter as Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 import { fetchFoundDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
 import { Link, Route } from 'react-router-dom';
@@ -7,27 +9,34 @@ import Advert from '../Advert/Advert'
 
 class FoundDogsList extends Component {
   state = {
-    allAdverts: [],
-  }
+    allAdverts: []
+  };
 
-  handleFiltration = (options) => {
+  handleFiltration = options => {
     let { allAdverts } = this.state;
     if (options.byBreed) {
-      allAdverts = allAdverts.filter(advert => advert.dogData.breed === options.byBreed)
+      allAdverts = allAdverts.filter(
+        advert => advert.dogData.breed === options.byBreed
+      );
     }
     if (options.bySex) {
-      allAdverts = allAdverts.filter(advert => advert.dogData.sex === options.bySex)
+      allAdverts = allAdverts.filter(
+        advert => advert.dogData.sex === options.bySex
+      );
     }
     if (options.byDate) {
-      allAdverts = allAdverts.filter(advert => advert.createdAt === options.byDate)
+      allAdverts = allAdverts.filter(
+        advert => advert.createdAt === options.byDate
+      );
     }
-    this.setState({ filtered: allAdverts })
-  }
+    this.setState({ filtered: allAdverts });
+  };
   componentDidMount() {
     this.props.requestFoundDogs();
   }
   componentDidUpdate(prevProps, prevState) {
-    !this.state.allAdverts.length && this.setState({ allAdverts: this.props.foundDogsList })
+    !this.state.allAdverts.length &&
+      this.setState({ allAdverts: this.props.foundDogsList });
   }
 
   renderList(advert) {
@@ -53,12 +62,11 @@ class FoundDogsList extends Component {
     return (
       <div>
         <FilterForm handleFiltration={this.handleFiltration} />
+        <Link to="/found-dogs/map">Посмотреть на карте</Link>
         <ul>
-          {
-            this.state.allAdverts && this.state.filtered
-              ? this.state.filtered.map(advert => this.renderList(advert))
-              : this.state.allAdverts.map(advert => this.renderList(advert))
-          }
+          {this.state.allAdverts && this.state.filtered
+            ? this.state.filtered.map(advert => this.renderList(advert))
+            : this.state.allAdverts.map(advert => this.renderList(advert))}
         </ul>
       </div>
     );
