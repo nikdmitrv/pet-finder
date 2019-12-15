@@ -1,7 +1,33 @@
 import React, { Component } from 'react';
 
 class FilterForm extends Component {
-    state = {}
+    state = {
+        breedOptions: [
+            'affenpinscher', 'african', 'airedale', 'akita',
+            'appenzeller', 'basenji', 'beagle', 'bluetick',
+            'borzoi', 'bouvier', 'boxer', 'brabancon',
+            'briard', 'buhund', 'bulldog', 'bullterrier',
+            'cairn', 'cattledog', 'chihuahua', 'chow',
+            'clumber', 'cockapoo', 'collie', 'coonhound',
+            'corgi', 'cotondetulear', 'dachshund', 'dalmatian',
+            'dane', 'deerhound', 'dhole', 'dingo',
+            'doberman', 'elkhound', 'entlebucher', 'eskimo',
+            'frise', 'germanshepherd', 'greyhound', 'groenendael',
+            'hound', 'husky', 'keeshond', 'kelpie',
+            'komondor', 'kuvasz', 'labrador', 'leonberg',
+            'lhasa', 'malamute', 'malinois', 'maltese',
+            'mastiff', 'mexicanhairless', 'mix', 'mountain',
+            'newfoundland', 'otterhound', 'papillon', 'pekinese',
+            'pembroke', 'pinscher', 'pitbull', 'pointer',
+            'pomeranian', 'poodle', 'pug', 'puggle',
+            'pyrenees', 'redbone', 'retriever', 'ridgeback',
+            'rottweiler', 'saluki', 'samoyed', 'schipperke',
+            'schnauzer', 'setter', 'sheepdog', 'shiba',
+            'shihtzu', 'spaniel', 'springer', 'stbernard',
+            'terrier', 'vizsla', 'waterdog', 'weimaraner',
+            'whippet', 'wolfhound'
+        ]
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -17,12 +43,16 @@ class FilterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <select name='breed'>
+                        <option value=''>Select a breed</option>
+                        {this.state.breedOptions.map((breed) => <option value={breed}>{breed}</option>)}
+                    </select>
 
-                    <label for='breedFilter'>Порода</label>
-                    <input name='breed' id='breedFilter' />
+                    <label for='sexFilterMale'>Male</label>
+                    <input type='radio' name='sex' id='sexFilterMale' value='male' />
+                    <label for='sexFilterFemale'>Female</label>
+                    <input type='radio' name='sex' id='sexFilterFemale' value='female' />
 
-                    <label for='sexFilter'>Пол</label>
-                    <input name='sex' id='sexFilter' />
 
                     <label for='dateFilter'>Дата</label>
                     <input name='date' id='dateFilter' />
