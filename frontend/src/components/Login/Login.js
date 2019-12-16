@@ -8,7 +8,7 @@ class Login extends Component {
     message: ""
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const user = JSON.stringify({
@@ -16,7 +16,8 @@ class Login extends Component {
       email: event.target.email.value
     });
     this.props.loginUser(user);
-  }
+    window.location = "/";
+  };
   render() {
     return (
       <>

@@ -45,16 +45,16 @@ class FilterForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <select name='breed'>
                         <option value=''>Select a breed</option>
-                        {this.state.breedOptions.map((breed) => <option value={breed}>{breed}</option>)}
+                        {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
                     </select>
 
-                    <label for='sexFilterMale'>Male</label>
+                    <label htmlFor='sexFilterMale'>Male</label>
                     <input type='radio' name='sex' id='sexFilterMale' value='male' />
-                    <label for='sexFilterFemale'>Female</label>
+                    <label htmlFor='sexFilterFemale'>Female</label>
                     <input type='radio' name='sex' id='sexFilterFemale' value='female' />
 
 
-                    <label for='dateFilter'>Дата</label>
+                    <label htmlFor='dateFilter'>Дата</label>
                     <input name='date' id='dateFilter' />
 
                     <button>Filter</button>

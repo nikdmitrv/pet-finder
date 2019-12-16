@@ -3,8 +3,9 @@ import {
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
   REQUEST_FOUND_DOGS,
-  REGISTER_USER,
-  LOGIN_USER
+  // REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER
 } from "./types";
 
 export const requestLostDogsAC = lostDogsList => {
@@ -114,12 +115,12 @@ export const createLostAdvertAC = advert => {
   };
 };
 
-export const registerUserAC = message => {
-  return {
-    type: REGISTER_USER,
-    message
-  };
-};
+// export const registerUserAC = message => {
+//   return {
+//     type: REGISTER_USER,
+//     message
+//   };
+// };
 
 export const requestRegisterAC = user => {
   return async dispatch => {
@@ -132,8 +133,8 @@ export const requestRegisterAC = user => {
         body: user
       });
       if (response.status === 200) {
-        const result = await response.json();
-        dispatch(registerUserAC(result.message, result.currentUser));
+        // const result = await response.json();
+        dispatch(loginUserAC());
       } else {
         console.log(response);
       }
@@ -155,6 +156,7 @@ export const requestLoginAC = user => {
     try {
       const response = await fetch("users/login", {
         method: "POST",
+        credentials: "include",
         headers: {
           "content-type": "application/json"
         },
@@ -164,6 +166,63 @@ export const requestLoginAC = user => {
         const result = await response.json();
         console.log(result);
         dispatch(loginUserAC(result.message, result.currentUser));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const logoutUserAC = () => {
+  return { type: LOGOUT_USER };
+};
+
+export const fetchSessionAC = () => {
+  return async dispatch => {
+    try {
+      const response = await fetch("/users/auth", {
+        method: "GET",
+        credentials: "include"
+      });
+      if (response.status === 200) {
+        console.log(response);
+
+        const result = await response.json();
+
+        console.log("fetchSession result: ", result);
+        console.log("logginIn");
+
+        dispatch(loginUserAC());
+      } else {
+        console.log(response);
+        console.log("logginOut");
+
+        dispatch(logoutUserAC());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const requestLogoutAC = () => {
+  return async dispatch => {
+    try {
+      const response = await fetch("/users/logout", {
+        method: "GET",
+        credentials: "include"
+      });
+      if (response.status === 200) {
+        console.log(response);
+
+        const result = await response.json();
+
+        console.log("requestLogout result: ", result);
+        console.log("logginOut");
+
+        dispatch(logoutUserAC());
       } else {
         console.log(response);
       }
