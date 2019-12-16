@@ -40,3 +40,9 @@
     transform: rotate(360deg);
   }
 }
+
+.maps-app {
+  display: block;
+  justify-content: center;
+  flex-direction: column;
+}

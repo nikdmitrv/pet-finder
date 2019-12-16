@@ -11,6 +11,7 @@ import FoundForm from "./components/FoundForm/FoundForm";
 import LostForm from "./components/LostForm/LostForm";
 import Account from "./components/account/account";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
+import LostDogsMap from "./components/LostDogsList/LostDogsMap";
 import "./App.css";
 
 function App(props) {
@@ -40,6 +41,7 @@ function App(props) {
             path="/found-dogs/map"
             render={() => <FoundDogsMap foundDogsList={props.foundDogsList} />}
           />
+          <Route exact path="/lost-dogs/map" render={() => <LostDogsMap />} />
         </Switch>
       </div>
     </Router>
