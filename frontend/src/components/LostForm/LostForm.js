@@ -16,6 +16,7 @@ class LostForm extends Component {
       authorEmail,
       authorPhoneNumber,
       authorAddress,
+      date,
       locationLat,
       locationLng
     } = event.target;
@@ -24,7 +25,8 @@ class LostForm extends Component {
       dogData: {
         breed: dogBreed.value,
         description: dogDescription.value,
-        sex: dogSex.value
+        sex: dogSex.value,
+        date: date.value
       },
       authorData: {
         name: authorName.value,
@@ -103,6 +105,12 @@ class LostForm extends Component {
             name="authorAddress"
             id="author-address"
             required
+          />
+          <label htmlFor="date-lost">Дата пропажи: </label>
+          <input 
+          type="date"
+          name="date"
+          id="date-lost"
           />
 
           <input

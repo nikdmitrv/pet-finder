@@ -12,6 +12,7 @@ import LostForm from "./components/LostForm/LostForm";
 import Account from "./components/account/account";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import LostDogsMap from "./components/LostDogsList/LostDogsMap";
+import Advert from "./components/Advert/Advert"
 import "./App.css";
 
 function App(props) {
@@ -42,6 +43,12 @@ function App(props) {
             render={() => <FoundDogsMap foundDogsList={props.foundDogsList} />}
           />
           <Route exact path="/lost-dogs/map" render={() => <LostDogsMap />} />
+          <Route exact path="/advert/found/:id" render={(props) => {
+            return (<Advert {...props} advertType='found' />)
+          }} />
+          <Route exact path="/advert/lost/:id" render={(props) => {
+            return (<Advert {...props} advertType='lost' />)
+          }} />
         </Switch>
       </div>
     </Router>
