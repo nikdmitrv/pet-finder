@@ -152,7 +152,7 @@ export const loginUserAC = message => {
 
 export const requestLoginAC = user => {
   return async dispatch => {
-    try {      
+    try {
       const response = await fetch("users/login", {
         method: "POST",
         headers: {

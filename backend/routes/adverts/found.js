@@ -9,9 +9,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.body.dogData.image)
   const { dogData, authorData, location } = req.body;
   const newAdvert = new FoundDogAdvertModel({
-    dogData: new Animal(dogData.breed, dogData.description, dogData.sex),
+    dogData: new Animal(
+      dogData.breed,
+      dogData.description,
+      dogData.sex,
+      dogData.image
+    ),
     authorData: new Author(
       authorData.name,
       authorData.email,
@@ -21,6 +27,7 @@ router.post("/", async (req, res) => {
     createdAt: Date.now(),
     location
   });
+  console.log(newAdvert)
   newAdvert
     .save()
     .then(() => {
