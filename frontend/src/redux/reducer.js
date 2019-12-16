@@ -4,13 +4,15 @@ import {
   REQUEST_LOST_DOGS,
   REQUEST_FOUND_DOGS,
   REGISTER_USER,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER
 } from "./types";
 
 const initialState = {
   lostDogsList: [],
   foundDogsList: [],
-  message: ""
+  message: "",
+  logged: false
 };
 
 export default function(state = initialState, action) {
@@ -52,7 +54,14 @@ export default function(state = initialState, action) {
     case LOGIN_USER: {
       return {
         ...state,
-        message: action.message
+        message: action.message,
+        logged: true
+      };
+    }
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        logged: false
       };
     }
     default:

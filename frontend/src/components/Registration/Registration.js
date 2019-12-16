@@ -19,8 +19,7 @@ class Registration extends Component {
         email: event.target.email.value
       });
       this.props.registerUser(user);
-      console.log();
-      
+      window.location = "/";
     }
   };
   render() {
