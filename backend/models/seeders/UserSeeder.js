@@ -91,6 +91,18 @@ async function seedall() {
     "Запись4",
     {lat:55.672197, lng:37.705588}
   );
+  let DogNull = await User.findOne({ name: "Nikita" });
+  await DogNull.addFound(
+    "ЧИх",
+    "Умный пес",
+    "Да",
+    "",
+    "Nikita",
+    "Запись4",
+    "Запись4",
+    "Запись4",
+    {lat:55.672197, lng:37.705588}
+  );
 
   let DogFive = await User.findOne({ name: "Alexander" });
   await DogFive.addLost(
