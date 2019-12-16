@@ -116,7 +116,7 @@ async function seedall() {
     "Запись6",
     "Запись6",
     "Запись6",
-    {lat:55.672197, lng:37.705588}
+    {lat:55.672170, lng:37.705570}
   );
   //   mongoose.disconnect();
 }
