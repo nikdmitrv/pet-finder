@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { fetchLostDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
-// import { Link } from "react-router-dom";
+
 
 class LostDogsList extends Component {
   state = {
