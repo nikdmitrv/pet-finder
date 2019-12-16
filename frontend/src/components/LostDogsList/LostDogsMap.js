@@ -13,7 +13,7 @@ class FoundDogsMap extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("/api/found");
+      const response = await fetch("/api/lost");
       if (response.status === 200) {
         const result = await response.json();
         this.setState({ list: result });

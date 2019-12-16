@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 
 const FoundDog = props => (
     <tr>
-        <td key={1}>{props.dog.breed}</td>
-        <td key={2}>{props.dog.description}</td>
-        <td key={3}>{props.dog.sex}</td>
+        <td key={1}>{props.dog.dogData.breed}</td>
+        <td key={2}>{props.dog.dogData.description}</td>
+        <td key={3}>{props.dog.dogData.sex}</td>
+        <Link to={"/editFound/"+props.dog._id}>Редактировать/Удалить</Link>
+        
+        
     </tr>
 )
 const LostDog = props => (
     <tr>
-        <td key={1}>{props.dog.breed}</td>
-        <td key={2}>{props.dog.description}</td>
-        <td key={3}>{props.dog.sex}</td>
+        <td key={1}>{props.dog.dogData.breed}</td>
+        <td key={2}>{props.dog.dogData.description}</td>
+        <td key={3}>{props.dog.dogData.sex}</td>
+        <Link to={"/editLost/"+props.dog._id}>Редактировать/Удалить</Link>
+      
     </tr>
 )
 
@@ -47,14 +53,34 @@ class Account extends Component {
     };
     foundDogList() {
         return this.state.myFound.map(e => {
-            return <FoundDog dog={e.dogData} />
+            return <FoundDog dog={e} />
         })
     }
     lostDogList() {
         return this.state.myLost.map(e => {
-            return <LostDog dog={e.dogData} />
+            return <LostDog dog={e} />
         })
     }
+
+
+
+    // deleteLostDog(id) {
+    //     axios.delete('http://localhost:5000/api/lost'+id)
+    //       .then(response => { console.log(response.data)});
+    
+    //     this.setState({
+    //       tasks: this.state.tasks.filter(el => el._id !== id)
+    //     })
+    //   }
+
+    //   deleteFoundDog(id) {
+    //     axios.delete('http://localhost:5000/api/found'+id)
+    //       .then(response => { console.log(response.data)});
+    
+    //     this.setState({
+    //       tasks: this.state.tasks.filter(el => el._id !== id)
+    //     })
+    //   }
 
 
     render() {
@@ -63,7 +89,7 @@ class Account extends Component {
             <div>
                 <h2>{this.state.name}</h2>
                 <h2>{this.state.email}</h2>
-                <h2>Тобою найденные псы</h2>
+                <h2>Ваши объявления о пропаже</h2>
                 <table>
                     <tr>
                         <th >Breed</th>
@@ -74,7 +100,7 @@ class Account extends Component {
                         {this.foundDogList()}
                     </tbody>
                 </table>
-                <h2>Тобою потерянные псы</h2>
+                <h2>Ваши объявления о находке</h2>
                 <table >
                     <tr>
                         <th >Breed</th>
