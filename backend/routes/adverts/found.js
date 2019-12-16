@@ -44,4 +44,35 @@ router.get('/:id', async (req, res) => {
   res.json(response)
 })
 
+router.route('/:id').delete((req, res) => {
+  FoundDogAdvertModel.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Dog deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+  console.log(req.body);
+  FoundDogAdvertModel.findById(req.params.id)
+    .then(dog => {
+      dog.dogData.breed = req.body.breed;
+      dog.dogData.description = req.body.description;
+      dog.dogData.sex = req.body.sex;
+      dog.dogData.date = req.body.date;
+      // dog.location = req.body.location;
+      
+
+      dog.save()
+        .then(() => res.json('Dog updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+router.route('/:id').delete((req, res) => {
+  FoundDogAdvertModel.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Dog deleted'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;

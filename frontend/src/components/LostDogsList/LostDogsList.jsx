@@ -1,32 +1,40 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 import { fetchLostDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
-import { Link } from 'react-router-dom'
 
 class LostDogsList extends Component {
   state = {
-    allAdverts: [],
-  }
+    allAdverts: []
+  };
 
-  handleFiltration = (options) => {
+  handleFiltration = options => {
     let { allAdverts } = this.state;
     if (options.byBreed) {
-      allAdverts = allAdverts.filter(advert => advert.dogData.breed === options.byBreed)
+      allAdverts = allAdverts.filter(
+        advert => advert.dogData.breed === options.byBreed
+      );
     }
     if (options.bySex) {
-      allAdverts = allAdverts.filter(advert => advert.dogData.sex === options.bySex)
+      allAdverts = allAdverts.filter(
+        advert => advert.dogData.sex === options.bySex
+      );
     }
     if (options.byDate) {
-      allAdverts = allAdverts.filter(advert => advert.createdAt === options.byDate)
+      allAdverts = allAdverts.filter(
+        advert => advert.createdAt === options.byDate
+      );
     }
-    this.setState({ filtered: allAdverts })
-  }
+    this.setState({ filtered: allAdverts });
+  };
   componentDidMount() {
     this.props.requestLostDogs();
   }
   componentDidUpdate(prevProps, prevState) {
-    !this.state.allAdverts.length && this.setState({ allAdverts: this.props.lostDogsList })
+    !this.state.allAdverts.length &&
+      this.setState({ allAdverts: this.props.lostDogsList });
   }
 
   renderList(advert) {
@@ -44,7 +52,7 @@ class LostDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
-        <Link to={'/advert/lost/' + advert._id}>Перейти к объявлению</Link>
+        <Link to={"/advert/lost/" + advert._id}>Перейти к объявлению</Link>
         <div>Дата потери:</div>
         <div>{advert.dogData.date}</div>
       </li>
@@ -54,12 +62,11 @@ class LostDogsList extends Component {
     return (
       <div>
         <FilterForm handleFiltration={this.handleFiltration} />
+        <Link to="/lost-dogs/map">Посмотреть на карте</Link>
         <ul>
-          {
-            this.state.allAdverts && this.state.filtered
-              ? this.state.filtered.map(advert => this.renderList(advert))
-              : this.state.allAdverts.map(advert => this.renderList(advert))
-          }
+          {this.state.allAdverts && this.state.filtered
+            ? this.state.filtered.map(advert => this.renderList(advert))
+            : this.state.allAdverts.map(advert => this.renderList(advert))}
         </ul>
       </div>
     );
