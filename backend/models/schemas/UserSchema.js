@@ -24,13 +24,15 @@ userSchema.methods.addLost = async function (
     email,
     phoneNumber,
     adress,
+    location,
 ) {
     let lostGenereted = new Lost({
         dogData: new Animal(breed, description, sex, date),
         authorData: new Author(name,
             email,
             phoneNumber,
-            adress)
+            adress),
+        location
     });
     this.myLost.push(lostGenereted);
     await lostGenereted.save();
@@ -45,17 +47,19 @@ userSchema.methods.addFound = async function (
     email,
     phoneNumber,
     adress,
+    location,
 ) {
-let foundGenereted = new Found({
-    dogData: new Animal(breed, description, sex, date),
-    authorData: new Author(name,
-        email,
-        phoneNumber,
-        adress)
-});
-this.myFound.push(foundGenereted);
-await foundGenereted.save();
-await this.save();
+    let foundGenereted = new Found({
+        dogData: new Animal(breed, description, sex, date),
+        authorData: new Author(name,
+            email,
+            phoneNumber,
+            adress),
+        location
+    });
+    this.myFound.push(foundGenereted);
+    await foundGenereted.save();
+    await this.save();
 };
 
 
