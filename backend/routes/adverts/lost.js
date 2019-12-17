@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const user = await User.findById(req.body.id);
-  console.log(req.body);
   const { dogData, location } = req.body;
   user.addLost(
     dogData.breed,

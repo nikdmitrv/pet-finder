@@ -1,5 +1,6 @@
 import {
   CLEAR_MESSAGE,
+  LOADING_REQUEST,
   ADD_LOST_DOG,
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
@@ -23,26 +24,36 @@ export default function(state = initialState, action) {
     case CLEAR_MESSAGE: {
       return {
         ...state,
+        loading: false,
         message: ""
+      };
+    }
+    case LOADING_REQUEST: {
+      return {
+        ...state,
+        loading: true
       };
     }
     case REQUEST_LOST_DOGS: {
       return {
         ...state,
-        lostDogsList: action.lostDogsList,
+        loading: false,
+        lostDogsList: action.lostDogsList.reverse(),
         message: ""
       };
     }
     case REQUEST_FOUND_DOGS: {
       return {
         ...state,
-        foundDogsList: action.foundDogsList,
+        loading: false,
+        foundDogsList: action.foundDogsList.reverse(),
         message: ""
       };
     }
     case ADD_FOUND_DOG: {
       return {
         ...state,
+        loading: false,
         foundDogsList: [...state.foundDogsList, action.dog],
         message: action.message
       };
@@ -50,6 +61,7 @@ export default function(state = initialState, action) {
     case ADD_LOST_DOG: {
       return {
         ...state,
+        loading: false,
         lostDogsList: [...state.lostDogsList, action.dog],
         message: action.message
       };
@@ -57,12 +69,14 @@ export default function(state = initialState, action) {
     case REGISTER_USER: {
       return {
         ...state,
+        loading: false,
         message: action.message
       };
     }
     case LOGIN_USER_SUCCESS: {
       return {
         ...state,
+        loading: false,
         user: action.user,
         message: "",
         logged: true
@@ -78,6 +92,7 @@ export default function(state = initialState, action) {
     case LOGOUT_USER: {
       return {
         ...state,
+        loading: false,
         user: {},
         message: "",
         logged: false
