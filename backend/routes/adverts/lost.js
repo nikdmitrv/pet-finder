@@ -2,6 +2,7 @@ const express = require("express");
 
 const LostDogAdvertModel = require("../../models/LostDogAdvertModel");
 const { Animal, Author } = require("../../models/schemas/AdvertSchema");
+const User = require("../../models/schemas/UserSchema");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -9,41 +10,46 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.body)
-  const { dogData, authorData, location } = req.body;
-  const newAdvert = new LostDogAdvertModel({
-    dogData: new Animal(
-      dogData.breed,
-      dogData.description,
-      dogData.sex,
-      dogData.image
-    ),
-    authorData: new Author(
-      authorData.name,
-      authorData.email,
-      authorData.phoneNumber,
-      authorData.adress
-    ),
-    createdAt: Date.now(),
+  const user = await User.findById(req.body.id);
+  console.log(req.body);
+  const { dogData, location } = req.body;
+  user.addLost(
+    dogData.breed,
+    dogData.description,
+    dogData.sex,
+    dogData.image,
+    user.name,
+    user.email,
+    user.phoneNumber,
+    user.adress,
     location
-  });
-  newAdvert
-    .save()
-    .then(() => {
-      res.json({ message: "Объявление добавлено", newAdvert });
-    })
-    .catch(err => {
-      res.json({ message: err.message });
-    });
+  );
+  // const newAdvert = new LostDogAdvertModel({
+  //   dogData: new Animal(
+  //     dogData.breed,
+  //     dogData.description,
+  //     dogData.sex,
+  //     dogData.image
+  //   ),
+  //   authorData: new Author(
+  //     authorData.name,
+  //     authorData.email,
+  //     authorData.phoneNumber,
+  //     authorData.adress
+  //   ),
+  //   createdAt: Date.now(),
+  //   location
+  // });
+  res.json({ message: "Объявление добавлено" });
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   const allFound = await LostDogAdvertModel.getAll();
   const response = allFound.find(advert => advert.id === req.params.id);
-  res.json(response)
-})
+  res.json(response);
+});
 
-router.route('/update/:id').post((req, res) => {
+router.route("/update/:id").post((req, res) => {
   console.log(req.body);
   LostDogAdvertModel.findById(req.params.id)
     .then(dog => {
@@ -53,19 +59,18 @@ router.route('/update/:id').post((req, res) => {
       dog.dogData.date = req.body.date;
       // dog.location = req.body.location;
 
-
-      dog.save()
-        .then(() => res.json('Dog updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+      dog
+        .save()
+        .then(() => res.json("Dog updated!"))
+        .catch(err => res.status(400).json("Error: " + err));
     })
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
-
-router.route('/:id').delete((req, res) => {
+router.route("/:id").delete((req, res) => {
   LostDogAdvertModel.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Dog deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json("Dog deleted."))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
