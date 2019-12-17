@@ -9,6 +9,7 @@ const FoundDog = props => (
     <td key={1}>{props.dog.dogData.breed}</td>
     <td key={2}>{props.dog.dogData.description}</td>
     <td key={3}>{props.dog.dogData.sex}</td>
+    <td key={4}>{<img alt='dog image' src={'http://localhost:5000/api/images/' + props.dog.dogData.image} />}></td>
     <Link to={"/editFound/" + props.dog._id}>Редактировать/Удалить</Link>
   </tr>
 );
@@ -17,6 +18,7 @@ const LostDog = props => (
     <td key={1}>{props.dog.dogData.breed}</td>
     <td key={2}>{props.dog.dogData.description}</td>
     <td key={3}>{props.dog.dogData.sex}</td>
+    <td key={4}>{<img alt='dog image' src={'http://localhost:5000/api/images/' + props.dog.dogData.image} />}></td>
     <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
   </tr>
 );

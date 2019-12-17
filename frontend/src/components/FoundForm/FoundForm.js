@@ -4,8 +4,108 @@ import { connect } from "react-redux";
 import { createFoundAdvertAC } from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
-class FoundForm extends Component {
-  state = {};
+class FoundForm extends Component {  
+  state = {
+    breedOptions: [
+        'Акита-ину',
+        'Алабай',
+        'Аляскинский Маламут',
+        'Американская Акита',
+        'Американский бульдог',
+        'Американский стаффордширский терьер',
+        'Английский бульдог',
+        'Афганская борзая',
+        'Американский кокер спаниель',
+        'Английский кокер спаниель',
+        'Английский мастиф',
+        'Английский пойнтер',
+        'Басенджи',
+        'Бассет Хаунд',
+        'Без породы',
+        'Бернский зенненхунд',
+        'Бигль',
+        'Бишон фризе',
+        'Бладхаунд',
+        'Бобтейл',
+        'Боксер',
+        'Болгарская овчарка',
+        'Бордер колли',
+        'Бордоский дог',
+        'Босерон',
+        'Бостон терьер',
+        'Бриар',
+        'Брюссельский гриффон',
+        'Бульмастиф',
+        'Бультерьер',
+        'Веймаранер',
+        'Вельш корги пемброк',
+        'Вест хайленд уайт терьер',
+        'Вельштерьер',
+        'Далматинец',
+        'Джек рассел терьер',
+        'Доберман',
+        'Дратхаар',
+        'Золотистый ретривер',
+        'Ирландский волкодав',
+        'Ирландский сеттер',
+        'Ирландский терьер',
+        'Итальянская левретка',
+        'Йоркширский терьер',
+        'Кавказская овчарка',
+        'Кане корсо',
+        'Карликовый пинчер',
+        'Кавалер кинг чарльз спаниель',
+        'Кеесхонд',
+        'Колли',
+        'Китайская хохлатая собака',
+        'Курцхаар',
+        'Королевский пудель',
+        'Карликовый пудель',
+        'Лабрадор ретривер',
+        'Лайка',
+        'Мальтийская болонка',
+        'Московская сторожевая',
+        'Миттельшнауцер',
+        'Мопс',
+        'Немецкий дог',
+        'Ньюфаундленд',
+        'Немецкая овчарка',
+        'Норвич-терьер',
+        'Папильон',
+        'Пекинес',
+        'Померанский шпиц',
+        'Пшеничный терьер',
+        'Родезийский риджбек',
+        'Ризеншнауцер',
+        'Ротвейлер',
+        'Русская борзая',
+        'Самоед',
+        'Сенбернар',
+        'Сибирские хаски',
+        'Скотч терьер',
+        'Стаффордширский Бультерьер',
+        'Такса',
+        'Той пудель',
+        'Той терьер',
+        'Уиппет',
+        'Фараонова собака',
+        'Фокстерьер гладкошерстный',
+        'Фокстерьер жесткошерстный',
+        'Французский бульдог',
+        'Цвергшнауцер',
+        'Чау Чау',
+        'Черный русский терьер',
+        'Шарпей',
+        'Шелти',
+        'Шиба-ину',
+        'Ши-тцу',
+        'Эрдельтерьер',
+        'Южноафриканский бурбуль',
+        'Ягдтерьер',
+        'Японский хин'
+    ]
+}
+
   handleImageUpload = event => {
     event.preventDefault();
     const imgData = new FormData();
@@ -68,19 +168,13 @@ class FoundForm extends Component {
     return (
       <div>
         <div>{this.props.message}</div>
-        <form
-          id="found-form"
-          onSubmit={this.handleSubmit}
-          encType="multipart/form-data"
-        >
-          <label htmlFor="dog-breed">Порода:</label>
-          <input
-            onChange={this.handleInput}
-            name="dogBreed"
-            id="dog-breed"
-            type="text"
-            required
-          />
+        <form id='found-form' onSubmit={this.handleSubmit} encType="multipart/form-data">
+
+        <label htmlFor="dog-breed">Порода:</label>
+          <select onChange={this.handleInput} name='dogBreed'>
+          <option value=''>Выберите породу</option>
+          {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
+          </select>
 
           <label htmlFor="dog-description">Описание:</label>
           <input
@@ -91,13 +185,11 @@ class FoundForm extends Component {
             required
           />
 
-          <label htmlFor="dog-sex">Пол:</label>
-          <input
-            onChange={this.handleInput}
-            name="dogSex"
-            id="dog-sex"
-            required
-          />
+          <label htmlFor="dog-description">Пол:</label>
+          <select onChange={this.handleInput} name='dogSex'>
+          <option value="М">М</option>
+          <option value="Ж">Ж</option>
+          </select>
 
           <input
             id="location-input-lat"
