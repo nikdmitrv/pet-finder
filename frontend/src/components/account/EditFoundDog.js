@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import axios from "axios"
+import React, { Component } from "react";
+import axios from "axios";
 
+import Map from "../Maps/Maps";
 
 export default class EditFoundDog extends Component {
   constructor(props) {
@@ -13,63 +14,58 @@ export default class EditFoundDog extends Component {
     // this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-
     this.state = {
-
       breed: "",
       description: "",
       sex: "",
-      date: "",
+      date: ""
       // location: "",
-
-    }
+    };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/found/' + this.props.match.params.id)
+    axios
+      .get("http://localhost:5000/api/found/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           breed: response.data.dogData.breed,
           description: response.data.dogData.description,
           sex: response.data.dogData.sex,
-          date: response.data.dogData.date,
+          date: response.data.dogData.date
           // location: response.data.location,
-        })
-        //   console.log(this.state);  
+        });
+        //   console.log(this.state);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
-      })
-
+      });
   }
-
 
   onChangeBreed(e) {
     this.setState({
       breed: e.target.value
-    })
+    });
   }
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
-    })
+    });
   }
   onChangeSex(e) {
     this.setState({
       sex: e.target.value
-    })
+    });
   }
   onChangeDate(e) {
     this.setState({
       date: e.target.value
-    })
+    });
   }
   // onChangeLocation(e) {
   //     this.setState({
   //         location: e.target.value
   //     })
   // }
-
 
   onSubmit(e) {
     e.preventDefault();
@@ -78,40 +74,52 @@ export default class EditFoundDog extends Component {
       description: this.state.description,
       sex: this.state.sex,
       date: this.state.date,
-      location: this.state.location
-    }
+      location: {
+        lat: e.target.locationLat.value,
+        lng: e.target.locationLng.value
+      }
+    };
     console.log(dog);
 
-    axios.post('http://localhost:5000/api/found/update/' + this.props.match.params.id, dog)
+    axios
+      .post(
+        "http://localhost:5000/api/found/update/" + this.props.match.params.id,
+        dog
+      )
       .then(res => console.log(res.data));
 
     // window.location= '/'
-
   }
 
-
-
   deleteFoundDog(id) {
-    axios.delete('http://localhost:5000/api/found/' + this.props.match.params.id)
-      .then(response => { console.log(response.data) });
+    axios
+      .delete("http://localhost:5000/api/found/" + this.props.match.params.id)
+      .then(response => {
+        console.log(response.data);
+      });
 
     this.setState({
       breed: "",
       description: "",
       sex: "",
-      date: "",
-    })
+      date: ""
+    });
   }
+
+  getLocation = location => {
+    document.getElementById("location-input-lat").value = location.lat;
+    document.getElementById("location-input-lng").value = location.lng;
+  };
 
   render() {
     return (
       <div>
         <h3>Редактировать данные о собаке</h3>
         <form onSubmit={this.onSubmit}>
-
           <div className="form-group">
             <label>Порода: </label>
-            <input type="text"
+            <input
+              type="text"
               required
               className="form-control"
               value={this.state.breed}
@@ -121,7 +129,8 @@ export default class EditFoundDog extends Component {
 
           <div className="form-group">
             <label>Описание: </label>
-            <input type="text"
+            <input
+              type="text"
               required
               className="form-control"
               value={this.state.description}
@@ -131,8 +140,7 @@ export default class EditFoundDog extends Component {
 
           <div className="form-group">
             <label>Пол: </label>
-            <select value={this.state.sex}
-              onChange={this.onChangeSex}>
+            <select value={this.state.sex} onChange={this.onChangeSex}>
               <option value="М">М</option>
               <option value="Ж">Ж</option>
             </select>
@@ -140,7 +148,8 @@ export default class EditFoundDog extends Component {
 
           <div className="form-group">
             <label>Дата: </label>
-            <input type="date"
+            <input
+              type="date"
               required
               className="form-control"
               value={this.state.date}
@@ -148,22 +157,33 @@ export default class EditFoundDog extends Component {
             />
           </div>
 
-          {/* <div className="form-group"> 
-                <label>Локация: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.location}
-                    onChange={this.onChangeLocation}
-                    />
-              </div> */}
-
           <div className="form-group">
-            <input type="submit" value="Редактировать" className="btn btn-primary" />
+            <input
+              type="submit"
+              value="Редактировать"
+              className="btn btn-primary"
+            />
           </div>
+
+          <input
+            id="location-input-lat"
+            name="locationLat"
+            hidden
+            required
+          ></input>
+          <input id="location-input-lng" name="locationLng" hidden></input>
+
+          <Map getLocation={this.getLocation} />
         </form>
-        <a href="#" onClick={() => { this.deleteFoundDog(this.state._id) }}>Удалить</a>
-          </div>
-          )
-        }
-      }
+        <a
+          href="#"
+          onClick={() => {
+            this.deleteFoundDog(this.state._id);
+          }}
+        >
+          Удалить
+        </a>
+      </div>
+    );
+  }
+}
