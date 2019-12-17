@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { fetchLostDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
 
-
 class LostDogsList extends Component {
   state = {
     allAdverts: []
