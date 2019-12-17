@@ -7,10 +7,10 @@ import Maps from "../Maps/Maps";
 class LostForm extends Component {
   handleImageUpload = event => {
     event.preventDefault();
-    const imgData = new FormData()
-    imgData.append('file', event.target.imgInput.files[0])
-    this.setState({ imgData })
-  }
+    const imgData = new FormData();
+    imgData.append("file", event.target.imgInput.files[0]);
+    this.setState({ imgData });
+  };
   handleSubmit = event => {
     event.preventDefault();
 
@@ -27,52 +27,52 @@ class LostForm extends Component {
     } = event.target;
 
     const request = {
-      method: 'POST',
-      body: this.state.imgData,
-    }
+      method: "POST",
+      body: this.state.imgData
+    };
 
     if (this.state.imgData) {
-      fetch('/api/images/', request)
+      fetch("/api/images/", request)
         .then(response => response.json())
-        .then(
-          data => {
-            console.log(data)
-            const advert = JSON.stringify({
-              dogData: {
-                breed: dogBreed.value,
-                description: dogDescription.value,
-                sex: dogSex.value,
-                image: data.filename
-              },
-              authorData: {
-                name: authorName.value,
-                email: authorEmail.value,
-                phoneNumber: authorPhoneNumber.value,
-                adress: authorAddress.value
-              },
-              location: { lat: locationLat.value, lng: locationLng.value }
-            });
-            this.props.createLostAdvert(advert)
-          })
+        .then(data => {
+          console.log(data);
+          const advert = JSON.stringify({
+            dogData: {
+              breed: dogBreed.value,
+              description: dogDescription.value,
+              sex: dogSex.value,
+              image: data.filename
+            },
+            // authorData: {
+            //   name: authorName.value,
+            //   email: authorEmail.value,
+            //   phoneNumber: authorPhoneNumber.value,
+            //   adress: authorAddress.value
+            // },
+            location: { lat: locationLat.value, lng: locationLng.value },
+            id: this.props.user._id
+          });
+          this.props.createLostAdvert(advert);
+        });
     } else {
       const advert = JSON.stringify({
         dogData: {
           breed: dogBreed.value,
           description: dogDescription.value,
           sex: dogSex.value,
-          image: 'placeholder.jpg'
+          image: "placeholder.jpg"
         },
-        authorData: {
-          name: authorName.value,
-          email: authorEmail.value,
-          phoneNumber: authorPhoneNumber.value,
-          adress: authorAddress.value
-        },
-        location: { lat: locationLat.value, lng: locationLng.value }
+        // authorData: {
+        //   name: authorName.value,
+        //   email: authorEmail.value,
+        //   phoneNumber: authorPhoneNumber.value,
+        //   adress: authorAddress.value
+        // },
+        location: { lat: locationLat.value, lng: locationLng.value },
+        id: this.props.user._id
       });
-      this.props.createLostAdvert(advert)
+      this.props.createLostAdvert(advert);
     }
-
   };
 
   getLocation = location => {
@@ -111,7 +111,7 @@ class LostForm extends Component {
             required
           />
 
-          <label htmlFor="author-name">Имя:</label>
+          {/* <label htmlFor="author-name">Имя:</label>
           <input
             onChange={this.handleInput}
             name="authorName"
@@ -143,11 +143,7 @@ class LostForm extends Component {
             required
           />
           <label htmlFor="date-lost">Дата пропажи: </label>
-          <input
-            type="date"
-            name="date"
-            id="date-lost"
-          />
+          <input type="date" name="date" id="date-lost" /> */}
 
           <input
             id="location-input-lat"
@@ -160,7 +156,7 @@ class LostForm extends Component {
           <button>Отправить</button>
         </form>
         <form onSubmit={this.handleImageUpload}>
-          <input type='file' name='imgInput' />
+          <input type="file" name="imgInput" />
           <button>Добавить картинку</button>
         </form>
         <Maps getLocation={this.getLocation} />
@@ -171,6 +167,7 @@ class LostForm extends Component {
 
 function mapStateToProps(store) {
   return {
+    user: store.user,
     message: store.message
   };
 }

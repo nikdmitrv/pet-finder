@@ -13,7 +13,6 @@ const AdvertSchema = mongoose.Schema({
         breed: String,
         description: String,
         sex: String,
-        date: Date,
         image: String,
     },
     authorData: {

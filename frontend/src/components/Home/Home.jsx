@@ -16,8 +16,6 @@ export default class Home extends Component {
   }
 
   foundDog(dog) {
-    console.log("func",dog);
-    
     return <li key={dog._id}>
     <span key={1}>{dog.dogData.breed}</span>
     <span key={2}>{dog.dogData.description}</span>

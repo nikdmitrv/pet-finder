@@ -1,12 +1,18 @@
 import {
+  CLEAR_MESSAGE,
   ADD_LOST_DOG,
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
   REQUEST_FOUND_DOGS,
   // REGISTER_USER,
-  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_ERROR,
   LOGOUT_USER
 } from "./types";
+
+export const clearMessageAC = () => {
+  return { type: CLEAR_MESSAGE };
+};
 
 export const requestLostDogsAC = lostDogsList => {
   return {
@@ -132,11 +138,12 @@ export const requestRegisterAC = user => {
         },
         body: user
       });
+      const result = await response.json();
       if (response.status === 200) {
-        // const result = await response.json();
-        dispatch(loginUserAC());
+        dispatch(loginUserSuccessAC(result.user));
       } else {
         console.log(response);
+        dispatch(loginUserErrorAC(result.message));
       }
     } catch (error) {
       console.log(error);
@@ -144,9 +151,16 @@ export const requestRegisterAC = user => {
   };
 };
 
-export const loginUserAC = message => {
+export const loginUserSuccessAC = user => {
   return {
-    type: LOGIN_USER,
+    type: LOGIN_USER_SUCCESS,
+    user
+  };
+};
+
+export const loginUserErrorAC = message => {
+  return {
+    type: LOGIN_USER_ERROR,
     message
   };
 };
@@ -162,12 +176,13 @@ export const requestLoginAC = user => {
         },
         body: user
       });
+      const result = await response.json();
       if (response.status === 200) {
-        const result = await response.json();
         console.log(result);
-        dispatch(loginUserAC(result.message, result.currentUser));
+        dispatch(loginUserSuccessAC(result.currentUser));
       } else {
         console.log(response);
+        dispatch(loginUserErrorAC(result.message));
       }
     } catch (error) {
       console.log(error);
@@ -187,14 +202,13 @@ export const fetchSessionAC = () => {
         credentials: "include"
       });
       if (response.status === 200) {
-        console.log(response);
-
         const result = await response.json();
+        console.log(response);
 
         console.log("fetchSession result: ", result);
         console.log("logginIn");
 
-        dispatch(loginUserAC());
+        dispatch(loginUserSuccessAC(result.currentUser));
       } else {
         console.log(response);
         console.log("logginOut");
