@@ -41,33 +41,24 @@ class LostDogsList extends Component {
   renderList(advert) {
     const date = new Date(advert.createdAt);
     return (
-      <div className="card cardList"key={advert._id}>
-        <div>Собака потеряна:</div>
+      <div className="card cardList" key={advert._id}>
+        {/* <div>Собака потеряна:</div> */}
         <img src={'http://localhost:5000/api/images/' + advert.dogData.image}></img>
-        <div>{advert.dogData.breed}</div>
-        <div>{advert.dogData.description}</div>
-        <div>{advert.dogData.sex}</div>
-        <div>Хозяин:</div>
-        <div>{advert.authorData.name}</div>
-        <div>{advert.authorData.email}</div>
-        <div>{advert.authorData.phoneNumber}</div>
-        <div>{advert.authorData.address}</div>
+        <div>Порода: {advert.dogData.breed}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
         <Link to={"/advert/lost/" + advert._id}>Перейти к объявлению</Link>
-        <div>Дата потери:</div>
-        <div>{advert.dogData.date}</div>
       </div>
-      </li>
+
     );
   }
   render() {
     return (
       <div>
-        <h3>
-        <Link to="/lost-dogs/map">Посмотреть на карте</Link>
-        </h3>
         <FilterForm handleFiltration={this.handleFiltration} />
+        <button  className="mapList btn btn-info">
+          <Link to="/lost-dogs/map">Посмотреть на карте</Link>
+        </button>
         <ul>
           {this.state.allAdverts && this.state.filtered
             ? this.state.filtered.map(advert => this.renderList(advert))

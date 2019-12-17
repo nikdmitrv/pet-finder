@@ -26,9 +26,10 @@ class Login extends Component {
 
     return (
       <>
-        <h1>Вход в профиль</h1>
+       <div class="reg">
         <div className="form-group row formReg">
           <form onSubmit={this.handleSubmit}>
+        <h1>Вход в профиль</h1>
           <div className="form-group mx-sm-3 mb-2">
               <label>Email</label>
               <input className="form-control" name="email" type="email" required></input>
@@ -42,6 +43,10 @@ class Login extends Component {
             </div>
             <p>{this.state.message}</p>
           </form>
+        </div>
+        
+        </div>
+          <div className="footer">
         </div>
       </>
     );

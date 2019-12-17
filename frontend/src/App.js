@@ -19,25 +19,7 @@ import Advert from "./components/Advert/Advert";
 import "./App.css";
 import { fetchSessionAC, clearMessageAC } from "./redux/actions";
 
-function App(props) {
-  console.log(props.logged);
-  useEffect(() => {
-    console.log("fetchsession");
-    props.fetchSession();
-  });
-  return (
-    <Router></Router>
-      <div className="App">
-        <nav className="header">
-          <Link to="/">Главная</Link>
-          {props.logged ? (
-            <Link to="/logout">Выход</Link>
-          ) : (
-            <>
-              <Link to="/registration">Регистрация</Link>
-              <Link to="/login">Вход</Link>
-            </>
-          )}
+
 class App extends Component {
   componentDidMount = () => {
     this.props.fetchSession();
@@ -52,6 +34,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <div  className="header">
+          <div className="logo">ШЩЕЙКА</div>
           <nav>
             <Link to="/">Главная</Link>
             {this.props.logged ? (
@@ -68,8 +52,8 @@ class App extends Component {
               </>
             )}
 
-            <Link to="/lost-dogs">Объявления о пропаже</Link>
-            <Link to="/found-dogs">Объявления о находке</Link>
+            <Link to="/lost-dogs">Потерялись</Link>
+            <Link to="/found-dogs">Нашлись</Link>
             {this.props.logged ? (
               <>
                 <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
@@ -77,6 +61,7 @@ class App extends Component {
               </>
             ) : null}
           </nav>
+          </div>
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/registration" component={Registration} />

@@ -41,26 +41,27 @@ class FilterForm extends Component {
 
     render() {
         return (
-            <div  className="">
-                <form onSubmit={this.handleSubmit}>
-                <div class="">
-                    </div>
+            
+                <div class="formList">
+                <form className="form-inline" onSubmit={this.handleSubmit}>
                     <label htmlFor='sexFilterMale'>Male</label>
                     <input type='radio' name='sex' id='sexFilterMale' value='male' />
                     <label htmlFor='sexFilterFemale'>Female</label>
                     <input type='radio' name='sex' id='sexFilterFemale' value='female' />
-
-
-                    <select className="custom-select"  name='breed'>
+                    <div className="form-group mb-2">
+                    <select className="select form-control-plaintext"  name='breed'>
                         <option value=''>Select a breed</option>
                         {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
                     </select>
-                    <label htmlFor='dateFilter'>Дата</label>
-                    <input className="form-control" name='date' id='dateFilter' />
-
-                    <button>Filter</button>
+                    </div>
+                    <div className="form-group mb-2">
+                    {/* <label htmlFor='dateFilter'>Дата</label> */}
+                    <input type="date"className="inputFilter" name='date' id='dateFilter' placeholder="Дата" />
+                    </div>
+                    <button className="btn btn-primary mb-2 btn-filt">Filter</button>
                 </form>
-            </div>
+                    </div>
+            
         );
     }
 
