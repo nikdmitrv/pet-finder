@@ -1,5 +1,6 @@
 import {
   CLEAR_MESSAGE,
+  LOADING_REQUEST,
   ADD_LOST_DOG,
   ADD_FOUND_DOG,
   REQUEST_LOST_DOGS,
@@ -14,6 +15,10 @@ export const clearMessageAC = () => {
   return { type: CLEAR_MESSAGE };
 };
 
+export const loadingRequestAC = () => {
+  return { type: LOADING_REQUEST };
+};
+
 export const requestLostDogsAC = lostDogsList => {
   return {
     type: REQUEST_LOST_DOGS,
@@ -24,6 +29,7 @@ export const requestLostDogsAC = lostDogsList => {
 export const fetchLostDogsAC = () => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("/api/lost");
       if (response.status === 200) {
         const result = await response.json();
@@ -47,6 +53,7 @@ export const requestFoundDogsAC = foundDogsList => {
 export const fetchFoundDogsAC = () => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("/api/found");
       if (response.status === 200) {
         const result = await response.json();
@@ -78,6 +85,7 @@ export const createFoundAdvertAC = advert => {
         },
         body: advert
       };
+      dispatch(loadingRequestAC());
       const response = await fetch("/api/found", request);
       const result = await response.json();
       if (response.status === 200) {
@@ -102,6 +110,7 @@ export const addLostDogAC = (dog, message) => {
 export const createLostAdvertAC = advert => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("api/lost", {
         method: "POST",
         headers: {
@@ -131,6 +140,7 @@ export const createLostAdvertAC = advert => {
 export const requestRegisterAC = user => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("users/registration", {
         method: "POST",
         headers: {
@@ -168,6 +178,7 @@ export const loginUserErrorAC = message => {
 export const requestLoginAC = user => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("users/login", {
         method: "POST",
         credentials: "include",
@@ -197,6 +208,7 @@ export const logoutUserAC = () => {
 export const fetchSessionAC = () => {
   return async dispatch => {
     try {
+      dispatch(loadingRequestAC());
       const response = await fetch("/users/auth", {
         method: "GET",
         credentials: "include"

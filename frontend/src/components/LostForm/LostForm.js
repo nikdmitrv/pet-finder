@@ -124,10 +124,6 @@ class LostForm extends Component {
       dogBreed,
       dogDescription,
       dogSex,
-      authorName,
-      authorEmail,
-      authorPhoneNumber,
-      authorAddress,
       locationLat,
       locationLng
     } = event.target;
@@ -141,7 +137,6 @@ class LostForm extends Component {
       fetch("/api/images/", request)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           const advert = JSON.stringify({
             dogData: {
               breed: dogBreed.value,
@@ -149,12 +144,6 @@ class LostForm extends Component {
               sex: dogSex.value,
               image: data.filename
             },
-            // authorData: {
-            //   name: authorName.value,
-            //   email: authorEmail.value,
-            //   phoneNumber: authorPhoneNumber.value,
-            //   adress: authorAddress.value
-            // },
             location: { lat: locationLat.value, lng: locationLng.value },
             id: this.props.user._id
           });
@@ -168,12 +157,6 @@ class LostForm extends Component {
           sex: dogSex.value,
           image: "placeholder.jpg"
         },
-        // authorData: {
-        //   name: authorName.value,
-        //   email: authorEmail.value,
-        //   phoneNumber: authorPhoneNumber.value,
-        //   adress: authorAddress.value
-        // },
         location: { lat: locationLat.value, lng: locationLng.value },
         id: this.props.user._id
       });
@@ -213,40 +196,6 @@ class LostForm extends Component {
           <option value="М">М</option>
           <option value="Ж">Ж</option>
           </select>
-
-          {/* <label htmlFor="author-name">Имя:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorName"
-            id="author-name"
-            required
-          />
-
-          <label htmlFor="author-email">Email:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorEmail"
-            id="author-email"
-            required
-          />
-
-          <label htmlFor="author-phoneNumber">Телефонный номер:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorPhoneNumber"
-            id="author-phoneNumber"
-            required
-          />
-
-          <label htmlFor="author-address">Адрес:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorAddress"
-            id="author-address"
-            required
-          />
-          <label htmlFor="date-lost">Дата пропажи: </label>
-          <input type="date" name="date" id="date-lost" /> */}
 
           <input
             id="location-input-lat"

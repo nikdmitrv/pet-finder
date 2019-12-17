@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { createFoundAdvertAC } from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
-class FoundForm extends Component {
-  
+class FoundForm extends Component {  
   state = {
     breedOptions: [
         'Акита-ину',
@@ -107,13 +106,12 @@ class FoundForm extends Component {
     ]
 }
 
-
   handleImageUpload = event => {
     event.preventDefault();
-    const imgData = new FormData()
-    imgData.append('file', event.target.imgInput.files[0])
-    this.setState({ imgData })
-  }
+    const imgData = new FormData();
+    imgData.append("file", event.target.imgInput.files[0]);
+    this.setState({ imgData });
+  };
   handleSubmit = event => {
     event.preventDefault();
 
@@ -121,61 +119,44 @@ class FoundForm extends Component {
       dogBreed,
       dogDescription,
       dogSex,
-      authorName,
-      authorEmail,
-      authorPhoneNumber,
-      authorAddress,
       locationLat,
       locationLng
     } = event.target;
 
     const request = {
-      method: 'POST',
-      body: this.state.imgData,
-    }
+      method: "POST",
+      body: this.state.imgData
+    };
 
     if (this.state.imgData) {
-      fetch('/api/images/', request)
+      fetch("/api/images/", request)
         .then(response => response.json())
-        .then(
-          data => {
-            console.log(data)
-            const advert = JSON.stringify({
-              dogData: {
-                breed: dogBreed.value,
-                description: dogDescription.value,
-                sex: dogSex.value,
-                image: data.filename
-              },
-              // authorData: {
-              //   name: authorName.value,
-              //   email: authorEmail.value,
-              //   phoneNumber: authorPhoneNumber.value,
-              //   adress: authorAddress.value
-              // },
-              location: { lat: locationLat.value, lng: locationLng.value }
-            });
-            this.props.createFoundAdvert(advert)
-          })
+        .then(data => {
+          const advert = JSON.stringify({
+            dogData: {
+              breed: dogBreed.value,
+              description: dogDescription.value,
+              sex: dogSex.value,
+              image: data.filename
+            },
+            location: { lat: locationLat.value, lng: locationLng.value },
+            id: this.props.user._id
+          });
+          this.props.createFoundAdvert(advert);
+        });
     } else {
       const advert = JSON.stringify({
         dogData: {
           breed: dogBreed.value,
           description: dogDescription.value,
           sex: dogSex.value,
-          image: 'placeholder.jpg'
+          image: "placeholder.jpg"
         },
-        // authorData: {
-        //   name: authorName.value,
-        //   email: authorEmail.value,
-        //   phoneNumber: authorPhoneNumber.value,
-        //   adress: authorAddress.value
-        // },
-        location: { lat: locationLat.value, lng: locationLng.value }
+        location: { lat: locationLat.value, lng: locationLng.value },
+        id: this.props.user._id
       });
-      this.props.createFoundAdvert(advert)
+      this.props.createFoundAdvert(advert);
     }
-
   };
 
   getLocation = location => {
@@ -210,38 +191,6 @@ class FoundForm extends Component {
           <option value="Ж">Ж</option>
           </select>
 
-          {/* <label htmlFor="author-name">Имя:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorName"
-            id="author-name"
-            required
-          />
-
-          <label htmlFor="author-email">Email:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorEmail"
-            id="author-email"
-            required
-          />
-
-          <label htmlFor="author-phoneNumber">Телефонный номер:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorPhoneNumber"
-            id="author-phoneNumber"
-            required
-          />
-
-          <label htmlFor="author-address">Адрес:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorAddress"
-            id="author-address"
-            required
-          /> */}
-
           <input
             id="location-input-lat"
             name="locationLat"
@@ -253,7 +202,7 @@ class FoundForm extends Component {
           <button>Submit</button>
         </form>
         <form onSubmit={this.handleImageUpload}>
-          <input type='file' name='imgInput' />
+          <input type="file" name="imgInput" />
           <button>Добавить картинку</button>
         </form>
         <Maps getLocation={this.getLocation} />
@@ -264,6 +213,7 @@ class FoundForm extends Component {
 
 function mapStateToProps(store) {
   return {
+    user: store.user,
     message: store.message
   };
 }
