@@ -5,6 +5,13 @@ import { createFoundAdvertAC } from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
 class FoundForm extends Component {
+  state = {}
+  handleImageUpload = event => {
+    event.preventDefault();
+    const imgData = new FormData()
+    imgData.append('file', event.target.imgInput.files[0])
+    this.setState({ imgData })
+  }
   handleSubmit = event => {
     event.preventDefault();
 
@@ -20,22 +27,53 @@ class FoundForm extends Component {
       locationLng
     } = event.target;
 
-    const advert = JSON.stringify({
-      dogData: {
-        breed: dogBreed.value,
-        description: dogDescription.value,
-        sex: dogSex.value
-      },
-      authorData: {
-        name: authorName.value,
-        email: authorEmail.value,
-        phoneNumber: authorPhoneNumber.value,
-        adress: authorAddress.value
-      },
-      location: { lat: locationLat.value, lng: locationLng.value }
-    });
+    const request = {
+      method: 'POST',
+      body: this.state.imgData,
+    }
 
-    this.props.createFoundAdvert(advert);
+    if (this.state.imgData) {
+      fetch('/api/images/', request)
+        .then(response => response.json())
+        .then(
+          data => {
+            console.log(data)
+            const advert = JSON.stringify({
+              dogData: {
+                breed: dogBreed.value,
+                description: dogDescription.value,
+                sex: dogSex.value,
+                image: data.filename
+              },
+              authorData: {
+                name: authorName.value,
+                email: authorEmail.value,
+                phoneNumber: authorPhoneNumber.value,
+                adress: authorAddress.value
+              },
+              location: { lat: locationLat.value, lng: locationLng.value }
+            });
+            this.props.createFoundAdvert(advert)
+          })
+    } else {
+      const advert = JSON.stringify({
+        dogData: {
+          breed: dogBreed.value,
+          description: dogDescription.value,
+          sex: dogSex.value,
+          image: 'placeholder.jpg'
+        },
+        authorData: {
+          name: authorName.value,
+          email: authorEmail.value,
+          phoneNumber: authorPhoneNumber.value,
+          adress: authorAddress.value
+        },
+        location: { lat: locationLat.value, lng: locationLng.value }
+      });
+      this.props.createFoundAdvert(advert)
+    }
+
   };
 
   getLocation = location => {
@@ -47,7 +85,7 @@ class FoundForm extends Component {
     return (
       <div>
         <div>{this.props.message}</div>
-        <form onSubmit={this.handleSubmit}>
+        <form id='found-form' onSubmit={this.handleSubmit} encType="multipart/form-data">
           <label htmlFor="dog-breed">Порода:</label>
           <input
             onChange={this.handleInput}
@@ -115,6 +153,10 @@ class FoundForm extends Component {
           <input id="location-input-lng" name="locationLng" hidden></input>
 
           <button>Submit</button>
+        </form>
+        <form onSubmit={this.handleImageUpload}>
+          <input type='file' name='imgInput' />
+          <button>Добавить картинку</button>
         </form>
         <Maps getLocation={this.getLocation} />
       </div>

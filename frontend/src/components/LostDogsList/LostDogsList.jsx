@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import { fetchLostDogsAC } from "../../redux/actions";
 import FilterForm from "../Filtration/FilterForm";
-// import { Link } from "react-router-dom";
 
 class LostDogsList extends Component {
   state = {
@@ -43,6 +42,7 @@ class LostDogsList extends Component {
     return (
       <li key={advert._id}>
         <div>Собака потеряна:</div>
+        <img src={'http://localhost:5000/api/images/' + advert.dogData.image}></img>
         <div>{advert.dogData.breed}</div>
         <div>{advert.dogData.description}</div>
         <div>{advert.dogData.sex}</div>

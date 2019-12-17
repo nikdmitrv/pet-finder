@@ -50,7 +50,10 @@ class FoundDogsMap extends Component {
         position={{ lat: dog.location.lat, lng: dog.location.lng }}
         onClick={this.onMarkerClick}
       >
-        <InfoWindow marker={dog._id} visible={this.state.showInfo}>
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showInfo}
+        >
           <div>
             <h2>{dog.dogData.breed}</h2>
             <span>Something</span>
