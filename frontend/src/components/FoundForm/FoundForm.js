@@ -1,12 +1,119 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { createFoundAdvertAC } from "../../redux/actions";
+import Maps from "../Maps/Maps";
 
 class FoundForm extends Component {
+  
   state = {
-    message: null
-  };
+    breedOptions: [
+        'Акита-ину',
+        'Алабай',
+        'Аляскинский Маламут',
+        'Американская Акита',
+        'Американский бульдог',
+        'Американский стаффордширский терьер',
+        'Английский бульдог',
+        'Афганская борзая',
+        'Американский кокер спаниель',
+        'Английский кокер спаниель',
+        'Английский мастиф',
+        'Английский пойнтер',
+        'Басенджи',
+        'Бассет Хаунд',
+        'Без породы',
+        'Бернский зенненхунд',
+        'Бигль',
+        'Бишон фризе',
+        'Бладхаунд',
+        'Бобтейл',
+        'Боксер',
+        'Болгарская овчарка',
+        'Бордер колли',
+        'Бордоский дог',
+        'Босерон',
+        'Бостон терьер',
+        'Бриар',
+        'Брюссельский гриффон',
+        'Бульмастиф',
+        'Бультерьер',
+        'Веймаранер',
+        'Вельш корги пемброк',
+        'Вест хайленд уайт терьер',
+        'Вельштерьер',
+        'Далматинец',
+        'Джек рассел терьер',
+        'Доберман',
+        'Дратхаар',
+        'Золотистый ретривер',
+        'Ирландский волкодав',
+        'Ирландский сеттер',
+        'Ирландский терьер',
+        'Итальянская левретка',
+        'Йоркширский терьер',
+        'Кавказская овчарка',
+        'Кане корсо',
+        'Карликовый пинчер',
+        'Кавалер кинг чарльз спаниель',
+        'Кеесхонд',
+        'Колли',
+        'Китайская хохлатая собака',
+        'Курцхаар',
+        'Королевский пудель',
+        'Карликовый пудель',
+        'Лабрадор ретривер',
+        'Лайка',
+        'Мальтийская болонка',
+        'Московская сторожевая',
+        'Миттельшнауцер',
+        'Мопс',
+        'Немецкий дог',
+        'Ньюфаундленд',
+        'Немецкая овчарка',
+        'Норвич-терьер',
+        'Папильон',
+        'Пекинес',
+        'Померанский шпиц',
+        'Пшеничный терьер',
+        'Родезийский риджбек',
+        'Ризеншнауцер',
+        'Ротвейлер',
+        'Русская борзая',
+        'Самоед',
+        'Сенбернар',
+        'Сибирские хаски',
+        'Скотч терьер',
+        'Стаффордширский Бультерьер',
+        'Такса',
+        'Той пудель',
+        'Той терьер',
+        'Уиппет',
+        'Фараонова собака',
+        'Фокстерьер гладкошерстный',
+        'Фокстерьер жесткошерстный',
+        'Французский бульдог',
+        'Цвергшнауцер',
+        'Чау Чау',
+        'Черный русский терьер',
+        'Шарпей',
+        'Шелти',
+        'Шиба-ину',
+        'Ши-тцу',
+        'Эрдельтерьер',
+        'Южноафриканский бурбуль',
+        'Ягдтерьер',
+        'Японский хин'
+    ]
+}
 
+
+  handleImageUpload = event => {
+    event.preventDefault();
+    const imgData = new FormData()
+    imgData.append('file', event.target.imgInput.files[0])
+    this.setState({ imgData })
+  }
   handleSubmit = event => {
     event.preventDefault();
 
@@ -17,84 +124,148 @@ class FoundForm extends Component {
       authorName,
       authorEmail,
       authorPhoneNumber,
-      authorAddress
+      authorAddress,
+      locationLat,
+      locationLng
     } = event.target;
 
-    const advert = JSON.stringify({
-      dogData: {
-        breed: dogBreed.value,
-        description: dogDescription.value,
-        sex: dogSex.value
-      },
-      authorData: {
-        name: authorName.value,
-        email: authorEmail.value,
-        phoneNumber: authorPhoneNumber.value,
-        adress: authorAddress.value
-      },
-      createdAt: Date.now()
-    });
+    const request = {
+      method: 'POST',
+      body: this.state.imgData,
+    }
 
-    this.props.createFoundAdvert(advert);
+    if (this.state.imgData) {
+      fetch('/api/images/', request)
+        .then(response => response.json())
+        .then(
+          data => {
+            console.log(data)
+            const advert = JSON.stringify({
+              dogData: {
+                breed: dogBreed.value,
+                description: dogDescription.value,
+                sex: dogSex.value,
+                image: data.filename
+              },
+              // authorData: {
+              //   name: authorName.value,
+              //   email: authorEmail.value,
+              //   phoneNumber: authorPhoneNumber.value,
+              //   adress: authorAddress.value
+              // },
+              location: { lat: locationLat.value, lng: locationLng.value }
+            });
+            this.props.createFoundAdvert(advert)
+          })
+    } else {
+      const advert = JSON.stringify({
+        dogData: {
+          breed: dogBreed.value,
+          description: dogDescription.value,
+          sex: dogSex.value,
+          image: 'placeholder.jpg'
+        },
+        // authorData: {
+        //   name: authorName.value,
+        //   email: authorEmail.value,
+        //   phoneNumber: authorPhoneNumber.value,
+        //   adress: authorAddress.value
+        // },
+        location: { lat: locationLat.value, lng: locationLng.value }
+      });
+      this.props.createFoundAdvert(advert)
+    }
+
+  };
+
+  getLocation = location => {
+    document.getElementById("location-input-lat").value = location.lat;
+    document.getElementById("location-input-lng").value = location.lng;
   };
 
   render() {
     return (
       <div>
-        <div>{this.state.message}</div>
-        <form onSubmit={this.handleSubmit}>
-          <label for="dog-breed">Порода:</label>
-          <input
-            onChange={this.handleInput}
-            name="dogBreed"
-            id="dog-breed"
-            type="text"
-          />
+        <div>{this.props.message}</div>
+        <form id='found-form' onSubmit={this.handleSubmit} encType="multipart/form-data">
 
-          <label for="dog-description">Описание:</label>
+        <label htmlFor="dog-breed">Порода:</label>
+          <select onChange={this.handleInput} name='dogBreed'>
+          <option value=''>Выберите породу</option>
+          {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
+          </select>
+
+          <label htmlFor="dog-description">Описание:</label>
           <input
             onChange={this.handleInput}
             name="dogDescription"
             id="dog-description"
             type="text"
+            required
           />
 
-          <label for="dog-sex">Пол:</label>
-          <input onChange={this.handleInput} name="dogSex" id="dog-sex" />
+          <label htmlFor="dog-description">Пол:</label>
+          <select onChange={this.handleInput} name='dogSex'>
+          <option value="М">М</option>
+          <option value="Ж">Ж</option>
+          </select>
 
-          <label for="author-name">Имя:</label>
+          {/* <label htmlFor="author-name">Имя:</label>
           <input
             onChange={this.handleInput}
             name="authorName"
             id="author-name"
+            required
           />
 
-          <label for="author-email">Email:</label>
+          <label htmlFor="author-email">Email:</label>
           <input
             onChange={this.handleInput}
             name="authorEmail"
             id="author-email"
+            required
           />
 
-          <label for="author-phoneNumber">Телефонный номер:</label>
+          <label htmlFor="author-phoneNumber">Телефонный номер:</label>
           <input
             onChange={this.handleInput}
             name="authorPhoneNumber"
             id="author-phoneNumber"
+            required
           />
 
-          <label for="author-address">Адрес:</label>
+          <label htmlFor="author-address">Адрес:</label>
           <input
             onChange={this.handleInput}
             name="authorAddress"
             id="author-address"
-          />
+            required
+          /> */}
+
+          <input
+            id="location-input-lat"
+            name="locationLat"
+            hidden
+            required
+          ></input>
+          <input id="location-input-lng" name="locationLng" hidden></input>
 
           <button>Submit</button>
         </form>
+        <form onSubmit={this.handleImageUpload}>
+          <input type='file' name='imgInput' />
+          <button>Добавить картинку</button>
+        </form>
+        <Maps getLocation={this.getLocation} />
       </div>
     );
   }
+}
+
+function mapStateToProps(store) {
+  return {
+    message: store.message
+  };
 }
 
 const mapDispatchToProps = dispatch => {
@@ -103,4 +274,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(FoundForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FoundForm);

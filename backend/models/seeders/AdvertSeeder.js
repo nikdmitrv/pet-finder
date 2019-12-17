@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/pet-finder", {
 
 function seed(Model, data) {
     for (let item of data) {
-        Model.create(data)
+        Model.create(item)
     }
 }
 

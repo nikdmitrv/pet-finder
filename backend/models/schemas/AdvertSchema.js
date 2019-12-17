@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types;
 
 // const advertSchemaConstructor = function () {
 //     return mongoose.Schema({
@@ -12,6 +13,7 @@ const AdvertSchema = mongoose.Schema({
         breed: String,
         description: String,
         sex: String,
+        image: String,
     },
     authorData: {
         name: String,
@@ -20,13 +22,15 @@ const AdvertSchema = mongoose.Schema({
         address: String,
     },
     createdAt: Date,
+    location: { lat: Number, lng: Number },
 });
 
 class Animal {
-    constructor(breed, description, sex) {
+    constructor(breed, description, sex, image) {
         this.breed = breed;
-        this.description = description
-        this.sex = sex
+        this.description = description;
+        this.sex = sex;
+        this.image = image;
     }
 }
 
