@@ -47,10 +47,6 @@ app.use(cookieParser());
 // Установка заголовков запросов
 app.use(require("./middleware/headers"));
 
-app.use((req, res, next) => {
-  setTimeout(() => next(), 500);
-});
-
 app.use("/api/found", dogsFoundRouter);
 app.use("/api/lost", dogsLostRouter);
 app.use("/api/account", accountRouter);
