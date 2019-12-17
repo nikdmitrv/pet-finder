@@ -4,14 +4,114 @@ import { connect } from "react-redux";
 import { createFoundAdvertAC } from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
-class FoundForm extends Component {
-  state = {}
+class FoundForm extends Component {  
+  state = {
+    breedOptions: [
+        'Акита-ину',
+        'Алабай',
+        'Аляскинский Маламут',
+        'Американская Акита',
+        'Американский бульдог',
+        'Американский стаффордширский терьер',
+        'Английский бульдог',
+        'Афганская борзая',
+        'Американский кокер спаниель',
+        'Английский кокер спаниель',
+        'Английский мастиф',
+        'Английский пойнтер',
+        'Басенджи',
+        'Бассет Хаунд',
+        'Без породы',
+        'Бернский зенненхунд',
+        'Бигль',
+        'Бишон фризе',
+        'Бладхаунд',
+        'Бобтейл',
+        'Боксер',
+        'Болгарская овчарка',
+        'Бордер колли',
+        'Бордоский дог',
+        'Босерон',
+        'Бостон терьер',
+        'Бриар',
+        'Брюссельский гриффон',
+        'Бульмастиф',
+        'Бультерьер',
+        'Веймаранер',
+        'Вельш корги пемброк',
+        'Вест хайленд уайт терьер',
+        'Вельштерьер',
+        'Далматинец',
+        'Джек рассел терьер',
+        'Доберман',
+        'Дратхаар',
+        'Золотистый ретривер',
+        'Ирландский волкодав',
+        'Ирландский сеттер',
+        'Ирландский терьер',
+        'Итальянская левретка',
+        'Йоркширский терьер',
+        'Кавказская овчарка',
+        'Кане корсо',
+        'Карликовый пинчер',
+        'Кавалер кинг чарльз спаниель',
+        'Кеесхонд',
+        'Колли',
+        'Китайская хохлатая собака',
+        'Курцхаар',
+        'Королевский пудель',
+        'Карликовый пудель',
+        'Лабрадор ретривер',
+        'Лайка',
+        'Мальтийская болонка',
+        'Московская сторожевая',
+        'Миттельшнауцер',
+        'Мопс',
+        'Немецкий дог',
+        'Ньюфаундленд',
+        'Немецкая овчарка',
+        'Норвич-терьер',
+        'Папильон',
+        'Пекинес',
+        'Померанский шпиц',
+        'Пшеничный терьер',
+        'Родезийский риджбек',
+        'Ризеншнауцер',
+        'Ротвейлер',
+        'Русская борзая',
+        'Самоед',
+        'Сенбернар',
+        'Сибирские хаски',
+        'Скотч терьер',
+        'Стаффордширский Бультерьер',
+        'Такса',
+        'Той пудель',
+        'Той терьер',
+        'Уиппет',
+        'Фараонова собака',
+        'Фокстерьер гладкошерстный',
+        'Фокстерьер жесткошерстный',
+        'Французский бульдог',
+        'Цвергшнауцер',
+        'Чау Чау',
+        'Черный русский терьер',
+        'Шарпей',
+        'Шелти',
+        'Шиба-ину',
+        'Ши-тцу',
+        'Эрдельтерьер',
+        'Южноафриканский бурбуль',
+        'Ягдтерьер',
+        'Японский хин'
+    ]
+}
+
   handleImageUpload = event => {
     event.preventDefault();
-    const imgData = new FormData()
-    imgData.append('file', event.target.imgInput.files[0])
-    this.setState({ imgData })
-  }
+    const imgData = new FormData();
+    imgData.append("file", event.target.imgInput.files[0]);
+    this.setState({ imgData });
+  };
   handleSubmit = event => {
     event.preventDefault();
 
@@ -19,61 +119,44 @@ class FoundForm extends Component {
       dogBreed,
       dogDescription,
       dogSex,
-      authorName,
-      authorEmail,
-      authorPhoneNumber,
-      authorAddress,
       locationLat,
       locationLng
     } = event.target;
 
     const request = {
-      method: 'POST',
-      body: this.state.imgData,
-    }
+      method: "POST",
+      body: this.state.imgData
+    };
 
     if (this.state.imgData) {
-      fetch('/api/images/', request)
+      fetch("/api/images/", request)
         .then(response => response.json())
-        .then(
-          data => {
-            console.log(data)
-            const advert = JSON.stringify({
-              dogData: {
-                breed: dogBreed.value,
-                description: dogDescription.value,
-                sex: dogSex.value,
-                image: data.filename
-              },
-              authorData: {
-                name: authorName.value,
-                email: authorEmail.value,
-                phoneNumber: authorPhoneNumber.value,
-                adress: authorAddress.value
-              },
-              location: { lat: locationLat.value, lng: locationLng.value }
-            });
-            this.props.createFoundAdvert(advert)
-          })
+        .then(data => {
+          const advert = JSON.stringify({
+            dogData: {
+              breed: dogBreed.value,
+              description: dogDescription.value,
+              sex: dogSex.value,
+              image: data.filename
+            },
+            location: { lat: locationLat.value, lng: locationLng.value },
+            id: this.props.user._id
+          });
+          this.props.createFoundAdvert(advert);
+        });
     } else {
       const advert = JSON.stringify({
         dogData: {
           breed: dogBreed.value,
           description: dogDescription.value,
           sex: dogSex.value,
-          image: 'placeholder.jpg'
+          image: "placeholder.jpg"
         },
-        authorData: {
-          name: authorName.value,
-          email: authorEmail.value,
-          phoneNumber: authorPhoneNumber.value,
-          adress: authorAddress.value
-        },
-        location: { lat: locationLat.value, lng: locationLng.value }
+        location: { lat: locationLat.value, lng: locationLng.value },
+        id: this.props.user._id
       });
-      this.props.createFoundAdvert(advert)
+      this.props.createFoundAdvert(advert);
     }
-
   };
 
   getLocation = location => {
@@ -86,14 +169,12 @@ class FoundForm extends Component {
       <div>
         <div>{this.props.message}</div>
         <form id='found-form' onSubmit={this.handleSubmit} encType="multipart/form-data">
-          <label htmlFor="dog-breed">Порода:</label>
-          <input
-            onChange={this.handleInput}
-            name="dogBreed"
-            id="dog-breed"
-            type="text"
-            required
-          />
+
+        <label htmlFor="dog-breed">Порода:</label>
+          <select onChange={this.handleInput} name='dogBreed'>
+          <option value=''>Выберите породу</option>
+          {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
+          </select>
 
           <label htmlFor="dog-description">Описание:</label>
           <input
@@ -104,45 +185,11 @@ class FoundForm extends Component {
             required
           />
 
-          <label htmlFor="dog-sex">Пол:</label>
-          <input
-            onChange={this.handleInput}
-            name="dogSex"
-            id="dog-sex"
-            required
-          />
-
-          <label htmlFor="author-name">Имя:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorName"
-            id="author-name"
-            required
-          />
-
-          <label htmlFor="author-email">Email:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorEmail"
-            id="author-email"
-            required
-          />
-
-          <label htmlFor="author-phoneNumber">Телефонный номер:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorPhoneNumber"
-            id="author-phoneNumber"
-            required
-          />
-
-          <label htmlFor="author-address">Адрес:</label>
-          <input
-            onChange={this.handleInput}
-            name="authorAddress"
-            id="author-address"
-            required
-          />
+          <label htmlFor="dog-description">Пол:</label>
+          <select onChange={this.handleInput} name='dogSex'>
+          <option value="М">М</option>
+          <option value="Ж">Ж</option>
+          </select>
 
           <input
             id="location-input-lat"
@@ -155,7 +202,7 @@ class FoundForm extends Component {
           <button>Submit</button>
         </form>
         <form onSubmit={this.handleImageUpload}>
-          <input type='file' name='imgInput' />
+          <input type="file" name="imgInput" />
           <button>Добавить картинку</button>
         </form>
         <Maps getLocation={this.getLocation} />
@@ -166,6 +213,7 @@ class FoundForm extends Component {
 
 function mapStateToProps(store) {
   return {
+    user: store.user,
     message: store.message
   };
 }

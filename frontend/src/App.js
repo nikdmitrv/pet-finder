@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Home from "./components/Home/Home";
+import Loading from "./components/Loading/Loading";
 import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
@@ -30,12 +31,16 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Router>
         <div className="App">
           <div  className="header">
           <div className="logo">ШЩЕЙКА</div>
+          {this.props.loading ? (
+            <div className="loading-block">
+              <Loading />
+            </div>
+          ) : null}
           <nav>
             <Link to="/">Главная</Link>
             {this.props.logged ? (
@@ -90,7 +95,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/advert/found/:id"
+              path="/advert/found/:id"ГлавнаяРегистрацияВходПотерялисьНашлись
               render={props => {
                 return <Advert {...props} advertType="found" />;
               }}
@@ -114,7 +119,8 @@ function mapStateToProps(store) {
     foundDogsList: store.foundDogsList,
     lostDogsList: store.lostDogsList,
     user: store.user,
-    logged: store.logged
+    logged: store.logged,
+    loading: store.loading
   };
 }
 
