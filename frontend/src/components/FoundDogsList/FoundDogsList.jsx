@@ -24,7 +24,7 @@ class FoundDogsList extends Component {
     }
     if (options.byDate) {
       allAdverts = allAdverts.filter(
-        advert => advert.createdAt === options.byDate
+        advert => new Date(advert.createdAt) >= new Date(options.byDate)
       );
     }
     this.setState({ filtered: allAdverts });
