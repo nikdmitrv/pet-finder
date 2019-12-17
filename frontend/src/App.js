@@ -28,7 +28,7 @@ function App(props) {
   return (
     <Router>
       <div className="App">
-        <nav>
+        <nav className="header">
           <Link to="/">Главная</Link>
           {props.logged ? (
             <Link to="/logout">Выход</Link>

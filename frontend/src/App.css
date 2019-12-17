@@ -1,9 +1,18 @@
 .App {
   text-align: center;
+  height: 2000px;
+  background-color: white;
+}
+.header {
+  background-color: #7121d8;
+  height: 50px;
 }
 
 .App > nav > a {
-  margin: 10px;
+  margin: 20px;
+  text-decoration: none;
+  color: white;
+  
 }
 
 .App-logo {
@@ -30,6 +39,22 @@
 
 .App-link {
   color: #61dafb;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+form {
+  margin: 0 auto;
+  background-color: #BABABA;
+  border-radius: 10px;
+}
+.cardList {
+  width: 528px;  
+  margin: 20px;
+  border-radius: 10px;
 }
 
 @keyframes App-logo-spin {

@@ -41,21 +41,22 @@ class FilterForm extends Component {
 
     render() {
         return (
-            <div>
+            <div  className="">
                 <form onSubmit={this.handleSubmit}>
-                    <select name='breed'>
-                        <option value=''>Select a breed</option>
-                        {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
-                    </select>
-
+                <div class="">
+                    </div>
                     <label htmlFor='sexFilterMale'>Male</label>
                     <input type='radio' name='sex' id='sexFilterMale' value='male' />
                     <label htmlFor='sexFilterFemale'>Female</label>
                     <input type='radio' name='sex' id='sexFilterFemale' value='female' />
 
 
+                    <select className="custom-select"  name='breed'>
+                        <option value=''>Select a breed</option>
+                        {this.state.breedOptions.map((breed, index) => <option key={index} value={breed}>{breed}</option>)}
+                    </select>
                     <label htmlFor='dateFilter'>Дата</label>
-                    <input name='date' id='dateFilter' />
+                    <input className="form-control" name='date' id='dateFilter' />
 
                     <button>Filter</button>
                 </form>
