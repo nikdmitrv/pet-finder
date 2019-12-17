@@ -40,9 +40,11 @@ class FoundDogsList extends Component {
   renderList(advert) {
     const date = new Date(advert.createdAt);
     return (
-      <li key={advert._id}>
+      <div key={advert._id}>
         <div>Собака найдена:</div>
-        <img src={'http://localhost:5000/api/images/' + advert.dogData.image}></img>
+        <img
+          src={"http://localhost:5000/api/images/" + advert.dogData.image}
+        ></img>
         <div>{advert.dogData.breed}</div>
         <div>{advert.dogData.description}</div>
         <div>{advert.dogData.sex}</div>
@@ -53,8 +55,8 @@ class FoundDogsList extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
-        <Link to={'/advert/found/' + advert._id}>Перейти к объявлению</Link>
-      </li>
+        <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
+      </div>
     );
   }
   render() {
