@@ -55,7 +55,7 @@ class FilterForm extends Component {
 
 
                     <label htmlFor='dateFilter'>Дата</label>
-                    <input name='date' id='dateFilter' />
+                    <input type='date' name='date' id='dateFilter' />
 
                     <button>Filter</button>
                 </form>
