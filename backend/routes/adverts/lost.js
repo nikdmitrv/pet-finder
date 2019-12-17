@@ -9,9 +9,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.body)
   const { dogData, authorData, location } = req.body;
   const newAdvert = new LostDogAdvertModel({
-    dogData: new Animal(dogData.breed, dogData.description, dogData.sex, dogData.date),
+    dogData: new Animal(
+      dogData.breed,
+      dogData.description,
+      dogData.sex,
+      dogData.image
+    ),
     authorData: new Author(
       authorData.name,
       authorData.email,
@@ -46,7 +52,7 @@ router.route('/update/:id').post((req, res) => {
       dog.dogData.sex = req.body.sex;
       dog.dogData.date = req.body.date;
       // dog.location = req.body.location;
-      
+
 
       dog.save()
         .then(() => res.json('Dog updated!'))

@@ -53,7 +53,6 @@ class FoundForm extends Component {
               },
               location: { lat: locationLat.value, lng: locationLng.value }
             });
-            console.log(advert)
             this.props.createFoundAdvert(advert)
           })
     } else {
