@@ -43,6 +43,7 @@ class LostDogsList extends Component {
     return (
       <li key={advert._id}>
         <div>Собака потеряна:</div>
+        <img src={'http://localhost:5000/api/images/' + advert.dogData.image}></img>
         <div>{advert.dogData.breed}</div>
         <div>{advert.dogData.description}</div>
         <div>{advert.dogData.sex}</div>
