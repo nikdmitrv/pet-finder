@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
+
 const User = require("../../models/schemas/UserSchema");
 
 router.post("/", async function(req, res) {
+  console.log(req.body);
 
   let emailInput = req.body.email;
   let passwordInput = req.body.password;
   const currentUser = await User.findOne({
     email: emailInput
   });
+  console.log(currentUser);
 
-  if (currentUser !== null && passwordInput === currentUser.password) {
-    req.session.logged = "true";
+  if (currentUser && passwordInput === currentUser.password) {
+    req.session.logged = true;
     req.session.name = req.body.email;
-    res.json({ message: "пользователь найден", currentUser });
-    // console.log(req.session.name);
+    res.json({ currentUser });
   } else {
-    req.session.destroy();
-    res.json({ message: "Неверный email или пароль" });
-    // console.log(req.session.name);
+    res.status(400).json({ message: "Неверный email или пароль" });
   }
 });
 

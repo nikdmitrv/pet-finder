@@ -19,7 +19,7 @@ class Registration extends Component {
         email: event.target.email.value
       });
       this.props.registerUser(user);
-      window.location = "/";
+      window.location = "/account/" + this.props.user._id;
     }
   };
   render() {
@@ -60,6 +60,7 @@ class Registration extends Component {
 
 function mapStateToProps(store) {
   return {
+    user: store.user,
     message: store.message
   };
 }

@@ -8,6 +8,10 @@ class Login extends Component {
     message: ""
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    window.location = "/account/" + this.props.user._id;
+  }
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -16,9 +20,10 @@ class Login extends Component {
       email: event.target.email.value
     });
     this.props.loginUser(user);
-    window.location = "/";
   };
   render() {
+    console.log("Login props:", this.props);
+
     return (
       <>
         <h1>Вход в профиль</h1>
@@ -45,6 +50,7 @@ class Login extends Component {
 
 function mapStateToProps(store) {
   return {
+    user: store.user,
     message: store.message
   };
 }

@@ -58,6 +58,7 @@ class LostDogsList extends Component {
         <div>Дата потери:</div>
         <div>{advert.dogData.date}</div>
       </div>
+      </li>
     );
   }
   render() {
