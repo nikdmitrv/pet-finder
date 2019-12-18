@@ -34,29 +34,20 @@ class App extends Component {
   render() {
     return (
       <Router>
+        {this.props.loading ? (
+          <div className="loading-block">
+            <Loading />
+          </div>
+        ) : null}
         <div className="header">
           <div className="logo">ИЩЕЙКА</div>
-          {this.props.loading ? (
-            <div className="loading-block">
-              <Loading />
-            </div>
-          ) : null}
           <nav>
-            <Link to="/">Главная</Link>
-            {this.props.logged ? (
-              <>
-                <Link to={"/account/" + this.props.user._id}>
-                  Личный кабинет
-                  </Link>
-                <Link to="/logout">Выход</Link>
-              </>
-            ) : (
-                <>
-                  <Link to="/registration">Регистрация</Link>
-                  <Link to="/login">Вход</Link>
-                </>
-              )}
-
+            <Link
+              to="/"
+              style={{ position: "absolute", left: "10vw", top: "0px" }}
+            >
+              Главная
+            </Link>
             <Link to="/lost-dogs">Потерялись</Link>
             <Link to="/found-dogs">Нашлись</Link>
             {this.props.logged ? (
@@ -65,19 +56,44 @@ class App extends Component {
                 <Link to="/add-found-dog">Добавить объявление о находке</Link>
               </>
             ) : null}
+            {this.props.logged ? (
+              <>
+                <Link
+                  style={{ position: "absolute", left: "80vw", top: "0px" }}
+                  to={"/account/" + this.props.user._id}
+                >
+                  Личный кабинет
+                </Link>
+                <Link
+                  style={{ position: "absolute", left: "90vw", top: "0px" }}
+                  to="/logout"
+                >
+                  Выход
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  style={{ position: "absolute", left: "82vw", top: "0px" }}
+                  to="/registration"
+                >
+                  Регистрация
+                </Link>
+                <Link
+                  style={{ position: "absolute", left: "90vw", top: "0px" }}
+                  to="/login"
+                >
+                  Вход
+                </Link>
+              </>
+            )}
           </nav>
-        {/* </div>
+        </div>
 
-          <div className="wrapper">
-          <div className="man">
-    
-    </div> */}
-            </div>
-        
-          <Switch>
-            <Route exact path="/" render={() => <Home />} />
-        <div className="App">
-  <Route exact path="/registration" render={() => <Registration />} />
+        <Switch>
+          <Route exact path="/" render={() => <Home />} />
+          <div className="App">
+            <Route exact path="/registration" render={() => <Registration />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/logout" render={() => <Logout />} />
             <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
@@ -124,11 +140,10 @@ class App extends Component {
               render={props => {
                 return <Advert {...props} advertType="lost" />;
               }}
-              />
-              </div>
-          </Switch>
-        <div className="footer">
-        </div>
+            />
+          </div>
+        </Switch>
+        <div className="footer"></div>
       </Router>
     );
   }
