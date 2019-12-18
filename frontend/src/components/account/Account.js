@@ -33,32 +33,29 @@ const FoundDog = props => (
   </tr>
 );
 const LostDog = props => (
-  <tr>
-    <td>{props.dog.dogData.breed}</td>
-    <td>{props.dog.dogData.sex}</td>
-    <td>
-      <span>
-        {props.dog.dogData.description.length > 30
+  <div className="card">
+    <div>{props.dog.dogData.breed}</div>
+    <div>{props.dog.dogData.sex}</div>
+    <div>{props.dog.dogData.description.length > 30
           ? props.dog.dogData.description.slice(0, 30) + "..."
-          : props.dog.dogData.description}
-      </span>
-    </td>
-    <td>
+          : props.dog.dogData.description}</div>
+    <div>
       {
         <img
+        class="card-img-top" 
           alt="dog image"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
       >
-    </td>
+    </div>
     <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
     <div>
       <Link to={"/find-matches/lost/" + props.dog._id}>
         Посмотреть совпадения
       </Link>
     </div>
-  </tr>
+  </div>
 );
 
 class Account extends Component {
@@ -97,14 +94,12 @@ class Account extends Component {
         <h2>{this.state.name}</h2>
         <h2>{this.state.email}</h2>
         <h2>Ваши объявления о находке</h2>
-        <table>
-          <tr>
-            <th>Порода</th>
-            <th>Пол</th>
-            <th>Описание</th>
-          </tr>
-          <tbody>{this.foundDogList()}</tbody>
-        </table>
+        <div className="card">
+          <div>{this.foundDogList()}</div>
+          <div>Breed:</div>
+          <div>Description:</div>
+          <div>Sex:</div>
+        </div>
         <h2>Ваши объявления о пропаже</h2>
         <table>
           <tr>
