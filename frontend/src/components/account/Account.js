@@ -6,10 +6,16 @@ import { loadingRequestAC, clearMessageAC } from "../../redux/actions";
 
 const FoundDog = props => (
   <tr>
-    <td key={1}>{props.dog.dogData.breed}</td>
-    <td key={2}>{props.dog.dogData.description}</td>
-    <td key={3}>{props.dog.dogData.sex}</td>
-    <td key={4}>
+    <td>{props.dog.dogData.breed}</td>
+    <td>{props.dog.dogData.sex}</td>
+    <td>
+      <span>
+        {props.dog.dogData.description.length > 30
+          ? props.dog.dogData.description.slice(0, 30) + "..."
+          : props.dog.dogData.description}
+      </span>
+    </td>
+    <td>
       {
         <img
           alt="dog image"
@@ -23,10 +29,16 @@ const FoundDog = props => (
 );
 const LostDog = props => (
   <tr>
-    <td key={1}>{props.dog.dogData.breed}</td>
-    <td key={2}>{props.dog.dogData.description}</td>
-    <td key={3}>{props.dog.dogData.sex}</td>
-    <td key={4}>
+    <td>{props.dog.dogData.breed}</td>
+    <td>{props.dog.dogData.sex}</td>
+    <td>
+      <span>
+        {props.dog.dogData.description.length > 30
+          ? props.dog.dogData.description.slice(0, 30) + "..."
+          : props.dog.dogData.description}
+      </span>
+    </td>
+    <td>
       {
         <img
           alt="dog image"
@@ -77,18 +89,18 @@ class Account extends Component {
         <h2>Ваши объявления о находке</h2>
         <table>
           <tr>
-            <th>Breed</th>
-            <th>Description</th>
-            <th>Sex</th>
+            <th>Порода</th>
+            <th>Пол</th>
+            <th>Описание</th>
           </tr>
           <tbody>{this.foundDogList()}</tbody>
         </table>
         <h2>Ваши объявления о пропаже</h2>
         <table>
           <tr>
-            <th>Breed</th>
-            <th>Description</th>
-            <th>Sex</th>
+            <th>Порода</th>
+            <th>Пол</th>
+            <th>Описание</th>
           </tr>
           <tbody>{this.lostDogList()}</tbody>
         </table>
