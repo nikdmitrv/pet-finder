@@ -26,22 +26,27 @@ class Login extends Component {
 
     return (
       <>
-        <h1>Вход в профиль</h1>
-        <div>
+       <div class="reg">
+        <div className="form-group row formReg">
           <form onSubmit={this.handleSubmit}>
-            <p>
+        <h1>Вход в профиль</h1>
+          <div className="form-group mx-sm-3 mb-2">
               <label>Email</label>
-              <input name="email" type="email" required></input>
-            </p>
-            <p>
+              <input className="form-control" name="email" type="email" required></input>
+            </div>
+            <div className="form-group mx-sm-3 mb-2">
               <label>Пароль</label>
-              <input name="password" type="password" required></input>
-            </p>
-            <p>
-              <button type="submit">Отправить</button>
-            </p>
+              <input className="form-control" name="password" type="password" required></input>
+            </div>
+            <div className="form-group mx-sm-3 mb-2">
+              <button className="btn btn-primary mb-2" type="submit">Отправить</button>
+            </div>
             <p>{this.state.message}</p>
           </form>
+        </div>
+        
+        </div>
+          <div className="footer">
         </div>
       </>
     );

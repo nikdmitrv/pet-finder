@@ -25,31 +25,37 @@ class Registration extends Component {
   render() {
     return (
       <>
-        <h1>Форма регистрация</h1>
-        <div>
+        <div class="reg">
+        <div className="form-group row formReg">
+
           <form onSubmit={this.handleSubmit}>
-            <p>
+        <h1 id="h1-form">Форма регистрации</h1>
+            <div className="form-group mx-sm-3 mb-2">
               <label>Имя</label>
-              <input name="name" required></input>
-            </p>
-            <p>
+              <input className="form-control" name="name" required></input>
+            </div>
+            <div className="form-group mx-sm-3 mb-2">
               <label>Email</label>
-              <input name="email" type="email" required></input>
-            </p>
-            <p>
+              <input className="form-control" name="email" type="email" required></input>
+            </div>
+            <div className="form-group mx-sm-3 mb-2">
               <label>Пароль</label>
-              <input name="password" type="password" required></input>
-            </p>
-            <p>
+              <input className="form-control" name="password" type="password" required></input>
+            </div>
+            <div className="form-group mx-sm-3 mb-2">
               <label>Подтвердите пароль</label>
-              <input name="confirmPassword" type="password"></input>
-            </p>
+              <input className="form-control" name="confirmPassword" type="password"></input>
+            </div>
             <p>
-              <button type="submit">Отправить</button>
+              <button className="btn btn-primary mb-2" type="submit">Отправить</button>
             </p>
             <p>{this.state.message}</p>
             <p>{this.props.message}</p>
           </form>
+          </div>
+          
+          </div>
+          <div className="footer">
         </div>
       </>
     );

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Home from "./components/Home/Home";
+import Loading from "./components/Loading/Loading";
 import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
@@ -29,35 +30,42 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Router>
         <div className="App">
-          <nav>
-            <Link to="/">Главная</Link>
-            {this.props.logged ? (
-              <>
-                <Link to={"/account/" + this.props.user._id}>
-                  Личный кабинет
-                </Link>
-                <Link to="/logout">Выход</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/registration">Регистрация</Link>
-                <Link to="/login">Вход</Link>
-              </>
-            )}
-
-            <Link to="/lost-dogs">Объявления о пропаже</Link>
-            <Link to="/found-dogs">Объявления о находке</Link>
-            {this.props.logged ? (
-              <>
-                <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                <Link to="/add-found-dog">Добавить объявление о находке</Link>
-              </>
+          <div className="header">
+            <div className="logo">ИЩЕЙКА</div>
+            {this.props.loading ? (
+              <div className="loading-block">
+                <Loading />
+              </div>
             ) : null}
-          </nav>
+            <nav>
+              <Link to="/">Главная</Link>
+              {this.props.logged ? (
+                <>
+                  <Link to={"/account/" + this.props.user._id}>
+                    Личный кабинет
+                  </Link>
+                  <Link to="/logout">Выход</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/registration">Регистрация</Link>
+                  <Link to="/login">Вход</Link>
+                </>
+              )}
+
+              <Link to="/lost-dogs">Потерялись</Link>
+              <Link to="/found-dogs">Нашлись</Link>
+              {this.props.logged ? (
+                <>
+                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
+                </>
+              ) : null}
+            </nav>
+          </div>
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/registration" component={Registration} />
@@ -87,6 +95,7 @@ class App extends Component {
             <Route
               exact
               path="/advert/found/:id"
+              ГлавнаяРегистрацияВходПотерялисьНашлись
               render={props => {
                 return <Advert {...props} advertType="found" />;
               }}
@@ -110,7 +119,8 @@ function mapStateToProps(store) {
     foundDogsList: store.foundDogsList,
     lostDogsList: store.lostDogsList,
     user: store.user,
-    logged: store.logged
+    logged: store.logged,
+    loading: store.loading
   };
 }
 

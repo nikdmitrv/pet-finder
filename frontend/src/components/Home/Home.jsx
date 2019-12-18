@@ -1,65 +1,96 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import { connect } from "react-redux";
 
+import {
+  fetchFoundDogsAC,
+  fetchLostDogsAC,
+  loadingRequestAC,
+  clearMessageAC
+} from "../../redux/actions";
 
-
-
-export default class Home extends Component {
-
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      foundDogs: [],
+      lostDogs: []
+    };
+  }
 
-      myDogs: []
+  renderList(dog) {
+    return (
+      <li key={dog._id}>
+        <span key={1}>{dog.dogData.breed}</span>
+        <span key={2}>{dog.dogData.description}</span>
+        <span key={3}>{dog.dogData.sex}</span>
+        <img
+          src={"http://localhost:5000/api/images/" + dog.dogData.image}
+        ></img>
+      </li>
+    );
+  }
 
+  componentDidMount = async () => {
+    try {
+      const arr = {
+        found: [],
+        lost: []
+      };
+      this.props.loadingRequest();
+      const responseFound = await fetch("/api/found");
+      if (responseFound.status === 200) {
+        const result = await responseFound.json();
+        arr.found = result;
+      } else {
+        console.log(responseFound);
+      }
+      const responseLost = await fetch("/api/lost");
+      if (responseLost.status === 200) {
+        const result = await responseLost.json();
+        arr.lost = result;
+      } else {
+        console.log(responseLost);
+      }
+      this.setState({ foundDogs: arr.found, lostDogs: arr.lost });
+    } catch (error) {
+      console.log(error);
     }
-  }
-
-  foundDog(dog) {
-    return <li key={dog._id}>
-    <span key={1}>{dog.dogData.breed}</span>
-    <span key={2}>{dog.dogData.description}</span>
-    <span key={3}>{dog.dogData.sex}</span>
-
-  </li>
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:5000/api/found/')
-      .then(response => {
-        let newMass = response.data.reverse();
-
-        this.setState({
-          myDogs: newMass
-        })
-        // const result = this.state.myDogs.sort(function(a,b){
-        //   let one = a.dogData.date;
-        //   let two = b.dogData.date;
-        //   return one - two;
-
-        // for(let i=this.state.myDogs.length -1; i> 0; i-- ){
-        //   newMass.push(i)
-        // }
-        // console.log(newMass);
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-
-  }
-
+    this.props.clearMessage();
+  };
 
   render() {
-
     return (
+      <div>
+        <p>Последние найденые =)</p>
+        <ul>
+          {this.state.foundDogs &&
+            this.state.foundDogs.slice(0, 5).map(e => this.renderList(e))}
+        </ul>
+        <p>Последние потеряные =(</p>
 
-
-      <div><ul>
-       {this.state.myDogs.slice(2).map(e => this.foundDog(e))}
-       </ul>
+        <ul>
+          {this.state.lostDogs &&
+            this.state.lostDogs.slice(0, 5).map(e => this.renderList(e))}
+        </ul>
       </div>
     );
   }
 }
 
+function mapStateToProps(store) {
+  return {
+    foundDogsList: store.foundDogsList,
+    lostDogsList: store.lostDogsList
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    requestFoundDogs: () => dispatch(fetchFoundDogsAC()),
+    requestLostDogs: () => dispatch(fetchLostDogsAC()),
+    loadingRequest: () => dispatch(loadingRequestAC()),
+    clearMessage: () => dispatch(clearMessageAC())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -138,7 +138,8 @@ class FilterForm extends Component {
 
                     <button>Filter</button>
                 </form>
-            </div>
+                    </div>
+            
         );
     }
 
