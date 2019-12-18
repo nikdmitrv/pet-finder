@@ -109,7 +109,7 @@ class FoundForm extends Component {
   handleImageUpload = event => {
     event.preventDefault();
     const imgData = new FormData();
-    imgData.append("file", event.target.imgInput.files[0]);
+    imgData.append("file", event.target.files[0]);
     this.setState({ imgData });
   };
   handleSubmit = event => {
@@ -209,9 +209,8 @@ class FoundForm extends Component {
 
           <button>Submit</button>
         </form>
-        <form onSubmit={this.handleImageUpload}>
-          <input type="file" name="imgInput" />
-          <button>Добавить картинку</button>
+        <form>
+          <input onChange={this.handleImageUpload} type="file" name="imgInput" />
         </form>
         <Maps getLocation={this.getLocation} />
       </div>
