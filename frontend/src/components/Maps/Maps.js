@@ -43,7 +43,7 @@ export default class MapContainer extends React.Component {
   render() {
     const Map = this.initMap();
     return (
-      <div style={{ height: "400px", width: "500px", padding: "30px" }}>
+      <div className="map" style={{ height: "500px", width: "1400px", padding: "30px" }}>
         <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU&language=ru&region=RU"
           loadingElement={<div style={{ height: `100%` }} />}

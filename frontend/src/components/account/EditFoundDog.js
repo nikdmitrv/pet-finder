@@ -115,9 +115,10 @@ export default class EditFoundDog extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <h3>Редактировать данные о собаке</h3>
-        <form onSubmit={this.onSubmit}>
+      <div className="editFound">
+        <form  onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Порода: </label>
             <input
@@ -143,7 +144,7 @@ export default class EditFoundDog extends Component {
               type="text"
               required
               className="form-control"
-              style={{ resize: "none", height: "100px", width: "300px" }}
+              style={{ resize: "none", height: "100px", width: "400px" }}
               value={this.state.description}
               onChange={this.onChangeDescription}
             />
@@ -160,13 +161,6 @@ export default class EditFoundDog extends Component {
             />
           </div>
 
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Редактировать"
-              className="btn btn-primary"
-            />
-          </div>
 
           <input
             id="location-input-lat"
@@ -176,22 +170,32 @@ export default class EditFoundDog extends Component {
           ></input>
           <input id="location-input-lng" name="locationLng" hidden></input>
 
-          <img
-            src={"http://localhost:5000/api/images/" + this.state.image}
-          ></img>
-
+          <div className="form-group">
+            <button className="btn btn-primary btn-edit">Подтвреди изменения</button>
+           
+              
+                         
+          </div>
+          <div className="form-group">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-edit"
             type="button"
             onClick={() => {
               this.deleteFoundDog(this.state._id);
             }}
           >
-            Удалить
+             Удалить объявление
           </button>
+          </div>
         </form>
+
+            <img
+              id="editImg"
+              src={"http://localhost:5000/api/images/" + this.state.image}
+            ></img>
         <Map getLocation={this.getLocation} />
       </div>
+      </>
     );
   }
 }

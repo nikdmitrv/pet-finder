@@ -38,7 +38,8 @@ class Registration extends Component {
         <div className="reg">
         <div className="form-group row formReg">
 
-          <form onSubmit={this.handleSubmit}>
+          <form className="formreg"
+          onSubmit={this.handleSubmit}>
         <h1 id="h1-form">Форма регистрации</h1>
             <div className="form-group mx-sm-3 mb-2">
               <label>Имя</label>
@@ -66,7 +67,7 @@ class Registration extends Component {
           
          
         </div>
-        <div className="footer"></div>
+     
       </>
     );
   }
