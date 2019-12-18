@@ -32,7 +32,7 @@ class Login extends Component {
       <>
        <div class="reg">
         <div className="form-group row formReg">
-          <form onSubmit={this.handleSubmit}>
+          <form className="formreg" onSubmit={this.handleSubmit}>
         <h1>Вход в профиль</h1>
           <div className="form-group mx-sm-3 mb-2">
               <label>Email</label>

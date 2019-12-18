@@ -77,18 +77,27 @@ ul {
   justify-content: space-evenly;
 }
 form {
-  margin: 100px 0 0 62%;
-  background-color: rgba(0, 0, 0, 0.123);
-  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
+  /* margin: 100px 0 0 62%; */
+  /* background-color: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2); */
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   width: 400px;
+  margin: 10px auto;
+}
+.formreg{
+  margin: 100px 0 0 62%; 
+  background-color: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2); 
 }
 .cardList {
-  width: 528px;
+  width: 400px;
   margin: 20px;
+  /* border: 1px solid #34145e; */
   border-radius: 10px;
-  display: flex;
-  flex-direction: ;
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
+  
 }
 
 .formList {
@@ -106,7 +115,7 @@ form {
 .mapList > a {
   text-decoration: none;
   color: white;
-}
+}   type="submit"
 .select {
   border-radius: 0;
   background: white;
@@ -132,6 +141,7 @@ form {
   width: 268px;
 }
 .btn-primary {
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
   color: #fff;
   background-color: #34145e;
   border-color: #34145e;
@@ -188,6 +198,8 @@ form {
 
 img {
   border-radius: 10px;
+  max-height: 260px;
+ 
 }
 .listHome {
   padding: 5px;
@@ -208,9 +220,6 @@ img {
   width: 100%;
   position: relative;
   top: -280px;
-
-  /* bottom: 200px; */
-  overflow: ;
   height: 600px;
   background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2019/11/searchAndMatchHero.jpg");
   background-size: cover;
@@ -237,4 +246,38 @@ img {
 .b1 > a {
   text-decoration: none;
   color: white;
+}
+.sds{
+  position: relative;
+  right: -10%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.float{
+  margin: 5px;
+}
+.btn > a{
+  color: white;
+  text-decoration: none;
+}
+.btnAcc{
+  margin: 20px;
+}
+.btnAcc{
+}
+#accH2{
+  padding:20px;
+}
+.map{
+
+}
+.editFound{
+  display: flex;
+  flex-wrap: wrap;
+}
+#editImg {
+ margin: 100px auto;
+}
+.btn-edit{
+  width: 400px;
 }

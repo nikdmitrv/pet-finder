@@ -38,7 +38,7 @@ export default class EditLostDog extends Component {
         });
         //   console.log(this.state);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -115,83 +115,87 @@ export default class EditLostDog extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <h3>Редактировать данные о собаке</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Порода: </label>
+        <div className="editFound">
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Порода: </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.breed}
+                onChange={this.onChangeBreed}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="dog-description">Пол:</label>
+              <label htmlFor="sexFilterMale">М</label>
+              <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+              <label htmlFor="sexFilterFemale">Ж</label>
+              <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
+            </div>
+
+            <div className="form-group">
+              <label>Описание: </label>
+              <textarea
+                type="text"
+                required
+                className="form-control"
+                style={{ resize: "none", height: "100px", width: "400px" }}
+                value={this.state.description}
+                onChange={this.onChangeDescription}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Дата: </label>
+              <input
+                type="date"
+                required
+                className="form-control"
+                value={this.state.date}
+                onChange={this.onChangeDate}
+              />
+            </div>
+
+
             <input
-              type="text"
+              id="location-input-lat"
+              name="locationLat"
+              hidden
               required
-              className="form-control"
-              value={this.state.breed}
-              onChange={this.onChangeBreed}
-            />
-          </div>
+            ></input>
+            <input id="location-input-lng" name="locationLng" hidden></input>
 
-          <div className="form-group">
-            <label htmlFor="dog-description">Пол:</label>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
-            <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
-          </div>
+            <div className="form-group">
+              <button className="btn btn-primary btn-edit">Подтвреди изменения</button>
 
-          <div className="form-group">
-            <label>Описание: </label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              style={{ resize: "none", height: "100px", width: "300px" }}
-              value={this.state.description}
-              onChange={this.onChangeDescription}
-            />
-          </div>
 
-          <div className="form-group">
-            <label>Дата: </label>
-            <input
-              type="date"
-              required
-              className="form-control"
-              value={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div>
 
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Редактировать"
-              className="btn btn-primary"
-            />
-          </div>
-
-          <input
-            id="location-input-lat"
-            name="locationLat"
-            hidden
-            required
-          ></input>
-          <input id="location-input-lng" name="locationLng" hidden></input>
+            </div>
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-edit"
+                type="button"
+                onClick={() => {
+                  this.deleteLostDog(this.state._id);
+                }}
+              >
+                Удалить объявление
+          </button>
+            </div>
+          </form>
 
           <img
+            id="editImg"
             src={"http://localhost:5000/api/images/" + this.state.image}
           ></img>
-
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => {
-              this.deleteLostDog(this.state._id);
-            }}
-          >
-            Удалить
-          </button>
-        </form>
-        <Map getLocation={this.getLocation} />
-      </div>
+          <Map getLocation={this.getLocation} />
+        </div>
+      </>
     );
   }
 }
