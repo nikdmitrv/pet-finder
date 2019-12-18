@@ -1,18 +1,31 @@
+#root{
+  background-color:#efeef1 ;
+}
 .App {
+  position: relative;
+  left: 13%;
+  top: 30px;
   text-align: center;
   height: 100%;
-  /* background-color: white; */
+  max-width: 1400px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
 }
+
 .header {
+  position: relative;
   background-color: #34145e;
-  /* height: 500px; */
+  height: 100px;
   display: flex;
   justify-content: center;
+  width: 100%;
+  z-index: 1;
 }
 nav {
   padding: 50px;
 }
-.App > .header > nav > a {
+.header > nav > a {
   margin: 20px;
   text-decoration: none;
   color: white;
@@ -24,6 +37,7 @@ nav {
   background-image: url(https://www.whiterockcity.ca/ImageRepository/Document?documentId=3896);
   background-size: cover;
   height: 700px;
+  border-radius: 10px;
 }
 
 .App-logo {
@@ -112,6 +126,11 @@ form {
   -webkit-appearance: none;
   width: 268px;
 }
+.btn-primary {
+  color: #fff;
+  background-color: #34145e;
+  border-color: #34145e;
+}
 .btn-filt {
   margin: 1px 10px;
 }
@@ -121,6 +140,7 @@ form {
 }
 .footer {
   height: 200px;
+  width: 100%;
   background-color: #34145e;
 }
 #h1-form {
@@ -138,7 +158,12 @@ form {
     transform: rotate(360deg);
   }
 }
-
+.homeMain {
+  margin-top: -200px;
+  border-radius: 10px;
+  
+  ;
+}
 .maps-app {
   display: block;
   justify-content: center;
@@ -156,6 +181,57 @@ form {
 }
 
 img {
-  width: 400px;
-  height: 400px;
+  border-radius: 10px;
+}
+.listHome {
+  padding: 5px;
+  /* margin: 2px; */
+  /* border: 1px solid #34145e; */
+  /* border-radius: 50px; */
+  display: block;
+  width: 20%;
+}
+.listHome >span{
+ 
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+/* .listHome > img {
+  float: left;
+} */
+.man {  
+  width: 100%;
+  position: relative;
+  top: -280px;
+
+  ;
+  /* bottom: 200px; */
+  overflow: ;
+  height: 600px;
+  background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2019/11/searchAndMatchHero.jpg") ;
+  background-size: cover;
+  
+}
+.h1{
+  position: relative;
+  top: 330px;
+  color: white;
+  padding-left: 50px;
+}
+.p1{
+  position: relative;
+  top: 330px;
+  color: white;
+  padding-left: 50px;
+  font-size: 22px;
+}
+.b1 {
+  position: relative;
+  top: 370px;
+  margin-left: 50px;
+  font-size: 15px;
+}
+.b1 >a{
+  text-decoration: none;
+  color: white;
 }

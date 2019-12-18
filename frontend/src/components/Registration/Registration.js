@@ -54,8 +54,7 @@ class Registration extends Component {
           </form>
           </div>
           
-          </div>
-          <div className="footer">
+         
         </div>
       </>
     );

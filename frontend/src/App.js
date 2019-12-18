@@ -32,42 +32,49 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <div className="header">
-            <div className="logo">ИЩЕЙКА</div>
-            {this.props.loading ? (
-              <div className="loading-block">
-                <Loading />
-              </div>
-            ) : null}
-            <nav>
-              <Link to="/">Главная</Link>
-              {this.props.logged ? (
-                <>
-                  <Link to={"/account/" + this.props.user._id}>
-                    Личный кабинет
+        <div className="header">
+          <div className="logo">ИЩЕЙКА</div>
+          {this.props.loading ? (
+            <div className="loading-block">
+              <Loading />
+            </div>
+          ) : null}
+          <nav>
+            <Link to="/">Главная</Link>
+            {this.props.logged ? (
+              <>
+                <Link to={"/account/" + this.props.user._id}>
+                  Личный кабинет
                   </Link>
-                  <Link to="/logout">Выход</Link>
-                </>
-              ) : (
+                <Link to="/logout">Выход</Link>
+              </>
+            ) : (
                 <>
                   <Link to="/registration">Регистрация</Link>
                   <Link to="/login">Вход</Link>
                 </>
               )}
 
-              <Link to="/lost-dogs">Потерялись</Link>
-              <Link to="/found-dogs">Нашлись</Link>
-              {this.props.logged ? (
-                <>
-                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
-                </>
-              ) : null}
-            </nav>
-          </div>
+            <Link to="/lost-dogs">Потерялись</Link>
+            <Link to="/found-dogs">Нашлись</Link>
+            {this.props.logged ? (
+              <>
+                <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+                <Link to="/add-found-dog">Добавить объявление о находке</Link>
+              </>
+            ) : null}
+          </nav>
+        {/* </div>
+
+          <div className="wrapper">
+          <div className="man">
+    
+    </div> */}
+            </div>
+        
           <Switch>
             <Route exact path="/" render={() => <Home />} />
+        <div className="App">
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/logout" render={() => <Logout />} />
@@ -106,8 +113,10 @@ class App extends Component {
               render={props => {
                 return <Advert {...props} advertType="lost" />;
               }}
-            />
+              />
+              </div>
           </Switch>
+        <div className="footer">
         </div>
       </Router>
     );
