@@ -19,7 +19,7 @@ const initialState = {
   logged: false
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case CLEAR_MESSAGE: {
       return {
@@ -85,6 +85,7 @@ export default function (state = initialState, action) {
     case LOGIN_USER_ERROR: {
       return {
         ...state,
+        loading: false,
         message: action.message,
         logged: false
       };

@@ -17,6 +17,7 @@ mongoose.connect("mongodb://localhost/pet-finder", {
 
 const dogsFoundRouter = require("./routes/adverts/found");
 const dogsLostRouter = require("./routes/adverts/lost");
+const matchesRouter = require("./routes/adverts/matches");
 const accountRouter = require("./routes/account/account");
 const RegistrationRouter = require("./routes/users/registration");
 const LoginRouter = require("./routes/users/login");
@@ -50,6 +51,7 @@ app.use(require("./middleware/headers"));
 app.use("/api/found", dogsFoundRouter);
 app.use("/api/lost", dogsLostRouter);
 app.use("/api/account", accountRouter);
+app.use("/api/matches", matchesRouter);
 app.use("/users/registration", RegistrationRouter);
 app.use("/users/login", LoginRouter);
 app.use("/users/logout", LogoutRouter);

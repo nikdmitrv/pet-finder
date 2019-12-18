@@ -46,8 +46,12 @@ class FoundDogsList extends Component {
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
         <div>{advert.dogData.breed}</div>
-        <div>{advert.dogData.description}</div>
         <div>{advert.dogData.sex}</div>
+        <div>
+          {advert.dogData.description.length > 30
+            ? advert.dogData.description.slice(0, 30) + "..."
+            : advert.dogData.description}
+        </div>
         <div>Нашедший:</div>
         <div>{advert.authorData.name}</div>
         <div>{advert.authorData.email}</div>

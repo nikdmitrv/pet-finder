@@ -25,6 +25,11 @@ const FoundDog = props => (
       >
     </td>
     <Link to={"/editFound/" + props.dog._id}>Редактировать/Удалить</Link>
+    <div>
+      <Link to={"/find-matches/found/" + props.dog._id}>
+        Посмотреть совпадения
+      </Link>
+    </div>
   </tr>
 );
 const LostDog = props => (
@@ -48,6 +53,11 @@ const LostDog = props => (
       >
     </td>
     <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
+    <div>
+      <Link to={"/find-matches/lost/" + props.dog._id}>
+        Посмотреть совпадения
+      </Link>
+    </div>
   </tr>
 );
 
