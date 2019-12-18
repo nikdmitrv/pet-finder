@@ -17,6 +17,8 @@ class Advert extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return this.state.advertData ? (
       <div>
         <div>Собака потеряна:</div>
@@ -32,6 +34,12 @@ class Advert extends Component {
         <div>
           {new Date(this.state.advertData.createdAt).toLocaleDateString("ru")}
         </div>
+        <img
+          src={
+            "http://localhost:5000/api/images/" +
+            this.state.advertData.dogData.image
+          }
+        ></img>
         <AdvertMap location={this.state.advertData.location} />
       </div>
     ) : (

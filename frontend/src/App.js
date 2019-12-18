@@ -20,11 +20,10 @@ import Advert from "./components/Advert/Advert";
 import "./App.css";
 import { fetchSessionAC, clearMessageAC } from "./redux/actions";
 
-
 class App extends Component {
   componentDidMount = () => {
     this.props.fetchSession();
-  }
+  };
 
   componentWillUnmount = () => {
     this.props.clearMessage();
@@ -34,38 +33,38 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div  className="header">
-          <div className="logo">ШЩЕЙКА</div>
-          {this.props.loading ? (
-            <div className="loading-block">
-              <Loading />
-            </div>
-          ) : null}
-          <nav>
-            <Link to="/">Главная</Link>
-            {this.props.logged ? (
-              <>
-                <Link to={"/account/" + this.props.user._id}>
-                  Личный кабинет
-                </Link>
-                <Link to="/logout">Выход</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/registration">Регистрация</Link>
-                <Link to="/login">Вход</Link>
-              </>
-            )}
-
-            <Link to="/lost-dogs">Потерялись</Link>
-            <Link to="/found-dogs">Нашлись</Link>
-            {this.props.logged ? (
-              <>
-                <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                <Link to="/add-found-dog">Добавить объявление о находке</Link>
-              </>
+          <div className="header">
+            <div className="logo">ИЩЕЙКА</div>
+            {this.props.loading ? (
+              <div className="loading-block">
+                <Loading />
+              </div>
             ) : null}
-          </nav>
+            <nav>
+              <Link to="/">Главная</Link>
+              {this.props.logged ? (
+                <>
+                  <Link to={"/account/" + this.props.user._id}>
+                    Личный кабинет
+                  </Link>
+                  <Link to="/logout">Выход</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/registration">Регистрация</Link>
+                  <Link to="/login">Вход</Link>
+                </>
+              )}
+
+              <Link to="/lost-dogs">Потерялись</Link>
+              <Link to="/found-dogs">Нашлись</Link>
+              {this.props.logged ? (
+                <>
+                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
+                </>
+              ) : null}
+            </nav>
           </div>
           <Switch>
             <Route exact path="/" render={() => <Home />} />
@@ -95,7 +94,8 @@ class App extends Component {
             />
             <Route
               exact
-              path="/advert/found/:id"ГлавнаяРегистрацияВходПотерялисьНашлись
+              path="/advert/found/:id"
+              ГлавнаяРегистрацияВходПотерялисьНашлись
               render={props => {
                 return <Advert {...props} advertType="found" />;
               }}
