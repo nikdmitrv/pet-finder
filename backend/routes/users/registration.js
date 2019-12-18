@@ -9,17 +9,20 @@ router.post("/", async function(req, res) {
   if (!currentUser) {
     req.session.logged = true;
     req.session.name = req.body.email;
-    newUser = new User({
+    const newUser = new User({
       name: req.body.name,
       password: req.body.password,
       email: req.body.email
-    }).save();
+    });
+    await newUser.save();
     const user = await User.findOne({
       email: newUser.email
     });
     res.json({ user });
   } else {
-    res.status.json({ message: "Пользователь с таким email уже существует" });
+    res
+      .status(400)
+      .json({ message: "Пользователь с таким email уже существует" });
   }
 });
 
