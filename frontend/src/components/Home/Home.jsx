@@ -20,9 +20,13 @@ class Home extends Component {
   renderList(dog) {
     return (
       <li key={dog._id}>
-        <span key={1}>{dog.dogData.breed}</span>
-        <span key={2}>{dog.dogData.description}</span>
-        <span key={3}>{dog.dogData.sex}</span>
+        <span>{dog.dogData.breed}</span>
+        <span>{dog.dogData.sex}</span>
+        <span>
+          {dog.dogData.description.length > 30
+            ? dog.dogData.description.slice(0, 30) + "..."
+            : dog.dogData.description}
+        </span>
         <img
           src={"http://localhost:5000/api/images/" + dog.dogData.image}
         ></img>
@@ -61,16 +65,16 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <p>Последние потеряные =(</p>
+        <ul>
+          {this.state.lostDogs &&
+            this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))}
+        </ul>
+
         <p>Последние найденые =)</p>
         <ul>
           {this.state.foundDogs &&
-            this.state.foundDogs.slice(0, 5).map(e => this.renderList(e))}
-        </ul>
-        <p>Последние потеряные =(</p>
-
-        <ul>
-          {this.state.lostDogs &&
-            this.state.lostDogs.slice(0, 5).map(e => this.renderList(e))}
+            this.state.foundDogs.slice(0, 6).map(e => this.renderList(e))}
         </ul>
       </div>
     );

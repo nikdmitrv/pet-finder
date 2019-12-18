@@ -90,7 +90,11 @@ class FoundDogsMap extends Component {
                 <li key={dog._id}>
                   <span>{dog.dogData.breed} </span>
                   <span>{dog.dogData.sex} </span>
-                  <span>{dog.dogData.description} </span>
+                  <span>
+                    {dog.dogData.description.length > 30
+                      ? dog.dogData.description.slice(0, 30) + "..."
+                      : dog.dogData.description}
+                  </span>
                 </li>
               ))}
           </ol>
