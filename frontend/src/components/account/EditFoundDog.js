@@ -18,7 +18,8 @@ export default class EditFoundDog extends Component {
       breed: "",
       description: "",
       sex: "",
-      date: ""
+      date: "",
+      image: ""
       // location: "",
     };
   }
@@ -31,7 +32,8 @@ export default class EditFoundDog extends Component {
           breed: response.data.dogData.breed,
           description: response.data.dogData.description,
           sex: response.data.dogData.sex,
-          date: response.data.dogData.date
+          date: response.data.dogData.date,
+          image: response.data.dogData.image
           // location: response.data.location,
         });
         //   console.log(this.state);
@@ -172,6 +174,10 @@ export default class EditFoundDog extends Component {
             required
           ></input>
           <input id="location-input-lng" name="locationLng" hidden></input>
+
+          <img
+            src={"http://localhost:5000/api/images/" + this.state.image}
+          ></img>
 
           <Map getLocation={this.getLocation} />
         </form>

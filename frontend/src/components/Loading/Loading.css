@@ -2,3 +2,10 @@
   position: fixed;
   justify-content: center;
 }
+
+.loading-picture > img {
+  position: relative;
+  bottom: 50px;
+  height: 200px;
+  width: 200px;
+}

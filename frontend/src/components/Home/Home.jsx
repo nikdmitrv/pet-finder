@@ -23,6 +23,9 @@ class Home extends Component {
         <span key={1}>{dog.dogData.breed}</span>
         <span key={2}>{dog.dogData.description}</span>
         <span key={3}>{dog.dogData.sex}</span>
+        <img
+          src={"http://localhost:5000/api/images/" + dog.dogData.image}
+        ></img>
       </li>
     );
   }
@@ -63,7 +66,7 @@ class Home extends Component {
           {this.state.foundDogs &&
             this.state.foundDogs.slice(0, 5).map(e => this.renderList(e))}
         </ul>
-        <p>Последние потеряне =(</p>
+        <p>Последние потеряные =(</p>
 
         <ul>
           {this.state.lostDogs &&
