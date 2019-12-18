@@ -17,6 +17,8 @@ import EditLostDog from "./components/account/EditLostDog";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import LostDogsMap from "./components/LostDogsList/LostDogsMap";
 import Advert from "./components/Advert/Advert";
+import FindMatchesLost from "./components/FindMatches/FindMatchesLost";
+import FindMatchesFound from "./components/FindMatches/FindMatchesFound";
 import "./App.css";
 import { fetchSessionAC, clearMessageAC } from "./redux/actions";
 
@@ -75,7 +77,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <Home />} />
         <div className="App">
-            <Route exact path="/registration" component={Registration} />
+  <Route exact path="/registration" render={() => <Registration />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/logout" render={() => <Logout />} />
             <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
@@ -85,6 +87,16 @@ class App extends Component {
             <Route exact path="/account/:id" component={Account} />
             <Route exact path="/editFound/:id" component={EditFoundDog} />
             <Route exact path="/editLost/:id" component={EditLostDog} />
+            <Route
+              exact
+              path="/find-matches/lost/:id"
+              component={FindMatchesLost}
+            />
+            <Route
+              exact
+              path="/find-matches/found/:id"
+              component={FindMatchesFound}
+            />
             <Route
               exact
               path="/found-dogs/map"
@@ -102,7 +114,6 @@ class App extends Component {
             <Route
               exact
               path="/advert/found/:id"
-              ГлавнаяРегистрацияВходПотерялисьНашлись
               render={props => {
                 return <Advert {...props} advertType="found" />;
               }}

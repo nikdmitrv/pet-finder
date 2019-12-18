@@ -130,22 +130,23 @@ export default class EditFoundDog extends Component {
           </div>
 
           <div className="form-group">
-            <label>Описание: </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.description}
-              onChange={this.onChangeDescription}
-            />
+            <label htmlFor="dog-description">Пол:</label>
+            <label htmlFor="sexFilterMale">М</label>
+            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+            <label htmlFor="sexFilterFemale">Ж</label>
+            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
           </div>
 
           <div className="form-group">
-            <label>Пол: </label>
-            <select value={this.state.sex} onChange={this.onChangeSex}>
-              <option value="М">М</option>
-              <option value="Ж">Ж</option>
-            </select>
+            <label>Описание: </label>
+            <textarea
+              type="text"
+              required
+              className="form-control"
+              style={{ resize: "none", height: "100px", width: "300px" }}
+              value={this.state.description}
+              onChange={this.onChangeDescription}
+            />
           </div>
 
           <div className="form-group">
@@ -179,16 +180,17 @@ export default class EditFoundDog extends Component {
             src={"http://localhost:5000/api/images/" + this.state.image}
           ></img>
 
-          <Map getLocation={this.getLocation} />
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => {
+              this.deleteFoundDog(this.state._id);
+            }}
+          >
+            Удалить
+          </button>
         </form>
-        <a
-          href="#"
-          onClick={() => {
-            this.deleteFoundDog(this.state._id);
-          }}
-        >
-          Удалить
-        </a>
+        <Map getLocation={this.getLocation} />
       </div>
     );
   }

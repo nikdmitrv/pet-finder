@@ -33,7 +33,9 @@ class Home extends Component {
           src={"http://localhost:5000/api/images/" + dog.dogData.image}
         ></img>
         <h5 className="card-title" key={1}>{dog.dogData.breed}</h5>
-        <p class="card-text">{dog.dogData.description}</p>
+        <p class="card-text">{dog.dogData.description.length > 30
+            ? dog.dogData.description.slice(0, 30) + "..."
+            : dog.dogData.description}</p>
         <span key={3}>{dog.dogData.sex}</span>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -95,6 +97,14 @@ class Home extends Component {
       <div className="App">
       <div className="homeMain">
       
+        <h2>Последние потеряные </h2>
+
+          <Slider {...settings}>
+        {this.state.lostDogs.length > 0
+            ? this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))
+            : <div></div>}
+            </Slider>
+            
         <h2>Последние найденые</h2>
        
         <Slider {...settings}>
@@ -103,13 +113,6 @@ class Home extends Component {
             : <div></div>}
 
         </Slider>
-        <h2>Последние потеряные </h2>
-
-          <Slider {...settings}>
-        {this.state.lostDogs.length > 0
-            ? this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))
-            : <div></div>}
-            </Slider>
       </div>
       </div>
       </>

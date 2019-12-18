@@ -42,20 +42,26 @@ class LostDogsList extends Component {
     return (
       <div className="card cardList" key={advert._id}>
         {/* <div>Собака потеряна:</div> */}
-        <img src={'http://localhost:5000/api/images/' + advert.dogData.image}></img>
+        <img
+          src={"http://localhost:5000/api/images/" + advert.dogData.image}
+        ></img>
         <div>Порода: {advert.dogData.breed}</div>
+        <div>
+          {advert.dogData.description.length > 30
+            ? advert.dogData.description.slice(0, 30) + "..."
+            : advert.dogData.description}
+        </div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
         <Link to={"/advert/lost/" + advert._id}>Перейти к объявлению</Link>
       </div>
-
     );
   }
   render() {
     return (
       <div>
         <FilterForm handleFiltration={this.handleFiltration} />
-        <button  className="mapList btn btn-info">
+        <button className="mapList btn btn-info">
           <Link to="/lost-dogs/map">Посмотреть на карте</Link>
         </button>
         <ul>

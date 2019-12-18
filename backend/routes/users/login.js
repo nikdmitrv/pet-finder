@@ -4,15 +4,11 @@ const router = express.Router();
 const User = require("../../models/schemas/UserSchema");
 
 router.post("/", async function(req, res) {
-  console.log(req.body);
-
   let emailInput = req.body.email;
   let passwordInput = req.body.password;
   const currentUser = await User.findOne({
     email: emailInput
   });
-  console.log(currentUser);
-
   if (currentUser && passwordInput === currentUser.password) {
     req.session.logged = true;
     req.session.name = req.body.email;

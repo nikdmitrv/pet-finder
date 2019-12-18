@@ -130,13 +130,6 @@ export const createLostAdvertAC = advert => {
   };
 };
 
-// export const registerUserAC = message => {
-//   return {
-//     type: REGISTER_USER,
-//     message
-//   };
-// };
-
 export const requestRegisterAC = user => {
   return async dispatch => {
     try {
@@ -148,7 +141,9 @@ export const requestRegisterAC = user => {
         },
         body: user
       });
+
       const result = await response.json();
+      console.log("register result:", result);
       if (response.status === 200) {
         dispatch(loginUserSuccessAC(result.user));
       } else {
@@ -215,16 +210,9 @@ export const fetchSessionAC = () => {
       });
       if (response.status === 200) {
         const result = await response.json();
-        console.log(response);
-
-        console.log("fetchSession result: ", result);
-        console.log("logginIn");
-
         dispatch(loginUserSuccessAC(result.currentUser));
       } else {
         console.log(response);
-        console.log("logginOut");
-
         dispatch(logoutUserAC());
       }
     } catch (error) {

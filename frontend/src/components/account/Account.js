@@ -6,10 +6,16 @@ import { loadingRequestAC, clearMessageAC } from "../../redux/actions";
 
 const FoundDog = props => (
   <tr>
-    <td key={1}>{props.dog.dogData.breed}</td>
-    <td key={2}>{props.dog.dogData.description}</td>
-    <td key={3}>{props.dog.dogData.sex}</td>
-    <td key={4}>
+    <td>{props.dog.dogData.breed}</td>
+    <td>{props.dog.dogData.sex}</td>
+    <td>
+      <span>
+        {props.dog.dogData.description.length > 30
+          ? props.dog.dogData.description.slice(0, 30) + "..."
+          : props.dog.dogData.description}
+      </span>
+    </td>
+    <td>
       {
         <img
           alt="dog image"
@@ -19,14 +25,21 @@ const FoundDog = props => (
       >
     </td>
     <Link to={"/editFound/" + props.dog._id}>Редактировать/Удалить</Link>
+    <div>
+      <Link to={"/find-matches/found/" + props.dog._id}>
+        Посмотреть совпадения
+      </Link>
+    </div>
   </tr>
 );
 const LostDog = props => (
   <div className="card">
-    <div key={1}>{props.dog.dogData.breed}</div>
-    <div key={2}>{props.dog.dogData.description}</div>
-    <div key={3}>{props.dog.dogData.sex}</div>
-    <div key={4}>
+    <div>{props.dog.dogData.breed}</div>
+    <div>{props.dog.dogData.sex}</div>
+    <div>{props.dog.dogData.description.length > 30
+          ? props.dog.dogData.description.slice(0, 30) + "..."
+          : props.dog.dogData.description}</div>
+    <div>
       {
         <img
         class="card-img-top" 
@@ -37,6 +50,11 @@ const LostDog = props => (
       >
     </div>
     <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
+    <div>
+      <Link to={"/find-matches/lost/" + props.dog._id}>
+        Посмотреть совпадения
+      </Link>
+    </div>
   </div>
 );
 
@@ -85,9 +103,9 @@ class Account extends Component {
         <h2>Ваши объявления о пропаже</h2>
         <table>
           <tr>
-            <th>Breed</th>
-            <th>Description</th>
-            <th>Sex</th>
+            <th>Порода</th>
+            <th>Пол</th>
+            <th>Описание</th>
           </tr>
           <tbody>{this.lostDogList()}</tbody>
         </table>
