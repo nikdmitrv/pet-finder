@@ -28,6 +28,9 @@
   width: 100%;
   z-index: 1;
 }
+ul {
+  padding: 0;
+}
 nav {
   display: grid;
   grid-template-columns: 25% auto 25%;
@@ -337,15 +340,14 @@ img {
 
 .long {
   width: auto;
-  margin-left: 5%;
+;
 }
 .btn-filter {
   background-color: #34145e;
 }
 
 .btn-map {
-  margin-left: 65%;
-  margin-top: -116px;
+
 }
 .advert {
   display: flex;
@@ -377,6 +379,11 @@ h3,
 h4,
 h5 {
   font-family: "OpenSans";
+}
+.form-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 a,
