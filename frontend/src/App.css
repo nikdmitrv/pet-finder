@@ -3,15 +3,17 @@
   min-height: 100vh;
 }
 .App {
-  position: relative;
-  left: 13%;
-  top: 30px;
   text-align: center;
   height: 100%;
   max-width: 1400px;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .header {
@@ -176,7 +178,8 @@ form {
   }
 }
 .homeMain {
-  margin-top: -200px;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
 }
 .maps-app {
@@ -217,28 +220,31 @@ img {
   float: left;
 } */
 .man {
+  display:flex;
+  justify-content: left;
+  align-items: center;
   width: 100%;
   position: relative;
-  top: -280px;
-  height: 600px;
+  height: 300px;
   background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2019/11/searchAndMatchHero.jpg");
   background-size: cover;
+  margin-bottom: 2%;
 }
 .h1 {
-  position: relative;
+  /* position: relative; */
   top: 330px;
   color: white;
   padding-left: 50px;
 }
 .p1 {
-  position: relative;
+  /* position: relative; */
   top: 330px;
   color: white;
   padding-left: 50px;
   font-size: 22px;
 }
 .b1 {
-  position: relative;
+  /* position: relative; */
   top: 370px;
   margin-left: 50px;
   font-size: 15px;
@@ -248,7 +254,7 @@ img {
   color: white;
 }
 .sds{
-  position: relative;
+  /* position: relative; */
   right: -10%;
   display: flex;
   flex-wrap: wrap;

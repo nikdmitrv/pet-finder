@@ -43,8 +43,8 @@ class Advert extends Component {
         <AdvertMap location={this.state.advertData.location} />
       </div>
     ) : (
-      <div>Loading...</div>
-    );
+        <div>Loading...</div>
+      );
   }
 }
 
