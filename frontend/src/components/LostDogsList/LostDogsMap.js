@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class FoundDogsMap extends Component {
   constructor(props) {
@@ -51,7 +51,10 @@ class FoundDogsMap extends Component {
         position={{ lat: dog.location.lat, lng: dog.location.lng }}
         onClick={this.onMarkerClick}
       >
-        <InfoWindow marker={this.state.activeMarker} visible={this.state.showInfo}>
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showInfo}
+        >
           <div>
             <h2>{dog.dogData.breed}</h2>
             <span>Something</span>
@@ -82,14 +85,30 @@ class FoundDogsMap extends Component {
         </div>
         <div className="maps-list-container">
           <h1>Список потерянных собак</h1>
-        <ol className="list-group">
+          <ol className="list-group">
             {this.state.list &&
-              this.state.list.map(dog => (
+              this.state.list.map((dog, index) => (
                 <li className="list-group-item" key={dog._id}>
-                  <span><b>Порода:</b> "{dog.dogData.breed}" </span>
-                  
-                  <span><b>Пол:</b>: "{dog.dogData.sex}" </span>
-                  <Link className="btn-maps btn btn-info" to={"/advert/found/" + dog._id}>Перейти к объявлению</Link>
+                  <div>
+                    <div>
+                      <b>{index + 1}</b>
+                    </div>
+                    <div>
+                      <div>
+                        <b>Порода: </b> {dog.dogData.breed}{" "}
+                      </div>
+                      <b>Пол: </b> {dog.dogData.sex}{" "}
+                    </div>
+                  </div>
+
+                  <div>
+                    <Link
+                      className="btn-maps btn btn-info"
+                      to={"/advert/found/" + dog._id}
+                    >
+                      Перейти к объявлению
+                    </Link>
+                  </div>
                 </li>
               ))}
           </ol>

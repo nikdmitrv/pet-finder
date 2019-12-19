@@ -75,7 +75,7 @@ class LostDogsList extends Component {
             <button className="btn btn-info btn-map">
               <Link to="/found-dogs/map">Посмотреть на карте</Link>
             </button>
-            <h1>Список найденных собак:</h1>
+            <h1>Список потерянных собак:</h1>
           </>
         ) : null}
         <ul>

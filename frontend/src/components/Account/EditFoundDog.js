@@ -168,15 +168,13 @@ class EditFoundDog extends Component {
     const dog = {
       breed: e.target.dogBreed.value,
       description: this.state.description,
-      sex: this.state.sex,
+      sex: e.target.dogSex.value,
       date: this.state.date,
       location: {
         lat: e.target.locationLat.value,
         lng: e.target.locationLng.value
       }
     };
-    console.log(dog);
-
     axios
       .post("/api/found/update/" + this.props.match.params.id, dog)
       .then(() => (window.location = "/account/" + this.props.user._id));
@@ -215,7 +213,7 @@ class EditFoundDog extends Component {
             <div>
               <label>Порода: </label>
               <select name="dogBreed" className="form-control">
-                <option value="">{this.state.breed}</option>
+                <option value={this.state.breed}>{this.state.breed}</option>
                 {this.state.breedOptions.map((breed, index) => (
                   <option key={index} value={breed}>
                     {breed}
@@ -224,17 +222,18 @@ class EditFoundDog extends Component {
               </select>
             </div>
 
-            <div>
-              <label htmlFor="dog-description">Пол:</label>
-              <label htmlFor="sexFilterMale">М</label>
-              <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
-              <label htmlFor="sexFilterFemale">Ж</label>
+            <div className="" data-toggle="buttons">
+              <p style={{ marginTop: "10px", marginBottom: "2px" }}>Пол:</p>
               <input
                 type="radio"
-                name="dogSex"
-                id="sexFilterFemale"
                 value="Ж"
+                id="sexFilterFemale"
+                name="dogSex"
               />
+              <label htmlFor="sexFilterFemale">Ж</label>
+
+              <input value="М" type="radio" id="sexFilterMale" name="dogSex" />
+              <label htmlFor="sexFilterMale">М</label>
             </div>
 
             <div>

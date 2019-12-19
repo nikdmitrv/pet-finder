@@ -6,12 +6,12 @@ import { loadingRequestAC, clearMessageAC } from "../../redux/actions";
 
 const FoundDog = props => (
   <div className="card cardList" key={props._id}>
-    <div className="card-title">{props.dog.dogData.breed}</div>
-    <div className="card-title">{props.dog.dogData.sex}</div>
-    <div className="card-text">
+    <div className="card-title"><span><b>Порода: </b>{props.dog.dogData.breed}</span></div>
+    <div className="card-title"><span><b>Пол: </b>{props.dog.dogData.sex}</span></div>
+    <div className="card-text"><span><b>Описание: </b>
       {props.dog.dogData.description.length > 30
         ? props.dog.dogData.description.slice(0, 30) + "..."
-        : props.dog.dogData.description}
+        : props.dog.dogData.description}</span>
     </div>
     <div>
       {
@@ -40,12 +40,12 @@ const FoundDog = props => (
 
 const LostDog = props => (
   <div className="card cardList" key={props._id}>
-    <div className="card-title">{props.dog.dogData.breed}</div>
-    <div className="card-title">{props.dog.dogData.sex}</div>
-    <div className="card-text">
+    <div className="card-title"><span><b>Порода: </b>{props.dog.dogData.breed}</span></div>
+    <div className="card-title"><span><b>Пол: </b>{props.dog.dogData.sex}</span></div>
+    <div className="card-text"><span><b>Описание: </b>
       {props.dog.dogData.description.length > 30
         ? props.dog.dogData.description.slice(0, 30) + "..."
-        : props.dog.dogData.description}
+        : props.dog.dogData.description}</span>
     </div>
     <div>
       {
