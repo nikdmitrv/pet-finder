@@ -26,7 +26,7 @@ class Home extends Component {
           <img
             className="card-img-top"
             alt="..."
-            src={"http://localhost:5000/api/images/" + dog.dogData.image}
+            src={"/api/images/" + dog.dogData.image}
           ></img>
           <h5 className="card-title">
             <b>Порода: </b>
@@ -57,7 +57,7 @@ class Home extends Component {
           <img
             className="card-img-top"
             alt="..."
-            src={"http://localhost:5000/api/images/" + dog.dogData.image}
+            src={"/api/images/" + dog.dogData.image}
           ></img>
           <h5 className="card-title">
             <b>Порода: </b>

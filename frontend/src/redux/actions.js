@@ -137,7 +137,7 @@ export const requestRegisterAC = user => {
   return async dispatch => {
     try {
       dispatch(loadingRequestAC());
-      const response = await fetch("users/registration", {
+      const response = await fetch("/api/users/registration", {
         method: "POST",
         headers: {
           "content-type": "application/json"
@@ -177,7 +177,7 @@ export const requestLoginAC = user => {
   return async dispatch => {
     try {
       dispatch(loadingRequestAC());
-      const response = await fetch("users/login", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -207,7 +207,7 @@ export const fetchSessionAC = () => {
   return async dispatch => {
     try {
       dispatch(loadingRequestAC());
-      const response = await fetch("/users/auth", {
+      const response = await fetch("/api/users/auth", {
         method: "GET",
         credentials: "include"
       });
@@ -227,7 +227,7 @@ export const fetchSessionAC = () => {
 export const requestLogoutAC = () => {
   return async dispatch => {
     try {
-      const response = await fetch("/users/logout", {
+      const response = await fetch("/api/users/logout", {
         method: "GET",
         credentials: "include"
       });
