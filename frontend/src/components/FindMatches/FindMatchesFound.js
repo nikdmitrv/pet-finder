@@ -28,7 +28,7 @@ class FindMatchesFound extends Component {
     return (
       <div key={advert._id}>
         <div>Собака найдена:</div>
-        <img
+        <img alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
         <div>{advert.dogData.breed}</div>
@@ -52,7 +52,7 @@ class FindMatchesFound extends Component {
 
   render() {
     return (
-      <>
+      <div className="matches-found">
         <h1>Найденные совпадения:</h1>
         <ul>
           {this.state.guesses > 0 ? (
@@ -61,7 +61,7 @@ class FindMatchesFound extends Component {
             <h2>Извините, совпадений нет.</h2>
           )}
         </ul>
-      </>
+      </div>
     );
   }
 }

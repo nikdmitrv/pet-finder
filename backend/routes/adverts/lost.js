@@ -10,35 +10,19 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const user = await User.findById(req.body.id);
-  const { dogData, location } = req.body;
+  const user = await User.findById(req.body.advert.id);
+  const { dogData, location } = req.body.advert;
   user.addLost(
     dogData.breed,
     dogData.description,
     dogData.sex,
-    dogData.image,
+    req.body.image,
     user.name,
     user.email,
     user.phoneNumber,
     user.adress,
     location
   );
-  // const newAdvert = new LostDogAdvertModel({
-  //   dogData: new Animal(
-  //     dogData.breed,
-  //     dogData.description,
-  //     dogData.sex,
-  //     dogData.image
-  //   ),
-  //   authorData: new Author(
-  //     authorData.name,
-  //     authorData.email,
-  //     authorData.phoneNumber,
-  //     authorData.adress
-  //   ),
-  //   createdAt: Date.now(),
-  //   location
-  // });
   res.json({ message: "Объявление добавлено" });
 });
 
