@@ -189,10 +189,7 @@ export default class EditFoundDog extends Component {
           </div>
         </form>
 
-            <img
-              id="editImg"
-              src={"http://localhost:5000/api/images/" + this.state.image}
-            ></img>
+           
         <Map getLocation={this.getLocation} />
       </div>
       </>
