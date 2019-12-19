@@ -20,7 +20,106 @@ class EditFoundDog extends Component {
       description: "",
       sex: "",
       date: "",
-      image: ""
+      image: "",
+      breedOptions: [
+        "Акита-ину",
+        "Алабай",
+        "Аляскинский Маламут",
+        "Американская Акита",
+        "Американский бульдог",
+        "Американский стаффордширский терьер",
+        "Английский бульдог",
+        "Афганская борзая",
+        "Американский кокер спаниель",
+        "Английский кокер спаниель",
+        "Английский мастиф",
+        "Английский пойнтер",
+        "Басенджи",
+        "Бассет Хаунд",
+        "Без породы",
+        "Бернский зенненхунд",
+        "Бигль",
+        "Бишон фризе",
+        "Бладхаунд",
+        "Бобтейл",
+        "Боксер",
+        "Болгарская овчарка",
+        "Бордер колли",
+        "Бордоский дог",
+        "Босерон",
+        "Бостон терьер",
+        "Бриар",
+        "Брюссельский гриффон",
+        "Бульмастиф",
+        "Бультерьер",
+        "Веймаранер",
+        "Вельш корги пемброк",
+        "Вест хайленд уайт терьер",
+        "Вельштерьер",
+        "Далматинец",
+        "Джек рассел терьер",
+        "Доберман",
+        "Дратхаар",
+        "Золотистый ретривер",
+        "Ирландский волкодав",
+        "Ирландский сеттер",
+        "Ирландский терьер",
+        "Итальянская левретка",
+        "Йоркширский терьер",
+        "Кавказская овчарка",
+        "Кане корсо",
+        "Карликовый пинчер",
+        "Кавалер кинг чарльз спаниель",
+        "Кеесхонд",
+        "Колли",
+        "Китайская хохлатая собака",
+        "Курцхаар",
+        "Королевский пудель",
+        "Карликовый пудель",
+        "Лабрадор ретривер",
+        "Лайка",
+        "Мальтийская болонка",
+        "Московская сторожевая",
+        "Миттельшнауцер",
+        "Мопс",
+        "Немецкий дог",
+        "Ньюфаундленд",
+        "Немецкая овчарка",
+        "Норвич-терьер",
+        "Папильон",
+        "Пекинес",
+        "Померанский шпиц",
+        "Пшеничный терьер",
+        "Родезийский риджбек",
+        "Ризеншнауцер",
+        "Ротвейлер",
+        "Русская борзая",
+        "Самоед",
+        "Сенбернар",
+        "Сибирские хаски",
+        "Скотч терьер",
+        "Стаффордширский Бультерьер",
+        "Такса",
+        "Той пудель",
+        "Той терьер",
+        "Уиппет",
+        "Фараонова собака",
+        "Фокстерьер гладкошерстный",
+        "Фокстерьер жесткошерстный",
+        "Французский бульдог",
+        "Цвергшнауцер",
+        "Чау Чау",
+        "Черный русский терьер",
+        "Шарпей",
+        "Шелти",
+        "Шиба-ину",
+        "Ши-тцу",
+        "Эрдельтерьер",
+        "Южноафриканский бурбуль",
+        "Ягдтерьер",
+        "Японский хин"
+      ]
+
     };
   }
 
@@ -64,16 +163,9 @@ class EditFoundDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if (
-      e.target.locationLat.value === "" ||
-      e.target.locationLng.value === ""
-    ) {
-      this.props.warningMessage(
-        "Укажите на карте место, где вы нашли животное"
-      );
-    } else {
+    
       const dog = {
-        breed: this.state.breed,
+        breed: e.target.dogBreed.value,
         description: this.state.description,
         sex: this.state.sex,
         date: this.state.date,
@@ -89,7 +181,7 @@ class EditFoundDog extends Component {
           dog
         )
         .then(() => (window.location = "/account/" + this.props.user._id));
-    }
+    
   }
 
   deleteFoundDog(id) {
@@ -97,14 +189,14 @@ class EditFoundDog extends Component {
       .delete("http://localhost:5000/api/found/" + this.props.match.params.id)
       .then(response => {
         console.log(response.data);
-      });
+      })
 
-    this.setState({
+    .then (() => this.setState({
       breed: "",
       description: "",
       sex: "",
-      date: ""
-    });
+    }))
+    .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   getLocation = location => {
@@ -121,13 +213,17 @@ class EditFoundDog extends Component {
         <form  className="form-group"onSubmit={this.onSubmit}>
           <div>
             <label>Порода: </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.breed}
-              onChange={this.onChangeBreed}
-            />
+            <select
+            name="dogBreed"
+            className="form-control"
+          >
+            <option value="">{this.state.breed}</option>
+            {this.state.breedOptions.map((breed, index) => (
+              <option key={index} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
           </div>
 
           <div>
@@ -149,18 +245,6 @@ class EditFoundDog extends Component {
               onChange={this.onChangeDescription}
             />
           </div>
-
-          <div className="form-group">
-            <label>Дата: </label>
-            <input
-              type="date"
-              required
-              className="form-control"
-              value={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div>
-
 
           <input
             id="location-input-lat"

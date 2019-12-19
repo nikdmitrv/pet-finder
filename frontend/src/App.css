@@ -167,14 +167,16 @@ form {
   color: #fff;
   background-color: #34145e;
   border-color: #34145e;
+ 
 }
-.btn-filt {
+.btn-filter {
   margin: 1px 10px;
+  border-color: #34145e;
 }
 
 #h1-form {
   color: black;
-  font-size: 27px;
+  font-size: 40px;
   border-radius: 5px 5px 0 0;
   padding: 9px;
 }
@@ -419,3 +421,15 @@ div {
   display: flex;
   position: relative;
 }
+
+.color:hover {
+  color: #FDE9FF;
+}
+
+.btn:hover {
+  background-color: #17a2b8;
+  border-color:#17a2b8;
+}
+/* .mb-2:hover {
+background-color: #34145e;;
+} */
