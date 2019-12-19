@@ -195,6 +195,8 @@ form {
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  align-self: flex-start;
+  padding-top: 50px;
 }
 .maps-app {
   display: flex;
@@ -505,4 +507,8 @@ background-color: #34145e;;
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
+}
+#nav-main {
+  display: flex;
+  justify-content: space-evenly;
 }

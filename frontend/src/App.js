@@ -54,7 +54,7 @@ class App extends Component {
                 <img className="logo-text" alt="logo-text" src={logoText}></img>
               </Link>
             </div>
-            <div className="nav-main">
+            <div id="nav-main">
               <Link className="color" to="/lost-dogs">Потерянные</Link>
               <Link className="color" to="/found-dogs">Найденные</Link>
             </div>
