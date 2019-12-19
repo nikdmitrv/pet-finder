@@ -41,33 +41,39 @@ class FoundDogsList extends Component {
     const date = new Date(advert.createdAt);
     return (
       <div className="card cardList" key={advert._id}>
-
-      
-        <div>Собака найдена:</div>
-        <img alt="dog"
+        <img
+          alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
-        <div><b>Порода</b>: {advert.dogData.breed}</div>
-        <div> <b>Описание</b>: {advert.dogData.description.length > 30
-            ? advert.dogData.description.slice(0, 30) + "..."
-            : advert.dogData.description}
+        <div>
+          <b>Порода</b>: {advert.dogData.breed}
         </div>
-            
-        <div><b>Дата объявдение</b>: </div>
-        <div>{date.toLocaleDateString("ru")}</div>
+        <div>
+          {" "}
+          <b>Пол</b>: {advert.dogData.sex}
+        </div>
+
+        <div>
+          <b>Дата объявления: </b>
+          <span>{date.toLocaleDateString("ru")}</span>
+        </div>
         <button className="btn btn-primary">
           <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
-          </button>
+        </button>
       </div>
     );
   }
   render() {
     return (
       <div>
-        <FilterForm handleFiltration={this.handleFiltration} />
+        <div className="filter-found">
+          <div>Поиск по фильтру</div>
+          <FilterForm handleFiltration={this.handleFiltration} />
+        </div>
         <button className="btn btn-info btn-map">
-        <Link to="/found-dogs/map">Посмотреть на карте</Link>
+          <Link to="/found-dogs/map">Посмотреть на карте</Link>
         </button>
+        <h1>Список найденных собак:</h1>
         <ul>
           {this.state.allAdverts && this.state.filtered
             ? this.state.filtered.map(advert => this.renderList(advert))
