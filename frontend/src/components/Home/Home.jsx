@@ -28,15 +28,20 @@ class Home extends Component {
             alt="..."
             src={"http://localhost:5000/api/images/" + dog.dogData.image}
           ></img>
-          <h5 className="card-title" key={1}>
+          <h5 className="card-title">
+            <b>Порода: </b>
             {dog.dogData.breed}
           </h5>
           <p class="card-text">
+            <b>Описание: </b>
             {dog.dogData.description.length > 30
               ? dog.dogData.description.slice(0, 30) + "..."
               : dog.dogData.description}
           </p>
-          <span key={3}>{dog.dogData.sex}</span>
+          <span>
+            <b>Пол: </b>
+            {dog.dogData.sex}
+          </span>
           <Link to={"/advert/found/" + dog._id} class="btn btn-primary">
             Перейти к объявлению
           </Link>
@@ -54,15 +59,20 @@ class Home extends Component {
             alt="..."
             src={"http://localhost:5000/api/images/" + dog.dogData.image}
           ></img>
-          <h5 className="card-title" key={1}>
+          <h5 className="card-title">
+            <b>Порода: </b>
             {dog.dogData.breed}
           </h5>
           <p class="card-text">
+            <b>Описание: </b>
             {dog.dogData.description.length > 30
               ? dog.dogData.description.slice(0, 30) + "..."
               : dog.dogData.description}
           </p>
-          <span key={3}>{dog.dogData.sex}</span>
+          <span>
+            <b>Пол: </b>
+            {dog.dogData.sex}
+          </span>
           <Link to={"/advert/lost/" + dog._id} class="btn btn-primary">
             Перейти к объявлению
           </Link>
@@ -114,11 +124,11 @@ class Home extends Component {
     return (
       <>
         <div className="man">
-            <h1 className="h1">Поиск потерянных животных</h1>
-            <p className="p1">Помогите питомцу вернуться домой</p>
-            <button className="b1 btn btn-primary">
-              <a href="/registration">Подать объявление</a>
-            </button>
+          <h1 className="h1">Поиск потерянных животных</h1>
+          <p className="p1">Помогите питомцу вернуться домой</p>
+          <button className="b1 btn btn-primary">
+            <a href="/registration">Подать объявление</a>
+          </button>
         </div>
         <div className="App">
           <div className="homeMain">

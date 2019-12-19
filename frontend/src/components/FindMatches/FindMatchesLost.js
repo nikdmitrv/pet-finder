@@ -28,7 +28,8 @@ class FindMatchesLost extends Component {
     return (
       <div key={advert._id}>
         <div>Собака найдена:</div>
-        <img alt="dog"
+        <img
+          alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
         <div>{advert.dogData.breed}</div>
