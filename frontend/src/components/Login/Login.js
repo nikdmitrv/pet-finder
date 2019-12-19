@@ -50,7 +50,7 @@ class Login extends Component {
               </div>
               <div className="error-message">{this.props.message}</div>
               <div className="form-group mx-sm-3 mb-2">
-                <button className="btn btn-primary mb-2" type="submit">
+                <button className="btn btn-info mb-2" type="submit">
                   Отправить
                 </button>
               </div>
