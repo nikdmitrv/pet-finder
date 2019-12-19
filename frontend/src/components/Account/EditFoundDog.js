@@ -26,7 +26,7 @@ class EditFoundDog extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/found/" + this.props.match.params.id)
+      .get("/api/found/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           breed: response.data.dogData.breed,
@@ -84,7 +84,7 @@ class EditFoundDog extends Component {
       };
       axios
         .post(
-          "http://localhost:5000/api/found/update/" +
+          "/api/found/update/" +
             this.props.match.params.id,
           dog
         )
@@ -94,7 +94,7 @@ class EditFoundDog extends Component {
 
   deleteFoundDog(id) {
     axios
-      .delete("http://localhost:5000/api/found/" + this.props.match.params.id)
+      .delete("/api/found/" + this.props.match.params.id)
       .then(response => {
         console.log(response.data);
       });

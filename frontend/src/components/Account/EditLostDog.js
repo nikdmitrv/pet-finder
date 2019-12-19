@@ -124,7 +124,7 @@ class EditLostDog extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/lost/" + this.props.match.params.id)
+      .get("/api/lost/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           breed: response.data.dogData.breed,
@@ -162,7 +162,7 @@ class EditLostDog extends Component {
 
   deleteLostDog(id) {
     axios
-      .delete("http://localhost:5000/api/lost/" + this.props.match.params.id)
+      .delete("/api/lost/" + this.props.match.params.id)
       .then(response => {
         console.log(response.data);
       });
@@ -197,7 +197,7 @@ class EditLostDog extends Component {
       };
       axios
         .post(
-          "http://localhost:5000/api/lost/update/" + this.props.match.params.id,
+          "/api/lost/update/" + this.props.match.params.id,
           dog
         )
         .then(() => (window.location = "/account/" + this.props.user._id));
@@ -294,7 +294,7 @@ class EditLostDog extends Component {
 
             <img
               alt="dog"
-              src={"http://localhost:5000/api/images/" + this.state.image}
+              src={"/api/images/" + this.state.image}
             ></img>
 
             <div className="form-group">
