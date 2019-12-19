@@ -20,8 +20,7 @@ class Advert extends Component {
     console.log(this.state);
 
     return this.state.advertData ? (
-    <div className="aaa">
-      <div className="card cardList">
+      <div className="advert card-list">
         <div className="info-advert card-body">
         <h3>Собака потеряна:</h3>
         <div><b>Порода</b>: {this.state.advertData.dogData.breed}</div>
@@ -47,12 +46,11 @@ class Advert extends Component {
           }
         ></img>
 
-        <div className="mapwrap">
+        </div>
+        <div>
 
-        <AdvertMap className="mapwrap" location={this.state.advertData.location} />
+        <AdvertMap location={this.state.advertData.location} />
         </div>
-        </div>
-      </div>
       </div>
     ) : (
         <div>Loading...</div>
