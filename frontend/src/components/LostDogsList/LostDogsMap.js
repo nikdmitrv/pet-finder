@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
+import { Link } from 'react-router-dom'
 
 class FoundDogsMap extends Component {
   constructor(props) {
@@ -65,12 +66,11 @@ class FoundDogsMap extends Component {
       <div className="maps-app">
         <div
           className="map-container"
-          style={{ width: "80vw", height: "90vh", margin: "30px" }}
+          style={{ position: "relative", height: "400px" }}
         >
           <Map
             google={this.props.google}
             zoom={10}
-            style={{ width: "80vw", height: "90vh", margin: "30px" }}
             initialCenter={{ lat: 55.752376, lng: 37.6722358 }}
             onClick={this.onMapClicked}
           >
@@ -87,7 +87,12 @@ class FoundDogsMap extends Component {
                 <li key={dog._id}>
                   <span>{dog.dogData.breed} </span>
                   <span>{dog.dogData.sex} </span>
-                  <span>{dog.dogData.description} </span>
+                  <span>
+                    {dog.dogData.description.length > 30
+                      ? dog.dogData.description.slice(0, 30) + "..."
+                      : dog.dogData.description}
+                  </span>
+                  <Link to={"/advert/lost/" + dog._id}>Перейти к объявлению</Link>
                 </li>
               ))}
           </ol>

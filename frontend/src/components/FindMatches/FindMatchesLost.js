@@ -52,7 +52,7 @@ class FindMatchesLost extends Component {
 
   render() {
     return (
-      <>
+      <div className="matches-lost">
         <h1>Найденные совпадения:</h1>
         <ul>
           {this.state.guesses.length > 0 ? (
@@ -61,7 +61,7 @@ class FindMatchesLost extends Component {
             <h2>Извините, совпадений нет.</h2>
           )}
         </ul>
-      </>
+      </div>
     );
   }
 }
