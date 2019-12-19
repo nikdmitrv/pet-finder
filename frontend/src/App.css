@@ -48,6 +48,7 @@ nav {
   background-image: url(https://www.whiterockcity.ca/ImageRepository/Document?documentId=3896);
   background-size: cover;
   height: 700px;
+  width: 100%;
   border-radius: 10px;
 }
 
