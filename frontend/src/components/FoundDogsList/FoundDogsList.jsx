@@ -40,26 +40,24 @@ class FoundDogsList extends Component {
   renderList(advert) {
     const date = new Date(advert.createdAt);
     return (
-      <div key={advert._id}>
+      <div className="card cardList" key={advert._id}>
+
+      
         <div>Собака найдена:</div>
         <img alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
-        <div>{advert.dogData.breed}</div>
-        <div>{advert.dogData.sex}</div>
-        <div>
-          {advert.dogData.description.length > 30
+        <div><b>Порода</b>: {advert.dogData.breed}</div>
+        <div> <b>Описание</b>: {advert.dogData.description.length > 30
             ? advert.dogData.description.slice(0, 30) + "..."
             : advert.dogData.description}
         </div>
-        <div>Нашедший:</div>
-        <div>{advert.authorData.name}</div>
-        <div>{advert.authorData.email}</div>
-        <div>{advert.authorData.phoneNumber}</div>
-        <div>{advert.authorData.address}</div>
-        <div>Дата объявления:</div>
+            
+        <div><b>Дата объявдение</b>: </div>
         <div>{date.toLocaleDateString("ru")}</div>
-        <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
+        <button className="btn btn-primary">
+          <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
+          </button>
       </div>
     );
   }
