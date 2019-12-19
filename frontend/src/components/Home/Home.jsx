@@ -132,7 +132,7 @@ class Home extends Component {
         </div>
         <div className="App">
           <div className="homeMain">
-            <h2>Последние потерянные </h2>
+            <h1>Последние потерянные </h1>
 
             <Slider {...settings}>
               {this.state.lostDogs.length > 0 ? (

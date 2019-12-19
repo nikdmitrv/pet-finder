@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom"
 
 import AdvertMap from "./AdvertMap";
 
@@ -22,6 +23,7 @@ class Advert extends Component {
     return this.state.advertData ? (
       <div className="advert card-list">
         <div className="info-advert card-body">
+        <div>
         <h3>Собака потеряна:</h3>
         <div><b>Порода</b>: {this.state.advertData.dogData.breed}</div>
         <div className="dscp"><b>Описание</b>: {this.state.advertData.dogData.description}</div>
@@ -32,7 +34,7 @@ class Advert extends Component {
         <div>{this.state.advertData.authorData.email}</div>
         <div>{this.state.advertData.authorData.phoneNumber}</div>
         <div>{this.state.advertData.authorData.address}</div>
-        <div>Дата объявления:</div>
+        <div><b>Дата объявления</b>:</div>
         <div>
           {new Date(this.state.advertData.createdAt).toLocaleDateString("ru")}
         </div>
@@ -44,16 +46,17 @@ class Advert extends Component {
             "http://localhost:5000/api/images/" +
             this.state.advertData.dogData.image
           }
-        ></img>
-
+          ></img>
+        </div>
         </div>
         <div>
 
+        <Link to="/lost-dogs" className="back btn btn-info">Назад</Link>
         <AdvertMap location={this.state.advertData.location} />
         </div>
       </div>
     ) : (
-        <div>Loading...</div>
+      <div>Loading...</div>
       );
   }
 }
