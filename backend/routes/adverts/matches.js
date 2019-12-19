@@ -7,11 +7,7 @@ const FoundDogAdvertModel = require("../../models/FoundDogAdvertModel");
 const LostDogAdvertModel = require("../../models/LostDogAdvertModel");
 
 router.post("/lost", async function(req, res) {
-  console.log(req.body.id);
-
   const lostDog = await LostDogAdvertModel.findById(req.body.id);
-  console.log("lostDog: ", lostDog);
-
   const guesses = await FoundDogAdvertModel.find({
     "dogData.breed": lostDog.dogData.breed,
     "dogData.sex": lostDog.dogData.sex,
@@ -24,16 +20,11 @@ router.post("/lost", async function(req, res) {
       $lt: lostDog.location.lng + 0.05
     }
   });
-  console.log("guesses:", guesses);
   res.json(guesses);
 });
 
 router.post("/found", async function(req, res) {
-  console.log(req.body.id);
-
   const foundDog = await FoundDogAdvertModel.findById(req.body.id);
-  console.log("foundDog: ", foundDog);
-
   const guesses = await LostDogAdvertModel.find({
     "dogData.breed": foundDog.dogData.breed,
     "dogData.sex": foundDog.dogData.sex,
@@ -46,7 +37,6 @@ router.post("/found", async function(req, res) {
       $lt: foundDog.location.lng + 0.05
     }
   });
-  console.log("guesses:", guesses);
   res.json(guesses);
 });
 

@@ -114,13 +114,11 @@ class Home extends Component {
     return (
       <>
         <div className="man">
-          <div>
             <h1 className="h1">Поиск потерянных животных</h1>
             <p className="p1">Помогите питомцу вернуться домой</p>
             <button className="b1 btn btn-primary">
               <a href="/registration">Подать объявление</a>
             </button>
-          </div>
         </div>
         <div className="App">
           <div className="homeMain">

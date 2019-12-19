@@ -52,7 +52,7 @@ class FindMatchesFound extends Component {
 
   render() {
     return (
-      <>
+      <div className="matches-found">
         <h1>Найденные совпадения:</h1>
         <ul>
           {this.state.guesses > 0 ? (
@@ -61,7 +61,7 @@ class FindMatchesFound extends Component {
             <h2>Извините, совпадений нет.</h2>
           )}
         </ul>
-      </>
+      </div>
     );
   }
 }
