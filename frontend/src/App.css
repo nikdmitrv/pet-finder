@@ -11,7 +11,7 @@
   width: 100%;
   height: 100%;
   max-width: 1400px;
-  min-height: 61.4vh;
+  min-height: 850px;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
@@ -193,9 +193,16 @@ form {
   border-radius: 10px;
 }
 .maps-app {
-  display: block;
-  justify-content: center;
-  flex-direction: column;
+  display: flex;
+}
+
+.map-container {
+  width: 500px;
+  margin: 10px;
+}
+
+.maps-list-container {
+  margin: 10px;
 }
 
 .loading-block {
