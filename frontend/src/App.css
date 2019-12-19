@@ -173,8 +173,7 @@ form {
 }
 
 #h1-form {
-  background-color: #34145e;
-  color: white;
+  color: black;
   font-size: 27px;
   border-radius: 5px 5px 0 0;
   padding: 9px;
@@ -336,6 +335,8 @@ img {
 }
 
 .long {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 rgba(0, 0,0,0);
   width: auto;
   margin-left: 5%;
 }
@@ -399,4 +400,10 @@ div {
 
 .matches-lost {
   align-self: flex-start;
+}
+.list-group{
+  text-align: left;
+}
+.btn-maps {
+  margin-left: 60%;
 }
