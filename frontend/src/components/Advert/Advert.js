@@ -34,7 +34,7 @@ class Advert extends Component {
         <div>
           {new Date(this.state.advertData.createdAt).toLocaleDateString("ru")}
         </div>
-        <img
+        <img alt="dog"
           src={
             "http://localhost:5000/api/images/" +
             this.state.advertData.dogData.image

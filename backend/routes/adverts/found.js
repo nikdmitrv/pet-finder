@@ -10,20 +10,19 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const user = await User.findById(req.body.id);
-  const { dogData, location } = req.body;
+  const user = await User.findById(req.body.advert.id);
+  const { dogData, location } = req.body.advert;
   user.addFound(
     dogData.breed,
     dogData.description,
     dogData.sex,
-    dogData.image,
+    req.body.image,
     user.name,
     user.email,
     user.phoneNumber,
     user.adress,
     location
   );
-
   res.json({ message: "Объявление добавлено" });
 });
 

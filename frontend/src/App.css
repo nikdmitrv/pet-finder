@@ -17,29 +17,43 @@
 .header {
   position: relative;
   background-color: #34145e;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: 100px;
   width: 100%;
   z-index: 1;
 }
 nav {
-  align-content: center;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: 25% auto 20%;
+  width: 100%;
+  height: 100%;
 }
-.header > nav > a {
-  height: 70px;
-  margin: 0px 20px;
-  padding: 20px 0px;
+
+.header > nav > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header > nav > div > a {
   text-decoration: none;
   color: white;
   font-size: 20px;
   font-weight: 800;
+  margin: 0px 10px;
 }
+
+.logo {
+  height: 95px;
+  width: 95px;
+}
+
+.logo-text {
+  border-radius: 0px;
+  height: 100px;
+}
+
 .reg {
-  background-image: url(https://www.whiterockcity.ca/ImageRepository/Document?documentId=3896);
+  background-image: url(./logos/form-picture.jpeg);
   background-size: cover;
   height: 700px;
   border-radius: 10px;
@@ -88,7 +102,7 @@ form {
   margin: 20px;
   border-radius: 10px;
   display: flex;
-  flex-direction: ;
+  /* flex-direction: ; */
 }
 
 .formList {
@@ -139,17 +153,7 @@ form {
 .btn-filt {
   margin: 1px 10px;
 }
-.logo {
-  font-size: 20px;
-  font-weight: 800;
-  position: absolute;
-  left: 5vw;
-}
-.footer {
-  height: 150px;
-  width: 100%;
-  background-color: #34145e;
-}
+
 #h1-form {
   background-color: #34145e;
   color: white;
@@ -197,10 +201,10 @@ img {
   display: block;
   width: 20%;
 }
-.listHome > span {
-  /* display: flex; */
-  /* flex-direction: column; */
-}
+/* .listHome > span {
+  display: flex;
+  flex-direction: column;
+} */
 /* .listHome > img {
   float: left;
 } */
@@ -210,9 +214,9 @@ img {
   top: -280px;
 
   /* bottom: 200px; */
-  overflow: ;
+  /* overflow: ; */
   height: 600px;
-  background-image: url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2019/11/searchAndMatchHero.jpg");
+  background-image: url("./logos/searchAndMatchHero.jpg");
   background-size: cover;
 }
 .h1 {
@@ -237,4 +241,47 @@ img {
 .b1 > a {
   text-decoration: none;
   color: white;
+}
+
+.error-message {
+  margin: 5px;
+  color: rgb(221, 0, 0);
+  box-shadow: rgba(0, 0, 0, 0.123);
+}
+
+.footer {
+  height: 100px;
+  width: 100%;
+  position: relative;
+  bottom: -50px;
+  background-color: #34145e;
+  display: grid;
+  grid-template-columns: 25% auto 35%;
+}
+
+.footer-text {
+  color: grey;
+  margin: 5px 20px;
+}
+
+.footer-map {
+  color: grey;
+  margin: 0px;
+}
+
+.footer-link > a {
+  text-decoration: none;
+  color: grey;
+}
+.footer-link > a:hover {
+  color: white;
+}
+
+.footer-logos {
+  justify-content: center;
+}
+
+.footer-logos > img {
+  height: 50px;
+  margin: 5px;
 }

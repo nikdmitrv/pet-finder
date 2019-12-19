@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { createLostAdvertAC } from "../../redux/actions";
+import {
+  createLostAdvertAC,
+  clearMessageAC,
+  warningMessageAC
+} from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
 class LostForm extends Component {
@@ -114,48 +118,47 @@ class LostForm extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-
-    const {
-      dogBreed,
-      dogDescription,
-      dogSex,
-      locationLat,
-      locationLng
-    } = event.target;
-
-    const request = {
-      method: "POST",
-      body: this.state.imgData
-    };
-
-    if (this.state.imgData) {
-      fetch("/api/images/", request)
-        .then(response => response.json())
-        .then(data => {
-          const advert = JSON.stringify({
-            dogData: {
-              breed: dogBreed.value,
-              description: dogDescription.value,
-              sex: dogSex.value,
-              image: data.filename
-            },
-            location: { lat: locationLat.value, lng: locationLng.value },
-            id: this.props.user._id
-          });
-          this.props.createLostAdvert(advert);
-        });
+    if (
+      event.target.locationLat.value === "" ||
+      event.target.locationLng.value === ""
+    ) {
+      this.props.warningMessage(
+        "Укажите на карте место, где вы потеряли животное"
+      );
     } else {
-      const advert = JSON.stringify({
+      const {
+        dogBreed,
+        dogDescription,
+        dogSex,
+        locationLat,
+        locationLng
+      } = event.target;
+
+      const request = {
+        method: "POST",
+        body: this.state.imgData
+      };
+
+      const advert = {
         dogData: {
           breed: dogBreed.value,
           description: dogDescription.value,
-          sex: dogSex.value,
-          image: "placeholder.jpg"
+          sex: dogSex.value
         },
         location: { lat: locationLat.value, lng: locationLng.value },
         id: this.props.user._id
-      });
-      this.props.createLostAdvert(advert);
+      };
+
+      if (this.state.imgData) {
+        fetch("/api/images/", request)
+          .then(response => response.json())
+          .then(data => this.props.createLostAdvert(advert, data.filename))
+          .then(() => (window.location = "/account/" + this.props.user._id));
+      } else {
+        this.props
+          .createLostAdvert(advert, "placeholder.jpg")
+          .then(() => (window.location = "/account/" + this.props.user._id));
+      }
     }
   };
 
@@ -167,7 +170,6 @@ class LostForm extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.message}</div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="dog-breed">Порода:</label>
           <select onChange={this.handleInput} name="dogBreed">
@@ -199,15 +201,25 @@ class LostForm extends Component {
             id="location-input-lat"
             name="locationLat"
             hidden
-            required
+            value=""
           ></input>
-          <input id="location-input-lng" name="locationLng" hidden></input>
+          <input
+            id="location-input-lng"
+            name="locationLng"
+            hidden
+            value=""
+          ></input>
 
           <button>Отправить</button>
         </form>
         <form>
-          <input onChange={this.handleImageUpload} type="file" name="imgInput" />
+          <input
+            onChange={this.handleImageUpload}
+            type="file"
+            name="imgInput"
+          />
         </form>
+        <div className="error-message">{this.props.message}</div>
         <Maps getLocation={this.getLocation} />
       </div>
     );
@@ -223,7 +235,10 @@ function mapStateToProps(store) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createLostAdvert: advert => dispatch(createLostAdvertAC(advert))
+    createLostAdvert: (advert, image) =>
+      dispatch(createLostAdvertAC(advert, image)),
+    clearMessage: () => dispatch(clearMessageAC()),
+    warningMessage: message => dispatch(warningMessageAC(message))
   };
 };
 

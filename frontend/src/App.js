@@ -11,15 +11,20 @@ import LostDogsList from "./components/LostDogsList/LostDogsList";
 import FoundDogsList from "./components/FoundDogsList/FoundDogsList";
 import FoundForm from "./components/FoundForm/FoundForm";
 import LostForm from "./components/LostForm/LostForm";
-import Account from "./components/account/Account";
-import EditFoundDog from "./components/account/EditFoundDog";
-import EditLostDog from "./components/account/EditLostDog";
+import Account from "./components/Account/Account";
+import EditFoundDog from "./components/Account/EditFoundDog";
+import EditLostDog from "./components/Account/EditLostDog";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import LostDogsMap from "./components/LostDogsList/LostDogsMap";
 import Advert from "./components/Advert/Advert";
 import FindMatchesLost from "./components/FindMatches/FindMatchesLost";
 import FindMatchesFound from "./components/FindMatches/FindMatchesFound";
 import "./App.css";
+import logo from "./logos/logo.png";
+import logoText from "./logos/logo-text.png";
+import jsLogo from "./logos/js.png";
+import reactLogo from "./logos/react.png";
+import reduxLogo from "./logos/redux.png";
 import { fetchSessionAC, clearMessageAC } from "./redux/actions";
 
 class App extends Component {
@@ -40,53 +45,46 @@ class App extends Component {
           </div>
         ) : null}
         <div className="header">
-          <div className="logo">ИЩЕЙКА</div>
+          {/* <div>
+            <img className="logo" alt="logo" src={logo} ></img>
+          </div> */}
+          {/* <div>
+            <img className="logo-text" alt="logo-text" src={logoText}></img>
+          </div> */}
           <nav>
-            <Link
-              to="/"
-              style={{ position: "absolute", left: "10vw", top: "0px" }}
-            >
-              Главная
-            </Link>
-            <Link to="/lost-dogs">Потерялись</Link>
-            <Link to="/found-dogs">Нашлись</Link>
-            {this.props.logged ? (
-              <>
-                <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                <Link to="/add-found-dog">Добавить объявление о находке</Link>
-              </>
-            ) : null}
-            {this.props.logged ? (
-              <>
-                <Link
-                  style={{ position: "absolute", left: "80vw", top: "0px" }}
-                  to={"/account/" + this.props.user._id}
-                >
-                  Личный кабинет
-                </Link>
-                <Link
-                  style={{ position: "absolute", left: "90vw", top: "0px" }}
-                  to="/logout"
-                >
-                  Выход
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  style={{ position: "absolute", left: "82vw", top: "0px" }}
-                  to="/registration"
-                >
-                  Регистрация
-                </Link>
-                <Link
-                  style={{ position: "absolute", left: "90vw", top: "0px" }}
-                  to="/login"
-                >
-                  Вход
-                </Link>
-              </>
-            )}
+            <div className="nav-logos">
+              <Link to="/">
+                <img className="logo" alt="logo" src={logo}></img>
+              </Link>
+              <Link to="/">
+                <img className="logo-text" alt="logo-text" src={logoText}></img>
+              </Link>
+            </div>
+            <div className="nav-main">
+              <Link to="/lost-dogs">Потерялись</Link>
+              <Link to="/found-dogs">Нашлись</Link>
+              {this.props.logged ? (
+                <>
+                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
+                </>
+              ) : null}
+            </div>
+            <div className="nav-auth">
+              {this.props.logged ? (
+                <>
+                  <Link to={"/account/" + this.props.user._id}>
+                    Личный кабинет
+                  </Link>
+                  <Link to="/logout">Выход</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/registration">Регистрация</Link>
+                  <Link to="/login">Вход</Link>
+                </>
+              )}
+            </div>
           </nav>
         </div>
 
@@ -143,7 +141,28 @@ class App extends Component {
             />
           </div>
         </Switch>
-        <div className="footer"></div>
+        <div className="footer">
+          <div className="footer-text">Created by Raccon-Dogs 2019 ©</div>
+          <div className="footer-map">
+            <div className="footer-link">
+              <Link>главная</Link>
+            </div>
+            <div className="footer-link">
+              <Link>личный кабинет</Link>
+            </div>
+            <div className="footer-link">
+              <Link>список потерянных собак</Link>
+            </div>
+            <div className="footer-link">
+              <Link>список найденных собак</Link>
+            </div>
+          </div>
+          <div className="footer-logos">
+            <img alt="js-logo" src={jsLogo}></img>
+            <img alt="react-logo" src={reactLogo}></img>
+            <img alt="redux-logo" src={reduxLogo}></img>
+          </div>
+        </div>
       </Router>
     );
   }

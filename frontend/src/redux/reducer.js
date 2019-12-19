@@ -8,7 +8,8 @@ import {
   REGISTER_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
-  LOGOUT_USER
+  LOGOUT_USER,
+  WARNING_MESSAGE
 } from "./types";
 
 const initialState = {
@@ -97,6 +98,13 @@ export default function(state = initialState, action) {
         user: {},
         message: "",
         logged: false
+      };
+    }
+    case WARNING_MESSAGE: {
+      return {
+        ...state,
+        message: action.message,
+        loading: false
       };
     }
     default:

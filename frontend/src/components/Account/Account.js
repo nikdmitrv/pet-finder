@@ -18,7 +18,7 @@ const FoundDog = props => (
     <td>
       {
         <img
-          alt="dog image"
+          alt="dog"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
@@ -43,7 +43,7 @@ const LostDog = props => (
       {
         <img
         class="card-img-top" 
-          alt="dog image"
+          alt="dog"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
@@ -96,9 +96,9 @@ class Account extends Component {
         <h2>Ваши объявления о находке</h2>
         <div className="card">
           <div>{this.foundDogList()}</div>
-          <div>Breed:</div>
-          <div>Description:</div>
-          <div>Sex:</div>
+          <div>Порода:</div>
+          <div>Пол:</div>
+          <div>Описание:</div>
         </div>
         <h2>Ваши объявления о пропаже</h2>
         <table>
