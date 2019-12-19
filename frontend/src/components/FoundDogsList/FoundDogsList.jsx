@@ -41,10 +41,7 @@ class FoundDogsList extends Component {
     const date = new Date(advert.createdAt);
     return (
       <div className="card cardList" key={advert._id}>
-        <img
-          alt="dog"
-          src={"http://localhost:5000/api/images/" + advert.dogData.image}
-        ></img>
+        <img alt="dog" src={"/api/images/" + advert.dogData.image}></img>
         <div>
           <b>Порода</b>: {advert.dogData.breed}
         </div>

@@ -26,7 +26,7 @@ class Home extends Component {
           <img
             className="card-img-top"
             alt="..."
-            src={"http://localhost:5000/api/images/" + dog.dogData.image}
+            src={"/api/images/" + dog.dogData.image}
           ></img>
           <h5 className="card-title">
             <b>Порода: </b>
@@ -57,7 +57,7 @@ class Home extends Component {
           <img
             className="card-img-top"
             alt="..."
-            src={"http://localhost:5000/api/images/" + dog.dogData.image}
+            src={"/api/images/" + dog.dogData.image}
           ></img>
           <h5 className="card-title">
             <b>Порода: </b>
@@ -111,15 +111,19 @@ class Home extends Component {
 
   render() {
     const settings = {
+      row: 2,
       dots: true,
+      swipe: true,
       slidesPerRow: 3,
-      wheelScroll: 1,
-      // autoplay: true,
-      // duration: 300,
-      shift: 30,
+      // slidesToShow: 3,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      pauseOnHover: true,
+      duration: 20,
+      shift: 800,
       centerMode: true,
-      arrowsScroll: 3
-      //  centerPadding: 130,
+      centerPadding: 30,
+      initialSlide: 1
     };
     return (
       <>
