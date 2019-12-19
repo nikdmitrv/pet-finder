@@ -186,21 +186,23 @@ class LostForm extends Component {
               </option>
             ))}
           </select>
-          <div className="form-group">
-            <label htmlFor="dog-description">Пол:</label>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+
+          <div className="" data-toggle="buttons">
+            <input type="radio" value="Ж" id="sexFilterFemale" name="dogSex" />
             <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
+
+            <input value="М" type="radio" id="sexFilterMale" name="dogSex" />
+            <label htmlFor="sexFilterMale">М</label>
           </div>
           <label htmlFor="dog-description">Описание собаки:</label>
           <div className="form-group">
             <textarea
+              className="form-control"
               onChange={this.handleInput}
               name="dogDescription"
               id="dog-description"
               type="text"
-              style={{ resize: "none", height: "100px", width: "300px" }}
+              style={{ resize: "none", height: "100px", width: "100%" }}
               required
             />
           </div>

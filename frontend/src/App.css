@@ -419,11 +419,11 @@ div {
 }
 
 .matches-found {
-  align-self: flex-start;
+  /* align-self: flex-start; */
 }
 
 .matches-lost {
-  align-self: flex-start;
+  /* align-self: flex-start; */
 }
 
 .list-group{
@@ -471,8 +471,8 @@ background-color: #34145e;;
     cursor: pointer;
     line-height: 20px;
     display: inline-block;
-    color: #666;
-}34145e
+   
+}
 [type="radio"]:checked + label:before,
 [type="radio"]:not(:checked) + label:before {
     content: '';

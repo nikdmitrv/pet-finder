@@ -181,7 +181,7 @@ class EditLostDog extends Component {
       const dog = {
         breed: e.target.dogBreed.value,
         description: this.state.description,
-        sex: this.state.sex,
+        sex: e.target.dogSex.value,
         date: this.state.date,
         location: {
           lat: e.target.locationLat.value,
@@ -224,12 +224,12 @@ class EditLostDog extends Component {
           </select>
           </div>
 
-          <div>
-            <label htmlFor="dog-description">Пол:</label>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+          <div className="" data-toggle="buttons">
+          <input type="radio" value="Ж" id="sexFilterFemale" name="dogSex"/>
             <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
+            
+            <input value="М" type="radio" id="sexFilterMale" name="dogSex"/>
+            <label htmlFor="sexFilterMale">М</label>
           </div>
 
           <div>
@@ -274,9 +274,9 @@ class EditLostDog extends Component {
           </div>
         </form>
         <div className="error-message">{this.props.message}</div>
-         <div className="mapwrap"> 
+         {/* <div className="mapwrap"> 
         <Map className="mapwrap" getLocation={this.getLocation} />
-        </div>  
+        </div>   */}
       </div>
       </>
     );

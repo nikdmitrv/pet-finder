@@ -142,7 +142,7 @@ class Home extends Component {
               )}
             </Slider>
 
-            <h2>Последние найденные</h2>
+            <h1>Последние найденные</h1>
 
             <Slider {...settings}>
               {this.state.foundDogs.length > 0 ? (
