@@ -20,7 +20,106 @@ class EditFoundDog extends Component {
       description: "",
       sex: "",
       date: "",
-      image: ""
+      image: "",
+      location: {},
+      breedOptions: [
+        "Акита-ину",
+        "Алабай",
+        "Аляскинский Маламут",
+        "Американская Акита",
+        "Американский бульдог",
+        "Американский стаффордширский терьер",
+        "Английский бульдог",
+        "Афганская борзая",
+        "Американский кокер спаниель",
+        "Английский кокер спаниель",
+        "Английский мастиф",
+        "Английский пойнтер",
+        "Басенджи",
+        "Бассет Хаунд",
+        "Без породы",
+        "Бернский зенненхунд",
+        "Бигль",
+        "Бишон фризе",
+        "Бладхаунд",
+        "Бобтейл",
+        "Боксер",
+        "Болгарская овчарка",
+        "Бордер колли",
+        "Бордоский дог",
+        "Босерон",
+        "Бостон терьер",
+        "Бриар",
+        "Брюссельский гриффон",
+        "Бульмастиф",
+        "Бультерьер",
+        "Веймаранер",
+        "Вельш корги пемброк",
+        "Вест хайленд уайт терьер",
+        "Вельштерьер",
+        "Далматинец",
+        "Джек рассел терьер",
+        "Доберман",
+        "Дратхаар",
+        "Золотистый ретривер",
+        "Ирландский волкодав",
+        "Ирландский сеттер",
+        "Ирландский терьер",
+        "Итальянская левретка",
+        "Йоркширский терьер",
+        "Кавказская овчарка",
+        "Кане корсо",
+        "Карликовый пинчер",
+        "Кавалер кинг чарльз спаниель",
+        "Кеесхонд",
+        "Колли",
+        "Китайская хохлатая собака",
+        "Курцхаар",
+        "Королевский пудель",
+        "Карликовый пудель",
+        "Лабрадор ретривер",
+        "Лайка",
+        "Мальтийская болонка",
+        "Московская сторожевая",
+        "Миттельшнауцер",
+        "Мопс",
+        "Немецкий дог",
+        "Ньюфаундленд",
+        "Немецкая овчарка",
+        "Норвич-терьер",
+        "Папильон",
+        "Пекинес",
+        "Померанский шпиц",
+        "Пшеничный терьер",
+        "Родезийский риджбек",
+        "Ризеншнауцер",
+        "Ротвейлер",
+        "Русская борзая",
+        "Самоед",
+        "Сенбернар",
+        "Сибирские хаски",
+        "Скотч терьер",
+        "Стаффордширский Бультерьер",
+        "Такса",
+        "Той пудель",
+        "Той терьер",
+        "Уиппет",
+        "Фараонова собака",
+        "Фокстерьер гладкошерстный",
+        "Фокстерьер жесткошерстный",
+        "Французский бульдог",
+        "Цвергшнауцер",
+        "Чау Чау",
+        "Черный русский терьер",
+        "Шарпей",
+        "Шелти",
+        "Шиба-ину",
+        "Ши-тцу",
+        "Эрдельтерьер",
+        "Южноафриканский бурбуль",
+        "Ягдтерьер",
+        "Японский хин"
+      ]
     };
   }
 
@@ -33,7 +132,8 @@ class EditFoundDog extends Component {
           description: response.data.dogData.description,
           sex: response.data.dogData.sex,
           date: response.data.dogData.date,
-          image: response.data.dogData.image
+          image: response.data.dogData.image,
+          location: response.data.location
         });
       })
       .catch(function(error) {
@@ -64,32 +164,22 @@ class EditFoundDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if (
-      e.target.locationLat.value === "" ||
-      e.target.locationLng.value === ""
-    ) {
-      this.props.warningMessage(
-        "Укажите на карте место, где вы нашли животное"
-      );
-    } else {
-      const dog = {
-        breed: this.state.breed,
-        description: this.state.description,
-        sex: this.state.sex,
-        date: this.state.date,
-        location: {
-          lat: e.target.locationLat.value,
-          lng: e.target.locationLng.value
-        }
-      };
-      axios
-        .post(
-          "/api/found/update/" +
-            this.props.match.params.id,
-          dog
-        )
-        .then(() => (window.location = "/account/" + this.props.user._id));
-    }
+
+    const dog = {
+      breed: e.target.dogBreed.value,
+      description: this.state.description,
+      sex: this.state.sex,
+      date: this.state.date,
+      location: {
+        lat: e.target.locationLat.value,
+        lng: e.target.locationLng.value
+      }
+    };
+    console.log(dog);
+
+    axios
+      .post("/api/found/update/" + this.props.match.params.id, dog)
+      .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   deleteFoundDog(id) {
@@ -97,14 +187,16 @@ class EditFoundDog extends Component {
       .delete("/api/found/" + this.props.match.params.id)
       .then(response => {
         console.log(response.data);
-      });
+      })
 
-    this.setState({
-      breed: "",
-      description: "",
-      sex: "",
-      date: ""
-    });
+      .then(() =>
+        this.setState({
+          breed: "",
+          description: "",
+          sex: ""
+        })
+      )
+      .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   getLocation = location => {
@@ -113,89 +205,86 @@ class EditFoundDog extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <>
-        
-      <div>
-      <h3>Редактировать данные о собаке</h3>
-        <form  className="form-group"onSubmit={this.onSubmit}>
-          <div>
-            <label>Порода: </label>
+        <div>
+          <h3>Редактировать данные о собаке</h3>
+          <form className="form-group" onSubmit={this.onSubmit}>
+            <div>
+              <label>Порода: </label>
+              <select name="dogBreed" className="form-control">
+                <option value="">{this.state.breed}</option>
+                {this.state.breedOptions.map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="dog-description">Пол:</label>
+              <label htmlFor="sexFilterMale">М</label>
+              <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+              <label htmlFor="sexFilterFemale">Ж</label>
+              <input
+                type="radio"
+                name="dogSex"
+                id="sexFilterFemale"
+                value="Ж"
+              />
+            </div>
+
+            <div>
+              <label>Описание: </label>
+              <textarea
+                type="text"
+                required
+                className="form-control"
+                style={{ resize: "none", height: "100px", width: "400px" }}
+                value={this.state.description}
+                onChange={this.onChangeDescription}
+              />
+            </div>
+
             <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.breed}
-              onChange={this.onChangeBreed}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="dog-description">Пол:</label>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
-            <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
-          </div>
-
-          <div>
-            <label>Описание: </label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              style={{ resize: "none", height: "100px", width: "400px" }}
-              value={this.state.description}
-              onChange={this.onChangeDescription}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Дата: </label>
+              id="location-input-lat"
+              name="locationLat"
+              hidden
+              value={this.state.location.lat}
+            ></input>
             <input
-              type="date"
-              required
-              className="form-control"
-              value={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div>
+              id="location-input-lng"
+              name="locationLng"
+              hidden
+              value={this.state.location.lng}
+            ></input>
 
+            <div className="form-group">
+              <button className="btn btn-primary btn-edit">
+                Подтвредить изменения
+              </button>
+            </div>
 
-          <input
-            id="location-input-lat"
-            name="locationLat"
-            hidden
-            value=""
-          ></input>
-          <input
-            id="location-input-lng"
-            name="locationLng"
-            hidden
-            value=""
-          ></input>
-
-          <div className="form-group">
-            <button className="btn btn-primary btn-edit">Подтвредить изменения</button>           
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-edit"
+                type="button"
+                onClick={() => {
+                  this.deleteFoundDog(this.state._id);
+                }}
+              >
+                Удалить объявление
+              </button>
+            </div>
+          </form>
+          <div className="error-message">{this.props.message}</div>
+          <div className="mapwrap">
+            <Map className="mapwrap" getLocation={this.getLocation} />
           </div>
-          
-          <div className="form-group">
-          <button
-            className="btn btn-primary btn-edit"
-            type="button"
-            onClick={() => {
-              this.deleteFoundDog(this.state._id);
-            }}
-          >
-             Удалить объявление
-          </button>
-          </div>
-        </form>
-        <div className="error-message">{this.props.message}</div>
-         <div className="mapwrap"> 
-        <Map className="mapwrap" getLocation={this.getLocation} />
-        </div>  
-      </div>
+        </div>
       </>
     );
   }

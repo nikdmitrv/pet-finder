@@ -63,14 +63,18 @@ class FoundDogsList extends Component {
   render() {
     return (
       <div>
-        <div className="filter-found">
-          <div>Поиск по фильтру</div>
-          <FilterForm handleFiltration={this.handleFiltration} />
-        </div>
-        <button className="btn btn-info btn-map">
-          <Link to="/found-dogs/map">Посмотреть на карте</Link>
-        </button>
-        <h1>Список найденных собак:</h1>
+        {this.state.allAdverts.length > 0 ? (
+          <>
+            <div className="filter-found">
+              <div>Поиск по фильтру</div>
+              <FilterForm handleFiltration={this.handleFiltration} />
+            </div>
+            <button className="btn btn-info btn-map">
+              <Link to="/found-dogs/map">Посмотреть на карте</Link>
+            </button>
+            <h1>Список найденных собак:</h1>
+          </>
+        ) : null}
         <ul>
           {this.state.allAdverts && this.state.filtered
             ? this.state.filtered.map(advert => this.renderList(advert))

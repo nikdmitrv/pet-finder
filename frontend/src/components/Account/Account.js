@@ -5,7 +5,7 @@ import axios from "axios";
 import { loadingRequestAC, clearMessageAC } from "../../redux/actions";
 
 const FoundDog = props => (
-  <div className="card cardList">
+  <div className="card cardList" key={props._id}>
     <div className="card-title">{props.dog.dogData.breed}</div>
     <div className="card-title">{props.dog.dogData.sex}</div>
     <div className="card-text">
@@ -17,7 +17,7 @@ const FoundDog = props => (
       {
         <img
           alt="dog"
-          class="card-img"
+          className="card-img"
           src={"/api/images/" + props.dog.dogData.image}
         />
       }
@@ -39,7 +39,7 @@ const FoundDog = props => (
 );
 
 const LostDog = props => (
-  <div className="card cardList">
+  <div className="card cardList" key={props._id}>
     <div className="card-title">{props.dog.dogData.breed}</div>
     <div className="card-title">{props.dog.dogData.sex}</div>
     <div className="card-text">
@@ -51,7 +51,7 @@ const LostDog = props => (
       {
         <img
           alt="dog"
-          class="card-img"
+          className="card-img"
           src={"/api/images/" + props.dog.dogData.image}
         />
       }
@@ -104,31 +104,35 @@ class Account extends Component {
 
   render() {
     return (
-      <div className="account-main">
-        <h2 id="accH2">Добро пожаловать, {this.state.name}!</h2>
-        {/* <h2>Ваш email: {this.state.email}</h2> */}
-        <div>
-          <button className="btn btn-info btnAcc">
-            <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-          </button>
-          <button className="btn btn-info btnAcc">
-            <Link to="/add-found-dog">Добавить объявление о находке</Link>
-          </button>
-        </div>
-        <h3>Ваши объявления о находке:</h3>
-        {this.state.myFound.length > 0 ? (
-          <div className="sds">{this.foundDogList()}</div>
-        ) : (
-          <div>У вас нет объявлений о находке</div>
-        )}
+      <>
+        {this.state.email ? (
+          <div className="account-main">
+            <h2 id="accH2">Добро пожаловать, {this.state.name}!</h2>
+            {/* <h2>Ваш email: {this.state.email}</h2> */}
+            <div>
+              <button className="btn btn-info btnAcc">
+                <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+              </button>
+              <button className="btn btn-info btnAcc">
+                <Link to="/add-found-dog">Добавить объявление о находке</Link>
+              </button>
+            </div>
+            <h3>Ваши объявления о находке:</h3>
+            {this.state.myFound.length > 0 ? (
+              <div className="sds">{this.foundDogList()}</div>
+            ) : (
+              <div>У вас нет объявлений о находке</div>
+            )}
 
-        <h3>Ваши объявления о пропаже:</h3>
-        {this.state.myLost.length > 0 ? (
-          <div className="sds">{this.lostDogList()}</div>
-        ) : (
-          <div>У вас нет объявлений о пропаже</div>
-        )}
-      </div>
+            <h3>Ваши объявления о пропаже:</h3>
+            {this.state.myLost.length > 0 ? (
+              <div className="sds">{this.lostDogList()}</div>
+            ) : (
+              <div>У вас нет объявлений о пропаже</div>
+            )}
+          </div>
+        ) : null}
+      </>
     );
   }
 }
