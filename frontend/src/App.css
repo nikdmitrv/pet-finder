@@ -285,7 +285,7 @@ img {
 }
 .editFound{
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 #editImg {
  margin: 100px auto;
@@ -324,4 +324,8 @@ h1, h2, h3, h4, h5 {
 
 a, span, div {
   font-family: "OpenSans";
+}
+
+.mapwrap{
+  width: 10%
 }
