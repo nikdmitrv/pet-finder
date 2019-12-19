@@ -26,26 +26,28 @@ class FindMatchesFound extends Component {
   renderGuesses(advert) {
     const date = new Date(advert.createdAt);
     return (
-      <div key={advert._id}>
+      <div className="card cardList" key={advert._id}>
         <div>Собака найдена:</div>
-        <img alt="dog"
+        <img
+          alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
-        <div>{advert.dogData.breed}</div>
-        <div>{advert.dogData.sex}</div>
-        <div>
+        <div>Порода: {advert.dogData.breed}</div>
+        <div>Пол: {advert.dogData.sex}</div>
+        {/* <div>
           {advert.dogData.description.length > 30
             ? advert.dogData.description.slice(0, 30) + "..."
             : advert.dogData.description}
-        </div>
+        </div> */}
         <div>Нашедший:</div>
-        <div>{advert.authorData.name}</div>
+        <div>{advert.authorData.name}, {advert.authorData.email}</div>
         <div>{advert.authorData.email}</div>
         <div>{advert.authorData.phoneNumber}</div>
-        <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
-        <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
+        <Link className="btn btn-primary" to={"/advert/lost/" + advert._id}>
+          Перейти к объявлению
+        </Link>
       </div>
     );
   }
@@ -55,7 +57,7 @@ class FindMatchesFound extends Component {
       <div className="matches-found">
         <h1>Найденные совпадения:</h1>
         <ul>
-          {this.state.guesses > 0 ? (
+          {this.state.guesses.length > 0 ? (
             this.state.guesses.map(advert => this.renderGuesses(advert))
           ) : (
             <h2>Извините, совпадений нет.</h2>
