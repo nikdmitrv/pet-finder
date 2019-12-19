@@ -8,10 +8,12 @@ const FoundDog = props => (
   <div className="card cardList">
     <div className="card-title">{props.dog.dogData.breed}</div>
     <div className="card-title">{props.dog.dogData.sex}</div>
-    <div className="card-text">{props.dog.dogData.description.length > 30
-      ? props.dog.dogData.description.slice(0, 30) + "..."
-      : props.dog.dogData.description}</div>
-    <div >
+    <div className="card-text">
+      {props.dog.dogData.description.length > 30
+        ? props.dog.dogData.description.slice(0, 30) + "..."
+        : props.dog.dogData.description}
+    </div>
+    <div>
       {
         <img
           alt="dog"
@@ -19,7 +21,6 @@ const FoundDog = props => (
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
-
     </div>
     <div>
       <button className="btn btn-primary float">
@@ -31,22 +32,22 @@ const FoundDog = props => (
       <button className="btn btn-primary">
         <Link to={"/find-matches/found/" + props.dog._id}>
           Посмотреть совпадения
-      </Link>
+        </Link>
       </button>
     </div>
   </div>
 );
 
-
 const LostDog = props => (
-
   <div className="card cardList">
     <div className="card-title">{props.dog.dogData.breed}</div>
     <div className="card-title">{props.dog.dogData.sex}</div>
-    <div className="card-text">{props.dog.dogData.description.length > 30
-      ? props.dog.dogData.description.slice(0, 30) + "..."
-      : props.dog.dogData.description}</div>
-    <div >
+    <div className="card-text">
+      {props.dog.dogData.description.length > 30
+        ? props.dog.dogData.description.slice(0, 30) + "..."
+        : props.dog.dogData.description}
+    </div>
+    <div>
       {
         <img
           alt="dog"
@@ -54,7 +55,6 @@ const LostDog = props => (
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
-
     </div>
     <div>
       <button className="btn btn-primary float">
@@ -66,7 +66,7 @@ const LostDog = props => (
       <button className="btn btn-primary">
         <Link to={"/find-matches/lost/" + props.dog._id}>
           Посмотреть совпадения
-      </Link>
+        </Link>
       </button>
     </div>
   </div>
@@ -104,28 +104,30 @@ class Account extends Component {
 
   render() {
     return (
-      <div >
+      <div className="account-main">
         <h2 id="accH2">Добро пожаловать, {this.state.name}!</h2>
         {/* <h2>Ваш email: {this.state.email}</h2> */}
-        <button className="btn btn-info btnAcc">
-          <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-        </button>
-        <button className="btn btn-info btnAcc">
-          <Link to="/add-found-dog">Добавить объявление о находке</Link>
-        </button>
+        <div>
+          <button className="btn btn-info btnAcc">
+            <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+          </button>
+          <button className="btn btn-info btnAcc">
+            <Link to="/add-found-dog">Добавить объявление о находке</Link>
+          </button>
+        </div>
         <h3>Ваши объявления о находке:</h3>
-        {this.state.myFound.length > 0 
-        ? <div className="sds">{this.foundDogList()}</div>
-          : <div>У вас нет объявлений о находке</div>}
-
-
-
+        {this.state.myFound.length > 0 ? (
+          <div className="sds">{this.foundDogList()}</div>
+        ) : (
+          <div>У вас нет объявлений о находке</div>
+        )}
 
         <h3>Ваши объявления о пропаже:</h3>
-        {this.state.myLost.length > 0 
-        ?
+        {this.state.myLost.length > 0 ? (
           <div className="sds">{this.lostDogList()}</div>
-        : <div>У вас нет объявлений о пропаже</div>}
+        ) : (
+          <div>У вас нет объявлений о пропаже</div>
+        )}
       </div>
     );
   }

@@ -45,12 +45,6 @@ class App extends Component {
           </div>
         ) : null}
         <div className="header">
-          {/* <div>
-            <img className="logo" alt="logo" src={logo} ></img>
-          </div> */}
-          {/* <div>
-            <img className="logo-text" alt="logo-text" src={logoText}></img>
-          </div> */}
           <nav>
             <div className="nav-logos">
               <Link to="/">
@@ -61,8 +55,8 @@ class App extends Component {
               </Link>
             </div>
             <div className="nav-main">
-              <Link to="/lost-dogs">Потерялись</Link>
-              <Link to="/found-dogs">Нашлись</Link>
+              <Link to="/lost-dogs">Потерянные</Link>
+              <Link to="/found-dogs">Найденные</Link>
             </div>
             <div className="nav-auth">
               {this.props.logged ? (
