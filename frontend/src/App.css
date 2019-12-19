@@ -1,9 +1,14 @@
 #root {
   background-color: #efeef1;
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .App {
   text-align: center;
+  width: 100%;
   height: 100%;
   max-width: 1400px;
   background-color: white;
@@ -12,8 +17,7 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 2%;
 }
 
 .header {
@@ -254,12 +258,9 @@ img {
   color: white;
 }
 .sds{
-<<<<<<< HEAD
   /* position: relative; */
   right: -10%;
-=======
 
->>>>>>> f500f7fe3d24f49746b6ac910396d3de4cbdc24e
   display: flex;
   flex-wrap: wrap;
 }
