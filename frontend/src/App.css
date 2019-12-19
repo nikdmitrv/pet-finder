@@ -254,8 +254,12 @@ img {
   color: white;
 }
 .sds{
+<<<<<<< HEAD
   /* position: relative; */
   right: -10%;
+=======
+
+>>>>>>> f500f7fe3d24f49746b6ac910396d3de4cbdc24e
   display: flex;
   flex-wrap: wrap;
 }
@@ -286,4 +290,19 @@ img {
 }
 .btn-edit{
   width: 400px;
+}
+
+.long {
+
+  display: inline;
+  
+
+}
+.btn-filter {
+  background-color: #34145e;
+}
+
+.btn-map {
+  margin-left: 15%;
+  margin-top: 0.3%;
 }

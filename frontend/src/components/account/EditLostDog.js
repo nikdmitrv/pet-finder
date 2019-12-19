@@ -7,7 +7,7 @@ export default class EditLostDog extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeBreed = this.onChangeBreed.bind(this);
+    // this.onChangeBreed = this.onChangeBreed.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
@@ -15,6 +15,104 @@ export default class EditLostDog extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      breedOptions: [
+        "Акита-ину",
+        "Алабай",
+        "Аляскинский Маламут",
+        "Американская Акита",
+        "Американский бульдог",
+        "Американский стаффордширский терьер",
+        "Английский бульдог",
+        "Афганская борзая",
+        "Американский кокер спаниель",
+        "Английский кокер спаниель",
+        "Английский мастиф",
+        "Английский пойнтер",
+        "Басенджи",
+        "Бассет Хаунд",
+        "Без породы",
+        "Бернский зенненхунд",
+        "Бигль",
+        "Бишон фризе",
+        "Бладхаунд",
+        "Бобтейл",
+        "Боксер",
+        "Болгарская овчарка",
+        "Бордер колли",
+        "Бордоский дог",
+        "Босерон",
+        "Бостон терьер",
+        "Бриар",
+        "Брюссельский гриффон",
+        "Бульмастиф",
+        "Бультерьер",
+        "Веймаранер",
+        "Вельш корги пемброк",
+        "Вест хайленд уайт терьер",
+        "Вельштерьер",
+        "Далматинец",
+        "Джек рассел терьер",
+        "Доберман",
+        "Дратхаар",
+        "Золотистый ретривер",
+        "Ирландский волкодав",
+        "Ирландский сеттер",
+        "Ирландский терьер",
+        "Итальянская левретка",
+        "Йоркширский терьер",
+        "Кавказская овчарка",
+        "Кане корсо",
+        "Карликовый пинчер",
+        "Кавалер кинг чарльз спаниель",
+        "Кеесхонд",
+        "Колли",
+        "Китайская хохлатая собака",
+        "Курцхаар",
+        "Королевский пудель",
+        "Карликовый пудель",
+        "Лабрадор ретривер",
+        "Лайка",
+        "Мальтийская болонка",
+        "Московская сторожевая",
+        "Миттельшнауцер",
+        "Мопс",
+        "Немецкий дог",
+        "Ньюфаундленд",
+        "Немецкая овчарка",
+        "Норвич-терьер",
+        "Папильон",
+        "Пекинес",
+        "Померанский шпиц",
+        "Пшеничный терьер",
+        "Родезийский риджбек",
+        "Ризеншнауцер",
+        "Ротвейлер",
+        "Русская борзая",
+        "Самоед",
+        "Сенбернар",
+        "Сибирские хаски",
+        "Скотч терьер",
+        "Стаффордширский Бультерьер",
+        "Такса",
+        "Той пудель",
+        "Той терьер",
+        "Уиппет",
+        "Фараонова собака",
+        "Фокстерьер гладкошерстный",
+        "Фокстерьер жесткошерстный",
+        "Французский бульдог",
+        "Цвергшнауцер",
+        "Чау Чау",
+        "Черный русский терьер",
+        "Шарпей",
+        "Шелти",
+        "Шиба-ину",
+        "Ши-тцу",
+        "Эрдельтерьер",
+        "Южноафриканский бурбуль",
+        "Ягдтерьер",
+        "Японский хин"
+      ],
       breed: "",
       description: "",
       sex: "",
@@ -43,11 +141,11 @@ export default class EditLostDog extends Component {
       });
   }
 
-  onChangeBreed(e) {
-    this.setState({
-      breed: e.target.value
-    });
-  }
+  // onChangeBreed(e) {
+  //   this.setState({
+  //     breed: e.target.value
+  //   });
+  // }
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
@@ -87,9 +185,9 @@ export default class EditLostDog extends Component {
   onSubmit(e) {
     e.preventDefault();
     const dog = {
-      breed: this.state.breed,
+      breed: e.target.dogBreed.value,
       description: this.state.description,
-      sex: this.state.sex,
+      sex: e.target.dogSex.value,
       date: this.state.date,
       location: {
         lat: e.target.locationLat.value,
@@ -121,13 +219,14 @@ export default class EditLostDog extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Порода: </label>
-              <input
-                type="text"
-                required
-                className="form-control"
-                value={this.state.breed}
-                onChange={this.onChangeBreed}
-              />
+              <select  name="dogBreed" className="form-control">
+            <option value="">Выберите породу</option>
+            {this.state.breedOptions.map((breed, index) => (
+              <option key={index} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
             </div>
 
             <div className="form-group">
@@ -189,10 +288,7 @@ export default class EditLostDog extends Component {
             </div>
           </form>
 
-          <img
-            id="editImg"
-            src={"http://localhost:5000/api/images/" + this.state.image}
-          ></img>
+       
           <Map getLocation={this.getLocation} />
         </div>
       </>
