@@ -114,29 +114,42 @@ class FilterForm extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <select name="breed">
-            <option value="">Select a breed</option>
-            {this.state.breedOptions.map((breed, index) => (
-              <option key={index} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
+      <form className="long" onSubmit={this.handleSubmit}>
+        <div className="long form-row">
+          <div className=" form-group col-md-3">
+            <select name="breed" className="form-control">
+              <option value="">Выберите породу</option>
+              {this.state.breedOptions.map((breed, index) => (
+                <option key={index} value={breed}>
+                  {breed}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group col-md-1">
+            <label>Пол:</label>
+            <span> </span>
+            <label htmlFor="sexFilterMale">М</label>
+            <input type="radio" name="sex" id="sexFilterMale" value="М" />
+            <label htmlFor="sexFilterFemale">Ж</label>
+            <input type="radio" name="sex" id="sexFilterFemale" value="Ж" />
+          </div>
 
-          <label>Пол:</label>
-          <label htmlFor="sexFilterMale">М</label>
-          <input type="radio" name="sex" id="sexFilterMale" value="М" />
-          <label htmlFor="sexFilterFemale">Ж</label>
-          <input type="radio" name="sex" id="sexFilterFemale" value="Ж" />
-
-          <label htmlFor="dateFilter">Дата</label>
-          <input type="date" name="date" id="dateFilter" />
-
-          <button>Filter</button>
-        </form>
-      </div>
+          <div className="form-group col-md-3">
+            {/* <label htmlFor="dateFilter">Дата</label> */}
+            <input
+              placeholder="Дата"
+              type="date"
+              name="date"
+              id="dateFilter"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group col-md-1">
+            <button className="btn btn-info btn-filter">Фильтр</button>
+          </div>
+        </div>
+      </form>
     );
   }
 }

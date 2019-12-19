@@ -4,42 +4,31 @@ const FoundDogAdvertModel = require("../../models/FoundDogAdvertModel");
 const { Animal, Author } = require("../../models/schemas/AdvertSchema");
 const User = require("../../models/schemas/UserSchema");
 const router = express.Router();
+const PaginationHelper = require('../../utils/PaginationHelper')
 
 router.get("/", async (req, res) => {
-  res.json(await FoundDogAdvertModel.getAll());
+  const response = await FoundDogAdvertModel.getAll();
+  if (req.query.pages) {
+    const helper = new PaginationHelper(response, 3)
+    res.json({ all: helper.collection, pages: helper.paginated })
+  }
+  res.json(response);
 });
 
 router.post("/", async (req, res) => {
-  const user = await User.findById(req.body.id);
-  const { dogData, location } = req.body;
+  const user = await User.findById(req.body.advert.id);
+  const { dogData, location } = req.body.advert;
   user.addFound(
     dogData.breed,
     dogData.description,
     dogData.sex,
-    dogData.image,
+    req.body.image,
     user.name,
     user.email,
     user.phoneNumber,
     user.adress,
     location
   );
-  // const newAdvert = new FoundDogAdvertModel({
-  //   dogData: new Animal(
-  //     dogData.breed,
-  //     dogData.description,
-  //     dogData.sex,
-  //     dogData.image
-  //   ),
-  //   authorData: new Author(
-  //     authorData.name,
-  //     authorData.email,
-  //     authorData.phoneNumber,
-  //     authorData.adress
-  //   ),
-  //   createdAt: Date.now(),
-  //   location
-  // });
-
   res.json({ message: "Объявление добавлено" });
 });
 

@@ -11,13 +11,20 @@ import LostDogsList from "./components/LostDogsList/LostDogsList";
 import FoundDogsList from "./components/FoundDogsList/FoundDogsList";
 import FoundForm from "./components/FoundForm/FoundForm";
 import LostForm from "./components/LostForm/LostForm";
-import Account from "./components/account/Account";
-import EditFoundDog from "./components/account/EditFoundDog";
-import EditLostDog from "./components/account/EditLostDog";
+import Account from "./components/Account/Account";
+import EditFoundDog from "./components/Account/EditFoundDog";
+import EditLostDog from "./components/Account/EditLostDog";
 import FoundDogsMap from "./components/FoundDogsList/FoundDogsMap";
 import LostDogsMap from "./components/LostDogsList/LostDogsMap";
 import Advert from "./components/Advert/Advert";
+import FindMatchesLost from "./components/FindMatches/FindMatchesLost";
+import FindMatchesFound from "./components/FindMatches/FindMatchesFound";
 import "./App.css";
+import logo from "./logos/logo.png";
+import logoText from "./logos/logo-text.png";
+import jsLogo from "./logos/js.png";
+import reactLogo from "./logos/react.png";
+import reduxLogo from "./logos/redux.png";
 import { fetchSessionAC, clearMessageAC } from "./redux/actions";
 
 class App extends Component {
@@ -32,16 +39,26 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <div className="header">
-            <div className="logo">ИЩЕЙКА</div>
-            {this.props.loading ? (
-              <div className="loading-block">
-                <Loading />
-              </div>
-            ) : null}
-            <nav>
-              <Link to="/">Главная</Link>
+        {this.props.loading ? (
+          <div className="loading-block">
+            <Loading />
+          </div>
+        ) : null}
+        <div className="header">
+          <nav>
+            <div className="nav-logos">
+              <Link to="/">
+                <img className="logo" alt="logo" src={logo}></img>
+              </Link>
+              <Link to="/">
+                <img className="logo-text" alt="logo-text" src={logoText}></img>
+              </Link>
+            </div>
+            <div className="nav-main">
+              <Link to="/lost-dogs">Потерянные</Link>
+              <Link to="/found-dogs">Найденные</Link>
+            </div>
+            <div className="nav-auth">
               {this.props.logged ? (
                 <>
                   <Link to={"/account/" + this.props.user._id}>
@@ -55,20 +72,14 @@ class App extends Component {
                   <Link to="/login">Вход</Link>
                 </>
               )}
+            </div>
+          </nav>
+        </div>
 
-              <Link to="/lost-dogs">Потерялись</Link>
-              <Link to="/found-dogs">Нашлись</Link>
-              {this.props.logged ? (
-                <>
-                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
-                </>
-              ) : null}
-            </nav>
-          </div>
-          <Switch>
-            <Route exact path="/" render={() => <Home />} />
-            <Route exact path="/registration" component={Registration} />
+        <Switch>
+          <Route exact path="/" render={() => <Home />} />
+          <div className="App">
+            <Route exact path="/registration" render={() => <Registration />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/logout" render={() => <Logout />} />
             <Route exact path="/lost-dogs" render={() => <LostDogsList />} />
@@ -78,6 +89,16 @@ class App extends Component {
             <Route exact path="/account/:id" component={Account} />
             <Route exact path="/editFound/:id" component={EditFoundDog} />
             <Route exact path="/editLost/:id" component={EditLostDog} />
+            <Route
+              exact
+              path="/find-matches/lost/:id"
+              component={FindMatchesLost}
+            />
+            <Route
+              exact
+              path="/find-matches/found/:id"
+              component={FindMatchesFound}
+            />
             <Route
               exact
               path="/found-dogs/map"
@@ -95,7 +116,6 @@ class App extends Component {
             <Route
               exact
               path="/advert/found/:id"
-              ГлавнаяРегистрацияВходПотерялисьНашлись
               render={props => {
                 return <Advert {...props} advertType="found" />;
               }}
@@ -107,7 +127,29 @@ class App extends Component {
                 return <Advert {...props} advertType="lost" />;
               }}
             />
-          </Switch>
+          </div>
+        </Switch>
+        <div className="footer">
+          <div className="footer-text">Created by Raccon-Dogs 2019 ©</div>
+          <div className="footer-map">
+            <div className="footer-link">
+              <Link to="/">главная</Link>
+            </div>
+            <div className="footer-link">
+              <Link to="/account/:id">личный кабинет</Link>
+            </div>
+            <div className="footer-link">
+              <Link to="/lost-dogs">список потерянных собак</Link>
+            </div>
+            <div className="footer-link">
+              <Link to="/found-dogs">список найденных собак</Link>
+            </div>
+          </div>
+          <div className="footer-logos">
+            <img alt="js-logo" src={jsLogo}></img>
+            <img alt="react-logo" src={reactLogo}></img>
+            <img alt="redux-logo" src={reduxLogo}></img>
+          </div>
         </div>
       </Router>
     );

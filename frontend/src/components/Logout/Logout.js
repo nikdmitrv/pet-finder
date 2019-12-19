@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import Loading from "../Loading/Loading";
 import { requestLogoutAC } from "../../redux/actions";
 
 class Logout extends Component {
@@ -10,7 +11,11 @@ class Logout extends Component {
   }
 
   render() {
-    return <div>Logging out...</div>;
+    return (
+      <div className="loading-block">
+        <Loading />
+      </div>
+    );
   }
 }
 

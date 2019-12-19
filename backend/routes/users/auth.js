@@ -4,8 +4,6 @@ const router = express.Router();
 const User = require("../../models/schemas/UserSchema");
 
 router.get("/", async function(req, res) {
-  console.log(req.session);
-  console.log(req.cookies);
   if (req.session && req.session.logged) {
     const currentUser = await User.findOne({
       email: req.session.name

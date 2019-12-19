@@ -8,7 +8,8 @@ import {
   // REGISTER_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
-  LOGOUT_USER
+  LOGOUT_USER,
+  WARNING_MESSAGE
 } from "./types";
 
 export const clearMessageAC = () => {
@@ -75,15 +76,17 @@ export const addFoundDogAC = (dog, message) => {
   };
 };
 
-export const createFoundAdvertAC = advert => {
+export const createFoundAdvertAC = (advert, image) => {
   return async dispatch => {
     try {
+      console.log("request create:", advert, image);
+
       const request = {
         method: "POST",
         headers: {
           "content-type": "application/json"
         },
-        body: advert
+        body: JSON.stringify({ advert, image })
       };
       dispatch(loadingRequestAC());
       const response = await fetch("/api/found", request);
@@ -107,7 +110,7 @@ export const addLostDogAC = (dog, message) => {
   };
 };
 
-export const createLostAdvertAC = advert => {
+export const createLostAdvertAC = (advert, image) => {
   return async dispatch => {
     try {
       dispatch(loadingRequestAC());
@@ -116,7 +119,7 @@ export const createLostAdvertAC = advert => {
         headers: {
           "content-type": "application/json"
         },
-        body: advert
+        body: JSON.stringify({ advert, image })
       });
       if (response.status === 200) {
         const result = await response.json();
@@ -130,13 +133,6 @@ export const createLostAdvertAC = advert => {
   };
 };
 
-// export const registerUserAC = message => {
-//   return {
-//     type: REGISTER_USER,
-//     message
-//   };
-// };
-
 export const requestRegisterAC = user => {
   return async dispatch => {
     try {
@@ -148,7 +144,9 @@ export const requestRegisterAC = user => {
         },
         body: user
       });
+
       const result = await response.json();
+      console.log("register result:", result);
       if (response.status === 200) {
         dispatch(loginUserSuccessAC(result.user));
       } else {
@@ -215,16 +213,9 @@ export const fetchSessionAC = () => {
       });
       if (response.status === 200) {
         const result = await response.json();
-        console.log(response);
-
-        console.log("fetchSession result: ", result);
-        console.log("logginIn");
-
         dispatch(loginUserSuccessAC(result.currentUser));
       } else {
         console.log(response);
-        console.log("logginOut");
-
         dispatch(logoutUserAC());
       }
     } catch (error) {
@@ -255,5 +246,12 @@ export const requestLogoutAC = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const warningMessageAC = message => {
+  return {
+    type: WARNING_MESSAGE,
+    message
   };
 };

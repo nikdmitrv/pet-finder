@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { createFoundAdvertAC } from "../../redux/actions";
+import {
+  createFoundAdvertAC,
+  clearMessageAC,
+  warningMessageAC
+} from "../../redux/actions";
 import Maps from "../Maps/Maps";
 
 class FoundForm extends Component {
@@ -114,48 +118,47 @@ class FoundForm extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-
-    const {
-      dogBreed,
-      dogDescription,
-      dogSex,
-      locationLat,
-      locationLng
-    } = event.target;
-
-    const request = {
-      method: "POST",
-      body: this.state.imgData
-    };
-
-    if (this.state.imgData) {
-      fetch("/api/images/", request)
-        .then(response => response.json())
-        .then(data => {
-          const advert = JSON.stringify({
-            dogData: {
-              breed: dogBreed.value,
-              description: dogDescription.value,
-              sex: dogSex.value,
-              image: data.filename
-            },
-            location: { lat: locationLat.value, lng: locationLng.value },
-            id: this.props.user._id
-          });
-          this.props.createFoundAdvert(advert);
-        });
+    if (
+      event.target.locationLat.value === "" ||
+      event.target.locationLng.value === ""
+    ) {
+      this.props.warningMessage(
+        "Укажите на карте место, где вы нашли животное"
+      );
     } else {
-      const advert = JSON.stringify({
+      const {
+        dogBreed,
+        dogDescription,
+        dogSex,
+        locationLat,
+        locationLng
+      } = event.target;
+
+      const request = {
+        method: "POST",
+        body: this.state.imgData
+      };
+
+      const advert = {
         dogData: {
           breed: dogBreed.value,
           description: dogDescription.value,
-          sex: dogSex.value,
-          image: "placeholder.jpg"
+          sex: dogSex.value
         },
         location: { lat: locationLat.value, lng: locationLng.value },
         id: this.props.user._id
-      });
-      this.props.createFoundAdvert(advert);
+      };
+
+      if (this.state.imgData) {
+        fetch("/api/images/", request)
+          .then(response => response.json())
+          .then(data => this.props.createFoundAdvert(advert, data.filename))
+          .then(() => (window.location = "/account/" + this.props.user._id));
+      } else {
+        this.props
+          .createFoundAdvert(advert, "placeholder.jpg")
+          .then(() => (window.location = "/account/" + this.props.user._id));
+      }
     }
   };
 
@@ -167,14 +170,13 @@ class FoundForm extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.message}</div>
-        <form
-          id="found-form"
-          onSubmit={this.handleSubmit}
-          encType="multipart/form-data"
-        >
+        <form id="found-form" onSubmit={this.handleSubmit}>
           <label htmlFor="dog-breed">Порода:</label>
-          <select onChange={this.handleInput} name="dogBreed">
+          <select
+            onChange={this.handleInput}
+            name="dogBreed"
+            className="form-control"
+          >
             <option value="">Выберите породу</option>
             {this.state.breedOptions.map((breed, index) => (
               <option key={index} value={breed}>
@@ -182,36 +184,49 @@ class FoundForm extends Component {
               </option>
             ))}
           </select>
-
-          <label htmlFor="dog-description">Пол:</label>
-          <label htmlFor="sexFilterMale">М</label>
-          <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
-          <label htmlFor="sexFilterFemale">Ж</label>
-          <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
-
+          <div className="form-group">
+            <label htmlFor="dog-description">Пол:</label>
+            <label htmlFor="sexFilterMale">М</label>
+            <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
+            <label htmlFor="sexFilterFemale">Ж</label>
+            <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
+          </div>
           <label htmlFor="dog-description">Описание собаки:</label>
-          <textarea
-            onChange={this.handleInput}
-            name="dogDescription"
-            id="dog-description"
-            type="text"
-            style={{ resize: "none", height: "100px", width: "300px" }}
-            required
-          />
+          <div className="form-group">
+            <textarea
+              onChange={this.handleInput}
+              name="dogDescription"
+              id="dog-description"
+              type="text"
+              style={{ resize: "none", height: "100px", width: "300px" }}
+              required
+            />
+          </div>
 
           <input
+            className="form-control"
             id="location-input-lat"
             name="locationLat"
             hidden
-            required
+            value=""
           ></input>
-          <input id="location-input-lng" name="locationLng" hidden></input>
+          <input
+            id="location-input-lng"
+            name="locationLng"
+            hidden
+            value=""
+          ></input>
 
-          <button>Submit</button>
+          <button className="btn btn-primary">Отправить</button>
         </form>
         <form>
-          <input onChange={this.handleImageUpload} type="file" name="imgInput" />
+          <input
+            onChange={this.handleImageUpload}
+            type="file"
+            name="imgInput"
+          />
         </form>
+        <div className="error-message">{this.props.message}</div>
         <Maps getLocation={this.getLocation} />
       </div>
     );
@@ -227,7 +242,10 @@ function mapStateToProps(store) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createFoundAdvert: advert => dispatch(createFoundAdvertAC(advert))
+    createFoundAdvert: (advert, image) =>
+      dispatch(createFoundAdvertAC(advert, image)),
+    clearMessage: () => dispatch(clearMessageAC()),
+    warningMessage: message => dispatch(warningMessageAC(message))
   };
 };
 
