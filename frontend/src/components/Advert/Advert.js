@@ -38,7 +38,8 @@ class Advert extends Component {
         </div>
         </div>
         <div>
-        <img
+        
+        <img alt="dog"
           src={
             "http://localhost:5000/api/images/" +
             this.state.advertData.dogData.image

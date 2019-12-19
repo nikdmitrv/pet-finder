@@ -43,6 +43,7 @@ class LostDogsList extends Component {
       <div className="card cardList" key={advert._id}>
         {/* <div>Собака потеряна:</div> */}
         <img
+          alt="dog"
           src={"http://localhost:5000/api/images/" + advert.dogData.image}
         ></img>
         <div>Порода: {advert.dogData.breed}</div>

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import Map from "../Maps/Maps";
+import { clearMessageAC, warningMessageAC } from "../../redux/actions";
 
-export default class EditLostDog extends Component {
+class EditLostDog extends Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +13,6 @@ export default class EditLostDog extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
-    // this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -118,7 +119,6 @@ export default class EditLostDog extends Component {
       sex: "",
       date: "",
       image: ""
-      // location: "",
     };
   }
 
@@ -132,11 +132,9 @@ export default class EditLostDog extends Component {
           sex: response.data.dogData.sex,
           date: response.data.dogData.date,
           image: response.data.dogData.image
-          // location: response.data.location,
         });
-        //   console.log(this.state);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }
@@ -161,11 +159,6 @@ export default class EditLostDog extends Component {
       date: e.target.value
     });
   }
-  // onChangeLocation(e) {
-  //     this.setState({
-  //         location: e.target.value
-  //     })
-  // }
 
   deleteLostDog(id) {
     axios
@@ -184,26 +177,31 @@ export default class EditLostDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const dog = {
-      breed: e.target.dogBreed.value,
-      description: this.state.description,
-      sex: e.target.dogSex.value,
-      date: this.state.date,
-      location: {
-        lat: e.target.locationLat.value,
-        lng: e.target.locationLng.value
-      }
-    };
-    console.log(dog);
-
-    axios
-      .post(
-        "http://localhost:5000/api/lost/update/" + this.props.match.params.id,
-        dog
-      )
-      .then(res => console.log(res.data));
-
-    // window.location= '/'
+    if (
+      e.target.locationLat.value === "" ||
+      e.target.locationLng.value === ""
+    ) {
+      this.props.warningMessage(
+        "Укажите на карте место, где вы потеряли животное"
+      );
+    } else {
+      const dog = {
+        breed: this.state.breed,
+        description: this.state.description,
+        sex: this.state.sex,
+        date: this.state.date,
+        location: {
+          lat: e.target.locationLat.value,
+          lng: e.target.locationLng.value
+        }
+      };
+      axios
+        .post(
+          "http://localhost:5000/api/lost/update/" + this.props.match.params.id,
+          dog
+        )
+        .then(() => (window.location = "/account/" + this.props.user._id));
+    }
   }
 
   getLocation = location => {
@@ -219,14 +217,14 @@ export default class EditLostDog extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Порода: </label>
-              <select  name="dogBreed" className="form-control">
-            <option value="">Выберите породу</option>
-            {this.state.breedOptions.map((breed, index) => (
-              <option key={index} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
+              <select name="dogBreed" className="form-control">
+                <option value="">Выберите породу</option>
+                {this.state.breedOptions.map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group">
@@ -234,7 +232,12 @@ export default class EditLostDog extends Component {
               <label htmlFor="sexFilterMale">М</label>
               <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
               <label htmlFor="sexFilterFemale">Ж</label>
-              <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
+              <input
+                type="radio"
+                name="dogSex"
+                id="sexFilterFemale"
+                value="Ж"
+              />
             </div>
 
             <div className="form-group">
@@ -260,7 +263,6 @@ export default class EditLostDog extends Component {
               />
             </div>
 
-
             <input
               id="location-input-lat"
               name="locationLat"
@@ -270,28 +272,70 @@ export default class EditLostDog extends Component {
             <input id="location-input-lng" name="locationLng" hidden></input>
 
             <div className="form-group">
-              <button className="btn btn-primary btn-edit">Подтвреди изменения</button>
-
-
-
+              <input
+                type="submit"
+                value="Редактировать"
+                className="btn btn-primary"
+              />
             </div>
+
+            <input
+              id="location-input-lat"
+              name="locationLat"
+              hidden
+              value=""
+            ></input>
+            <input
+              id="location-input-lng"
+              name="locationLng"
+              hidden
+              value=""
+            ></input>
+
+            <img
+              alt="dog"
+              src={"http://localhost:5000/api/images/" + this.state.image}
+            ></img>
+
+            <div className="form-group">
+              <button className="btn btn-primary btn-edit">
+                Подтвредить изменения
+              </button>
+            </div>
+
             <div className="form-group">
               <button
-                className="btn btn-primary btn-edit"
                 type="button"
+                className="btn btn-primary btn-edit"
                 onClick={() => {
                   this.deleteLostDog(this.state._id);
                 }}
               >
                 Удалить объявление
-          </button>
+              </button>
             </div>
           </form>
-
-       
+          <div className="error-message">{this.props.message}</div>
           <Map getLocation={this.getLocation} />
         </div>
       </>
     );
   }
 }
+
+function mapStateToProps(store) {
+  return {
+    user: store.user,
+    loading: store.loading,
+    message: store.message
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    clearMessage: () => dispatch(clearMessageAC()),
+    warningMessage: message => dispatch(warningMessageAC(message))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditLostDog);
