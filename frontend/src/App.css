@@ -401,9 +401,16 @@ div {
 .matches-lost {
   align-self: flex-start;
 }
+
 .list-group{
   text-align: left;
 }
+
 .btn-maps {
   margin-left: 60%;
+}
+
+.aaa{
+  display: flex;
+  position: relative;
 }
