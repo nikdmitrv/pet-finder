@@ -74,7 +74,7 @@ class Registration extends Component {
               </div>
               <p>
                 <div className="error-message">{this.props.message}</div>
-                <button className="btn btn-primary mb-2" type="submit">
+                <button className="btn btn-info mb-2" type="submit">
                   Отправить
                 </button>
               </p>
