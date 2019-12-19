@@ -133,16 +133,16 @@ class App extends Component {
           <div className="footer-text">Created by Raccon-Dogs 2019 ©</div>
           <div className="footer-map">
             <div className="footer-link">
-              <Link>главная</Link>
+              <Link to="/">главная</Link>
             </div>
             <div className="footer-link">
-              <Link>личный кабинет</Link>
+              <Link to="/account/:id">личный кабинет</Link>
             </div>
             <div className="footer-link">
-              <Link>список потерянных собак</Link>
+              <Link to="/lost-dogs">список потерянных собак</Link>
             </div>
             <div className="footer-link">
-              <Link>список найденных собак</Link>
+              <Link to="/found-dogs">список найденных собак</Link>
             </div>
           </div>
           <div className="footer-logos">

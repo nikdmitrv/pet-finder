@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const User = require("../../models/schemas/UserSchema");
-const { Animal, Author } = require("../../models/schemas/AdvertSchema");
 const FoundDogAdvertModel = require("../../models/FoundDogAdvertModel");
 const LostDogAdvertModel = require("../../models/LostDogAdvertModel");
 
