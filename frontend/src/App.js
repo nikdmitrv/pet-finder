@@ -63,12 +63,6 @@ class App extends Component {
             <div className="nav-main">
               <Link to="/lost-dogs">Потерялись</Link>
               <Link to="/found-dogs">Нашлись</Link>
-              {this.props.logged ? (
-                <>
-                  <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
-                  <Link to="/add-found-dog">Добавить объявление о находке</Link>
-                </>
-              ) : null}
             </div>
             <div className="nav-auth">
               {this.props.logged ? (

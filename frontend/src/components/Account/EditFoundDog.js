@@ -114,10 +114,12 @@ class EditFoundDog extends Component {
 
   render() {
     return (
+      <>
+        
       <div>
-        <h3>Редактировать данные о собаке</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
+      <h3>Редактировать данные о собаке</h3>
+        <form  className="form-group"onSubmit={this.onSubmit}>
+          <div>
             <label>Порода: </label>
             <input
               type="text"
@@ -128,7 +130,7 @@ class EditFoundDog extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div>
             <label htmlFor="dog-description">Пол:</label>
             <label htmlFor="sexFilterMale">М</label>
             <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
@@ -136,13 +138,13 @@ class EditFoundDog extends Component {
             <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Описание: </label>
             <textarea
               type="text"
               required
               className="form-control"
-              style={{ resize: "none", height: "100px", width: "300px" }}
+              style={{ resize: "none", height: "100px", width: "400px" }}
               value={this.state.description}
               onChange={this.onChangeDescription}
             />
@@ -159,13 +161,6 @@ class EditFoundDog extends Component {
             />
           </div>
 
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Редактировать"
-              className="btn btn-primary"
-            />
-          </div>
 
           <input
             id="location-input-lat"
@@ -180,24 +175,28 @@ class EditFoundDog extends Component {
             value=""
           ></input>
 
-          <img
-            alt="dog"
-            src={"http://localhost:5000/api/images/" + this.state.image}
-          ></img>
-
+          <div className="form-group">
+            <button className="btn btn-primary btn-edit">Подтвредить изменения</button>           
+          </div>
+          
+          <div className="form-group">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-edit"
             type="button"
             onClick={() => {
               this.deleteFoundDog(this.state._id);
             }}
           >
-            Удалить
+             Удалить объявление
           </button>
+          </div>
         </form>
         <div className="error-message">{this.props.message}</div>
-        <Map getLocation={this.getLocation} />
+         <div className="mapwrap"> 
+        <Map className="mapwrap" getLocation={this.getLocation} />
+        </div>  
       </div>
+      </>
     );
   }
 }

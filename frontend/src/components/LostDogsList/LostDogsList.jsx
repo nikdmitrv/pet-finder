@@ -60,11 +60,11 @@ class LostDogsList extends Component {
   }
   render() {
     return (
-      <div>
+      <div >
         <FilterForm handleFiltration={this.handleFiltration} />
-        <button className="mapList btn btn-info">
+        <button className="btn btn-info btn-map">
           <Link to="/lost-dogs/map">Посмотреть на карте</Link>
-        </button>
+        </button >
         <ul>
           {this.state.allAdverts && this.state.filtered
             ? this.state.filtered.map(advert => this.renderList(advert))

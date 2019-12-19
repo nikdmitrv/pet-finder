@@ -5,55 +5,69 @@ import axios from "axios";
 import { loadingRequestAC, clearMessageAC } from "../../redux/actions";
 
 const FoundDog = props => (
-  <tr>
-    <td>{props.dog.dogData.breed}</td>
-    <td>{props.dog.dogData.sex}</td>
-    <td>
-      <span>
-        {props.dog.dogData.description.length > 30
-          ? props.dog.dogData.description.slice(0, 30) + "..."
-          : props.dog.dogData.description}
-      </span>
-    </td>
-    <td>
+  <div className="card cardList">
+    <div className="card-title">{props.dog.dogData.breed}</div>
+    <div className="card-title">{props.dog.dogData.sex}</div>
+    <div className="card-text">{props.dog.dogData.description.length > 30
+      ? props.dog.dogData.description.slice(0, 30) + "..."
+      : props.dog.dogData.description}</div>
+    <div >
       {
         <img
           alt="dog"
+          class="card-img"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
-      >
-    </td>
-    <Link to={"/editFound/" + props.dog._id}>Редактировать/Удалить</Link>
-    <div>
-      <Link to={"/find-matches/found/" + props.dog._id}>
-        Посмотреть совпадения
-      </Link>
+
     </div>
-  </tr>
+    <div>
+      <button className="btn btn-primary float">
+        <Link to={"/editFound/" + props.dog._id}>Редактировать/Удалить</Link>
+      </button>
+    </div>
+    {/* <br></br> */}
+    <div>
+      <button className="btn btn-primary">
+        <Link to={"/find-matches/found/" + props.dog._id}>
+          Посмотреть совпадения
+      </Link>
+      </button>
+    </div>
+  </div>
 );
+
+
 const LostDog = props => (
-  <div className="card">
-    <div>{props.dog.dogData.breed}</div>
-    <div>{props.dog.dogData.sex}</div>
-    <div>{props.dog.dogData.description.length > 30
-          ? props.dog.dogData.description.slice(0, 30) + "..."
-          : props.dog.dogData.description}</div>
-    <div>
+
+  <div className="card cardList">
+    <div className="card-title">{props.dog.dogData.breed}</div>
+    <div className="card-title">{props.dog.dogData.sex}</div>
+    <div className="card-text">{props.dog.dogData.description.length > 30
+      ? props.dog.dogData.description.slice(0, 30) + "..."
+      : props.dog.dogData.description}</div>
+    <div >
       {
         <img
-        class="card-img-top" 
           alt="dog"
+          class="card-img"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
-      >
+
     </div>
-    <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
     <div>
-      <Link to={"/find-matches/lost/" + props.dog._id}>
-        Посмотреть совпадения
+      <button className="btn btn-primary float">
+        <Link to={"/editLost/" + props.dog._id}>Редактировать/Удалить</Link>
+      </button>
+    </div>
+    {/* <br></br> */}
+    <div>
+      <button className="btn btn-primary">
+        <Link to={"/find-matches/lost/" + props.dog._id}>
+          Посмотреть совпадения
       </Link>
+      </button>
     </div>
   </div>
 );
@@ -90,29 +104,28 @@ class Account extends Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.state.name}</h2>
-        <h2>{this.state.email}</h2>
-        <h2>Ваши объявления о находке</h2>
-        <div className="card">
-          <div>{this.foundDogList()}</div>
-          <div>Порода:</div>
-          <div>Пол:</div>
-          <div>Описание:</div>
-        </div>
-        <h2>Ваши объявления о пропаже</h2>
-        <table>
-          <tr>
-            <th>Порода</th>
-            <th>Пол</th>
-            <th>Описание</th>
-          </tr>
-          <tbody>{this.lostDogList()}</tbody>
-        </table>
-        <p>
+      <div >
+        <h2 id="accH2">Добро пожаловать, {this.state.name}!</h2>
+        {/* <h2>Ваш email: {this.state.email}</h2> */}
+        <button className="btn btn-info btnAcc">
           <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
+        </button>
+        <button className="btn btn-info btnAcc">
           <Link to="/add-found-dog">Добавить объявление о находке</Link>
-        </p>
+        </button>
+        <h3>Ваши объявления о находке:</h3>
+        {this.state.myFound.length > 0 
+        ? <div className="sds">{this.foundDogList()}</div>
+          : <div>У вас нет объявлений о находке</div>}
+
+
+
+
+        <h3>Ваши объявления о пропаже:</h3>
+        {this.state.myLost.length > 0 
+        ?
+          <div className="sds">{this.lostDogList()}</div>
+        : <div>У вас нет объявлений о пропаже</div>}
       </div>
     );
   }
