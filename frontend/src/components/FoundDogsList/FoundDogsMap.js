@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 class FoundDogsMap extends Component {
   constructor(props) {
     super(props);
@@ -94,16 +94,18 @@ class FoundDogsMap extends Component {
                       ? dog.dogData.description.slice(0, 30) + "..."
                       : dog.dogData.description}
                   </span>
-                  <Link to={"/advert/found/" + dog._id}>Перейти к объявлению</Link>
+                  <Link to={"/advert/found/" + dog._id}>
+                    Перейти к объявлению
+                  </Link>
                 </li>
               ))}
           </ol>
         </div>
-      </div >
+      </div>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU"
+  apiKey: process.env.REACT_APP_API_KEY
 })(FoundDogsMap);

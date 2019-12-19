@@ -103,5 +103,5 @@ class FoundDogsMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU"
+  apiKey: process.env.REACT_APP_API_KEY
 })(FoundDogsMap);
