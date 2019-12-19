@@ -116,10 +116,11 @@ export default class EditFoundDog extends Component {
   render() {
     return (
       <>
-        <h3>Редактировать данные о собаке</h3>
-      <div className="editFound">
-        <form  onSubmit={this.onSubmit}>
-          <div className="form-group">
+        
+      <div>
+      <h3>Редактировать данные о собаке</h3>
+        <form  className="form-group"onSubmit={this.onSubmit}>
+          <div>
             <label>Порода: </label>
             <input
               type="text"
@@ -130,7 +131,7 @@ export default class EditFoundDog extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div>
             <label htmlFor="dog-description">Пол:</label>
             <label htmlFor="sexFilterMale">М</label>
             <input type="radio" name="dogSex" id="sexFilterMale" value="М" />
@@ -138,7 +139,7 @@ export default class EditFoundDog extends Component {
             <input type="radio" name="dogSex" id="sexFilterFemale" value="Ж" />
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Описание: </label>
             <textarea
               type="text"
@@ -189,8 +190,9 @@ export default class EditFoundDog extends Component {
           </div>
         </form>
 
-           
-        <Map getLocation={this.getLocation} />
+         <div className="mapwrap"> 
+        <Map className="mapwrap" getLocation={this.getLocation} />
+        </div>  
       </div>
       </>
     );

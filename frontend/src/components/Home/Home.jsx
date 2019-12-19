@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Slider from 'infinite-react-carousel';
 
 import {
@@ -23,7 +24,7 @@ class Home extends Component {
     };
   }
 
-  renderList(dog) {
+  renderFoundList(dog) {
     return (
 
       <div className="listHome" key={dog._id}>
@@ -37,11 +38,37 @@ class Home extends Component {
             ? dog.dogData.description.slice(0, 30) + "..."
             : dog.dogData.description}</p>
           <span key={3}>{dog.dogData.sex}</span>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          {/* <Link to={"/advert/found/" + dog._id}>Перейти к объявлению</Link> */}
+          <a href={"/advert/found/" + dog._id} class="btn btn-primary">Перейти к объявлению</a>
         </div>
       </div>
     );
   }
+
+
+  renderLostList(dog) {
+    return (
+
+      <div className="listHome" key={dog._id}>
+        <div className="card">
+          <img
+            className="card-img-top" alt="..."
+            src={"http://localhost:5000/api/images/" + dog.dogData.image}
+          ></img>
+          <h5 className="card-title" key={1}>{dog.dogData.breed}</h5>
+          <p class="card-text">{dog.dogData.description.length > 30
+            ? dog.dogData.description.slice(0, 30) + "..."
+            : dog.dogData.description}</p>
+          <span key={3}>{dog.dogData.sex}</span>
+          {/* <Link to={"/advert/lost/" + dog._id}>Перейти к объявлению</Link> */}
+          <a href={"/advert/lost/" + dog._id} class="btn btn-primary">Перейти к объявлению</a>
+        </div>
+      </div>
+    );
+  }
+
+
+
 
   componentDidMount = async () => {
     try {
@@ -104,7 +131,7 @@ class Home extends Component {
 
             <Slider {...settings}>
               {this.state.lostDogs.length > 0
-                ? this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))
+                ? this.state.lostDogs.slice(0, 6).map(e => this.renderLostList(e))
                 : <div></div>}
             </Slider>
 
@@ -112,7 +139,7 @@ class Home extends Component {
 
             <Slider {...settings}>
               {this.state.foundDogs.length > 0
-                ? this.state.foundDogs.slice(0, 6).map(e => this.renderList(e))
+                ? this.state.foundDogs.slice(0, 6).map(e => this.renderFoundList(e))
                 : <div></div>}
 
             </Slider>
