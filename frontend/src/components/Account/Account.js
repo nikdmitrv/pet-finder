@@ -14,8 +14,8 @@ const FoundDog = props => (
     <div >
       {
         <img
+          alt="dog"
           class="card-img"
-          alt="dog image"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
@@ -49,8 +49,8 @@ const LostDog = props => (
     <div >
       {
         <img
+          alt="dog"
           class="card-img"
-          alt="dog image"
           src={"http://localhost:5000/api/images/" + props.dog.dogData.image}
         />
       }
