@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Slider from 'infinite-react-carousel';
 
 import {
   fetchFoundDogsAC,
@@ -7,6 +8,11 @@ import {
   loadingRequestAC,
   clearMessageAC
 } from "../../redux/actions";
+
+
+
+ 
+
 
 class Home extends Component {
   constructor(props) {
@@ -19,18 +25,21 @@ class Home extends Component {
 
   renderList(dog) {
     return (
-      <li key={dog._id}>
-        <span>{dog.dogData.breed}</span>
-        <span>{dog.dogData.sex}</span>
-        <span>
-          {dog.dogData.description.length > 30
-            ? dog.dogData.description.slice(0, 30) + "..."
-            : dog.dogData.description}
-        </span>
+      
+      <div className="listHome" key={dog._id}>
+        <div className="card">
         <img
+          className="card-img-top" alt="..."
           src={"http://localhost:5000/api/images/" + dog.dogData.image}
         ></img>
-      </li>
+        <h5 className="card-title" key={1}>{dog.dogData.breed}</h5>
+        <p class="card-text">{dog.dogData.description.length > 30
+            ? dog.dogData.description.slice(0, 30) + "..."
+            : dog.dogData.description}</p>
+        <span key={3}>{dog.dogData.sex}</span>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+      </div>
     );
   }
 
@@ -63,20 +72,50 @@ class Home extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <p>Последние потеряные =(</p>
-        <ul>
-          {this.state.lostDogs &&
-            this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))}
-        </ul>
+    const settings =  {
+      dots: true,
+      slidesPerRow: 3,
+      wheelScroll: 1,
+      // autoplay: true,
+      // duration: 300,
+      shift: 30,
+      centerMode: true,
+       arrowsScroll: 3,
+      //  centerPadding: 130,
+      
+    };
 
-        <p>Последние найденые =)</p>
-        <ul>
-          {this.state.foundDogs &&
-            this.state.foundDogs.slice(0, 6).map(e => this.renderList(e))}
-        </ul>
+    
+    
+    return (
+      <>
+      <div className="man">
+        <h1 className="h1">Поиск потерянных животных</h1>
+        <p className="p1">Помогите питомцу вернуться домой</p>
+        <button className="b1 btn btn-primary"><a href="/registration">Подать объявление</a></button>
       </div>
+      <div className="App">
+      <div className="homeMain">
+      
+        <h2>Последние потеряные </h2>
+
+          <Slider {...settings}>
+        {this.state.lostDogs.length > 0
+            ? this.state.lostDogs.slice(0, 6).map(e => this.renderList(e))
+            : <div></div>}
+            </Slider>
+            
+        <h2>Последние найденые</h2>
+       
+        <Slider {...settings}>
+        {this.state.foundDogs.length > 0
+            ? this.state.foundDogs.slice(0, 6).map(e => this.renderList(e))
+            : <div></div>}
+
+        </Slider>
+      </div>
+      </div>
+      </>
     );
   }
 }

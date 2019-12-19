@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { requestLoginAC } from "../../redux/actions";
+import { requestLoginAC, clearMessageAC } from "../../redux/actions";
 
 class Login extends Component {
   state = {
     message: ""
   };
 
+  componentDidMount() {
+    this.props.clearMessage();
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    window.location = "/account/" + this.props.user._id;
+    if (this.props.user.email && this.props.message === "") {
+      window.location = "/account/" + this.props.user._id;
+    }
   }
 
   handleSubmit = event => {
@@ -22,13 +28,11 @@ class Login extends Component {
     this.props.loginUser(user);
   };
   render() {
-    console.log("Login props:", this.props);
-
     return (
       <>
        <div class="reg">
         <div className="form-group row formReg">
-          <form onSubmit={this.handleSubmit}>
+          <form className="formreg" onSubmit={this.handleSubmit}>
         <h1>Вход в профиль</h1>
           <div className="form-group mx-sm-3 mb-2">
               <label>Email</label>
@@ -41,13 +45,12 @@ class Login extends Component {
             <div className="form-group mx-sm-3 mb-2">
               <button className="btn btn-primary mb-2" type="submit">Отправить</button>
             </div>
-            <p>{this.state.message}</p>
+            <p>{this.props.message}</p>
           </form>
         </div>
         
         </div>
-          <div className="footer">
-        </div>
+         
       </>
     );
   }
@@ -62,7 +65,8 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginUser: user => dispatch(requestLoginAC(user))
+    loginUser: user => dispatch(requestLoginAC(user)),
+    clearMessage: () => dispatch(clearMessageAC())
   };
 }
 

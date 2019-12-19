@@ -29,22 +29,6 @@ router.post("/", async (req, res) => {
     user.adress,
     location
   );
-  // const newAdvert = new FoundDogAdvertModel({
-  //   dogData: new Animal(
-  //     dogData.breed,
-  //     dogData.description,
-  //     dogData.sex,
-  //     dogData.image
-  //   ),
-  //   authorData: new Author(
-  //     authorData.name,
-  //     authorData.email,
-  //     authorData.phoneNumber,
-  //     authorData.adress
-  //   ),
-  //   createdAt: Date.now(),
-  //   location
-  // });
 
   res.json({ message: "Объявление добавлено" });
 });

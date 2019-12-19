@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { requestRegisterAC } from "../../redux/actions";
+import { requestRegisterAC, clearMessageAC } from "../../redux/actions";
 
 class Registration extends Component {
   state = {
     message: ""
   };
+
+  componentDidMount() {
+    this.props.clearMessage();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.user.email && this.props.message === "") {
+      window.location = "/account/" + this.props.user._id;
+    }
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -19,16 +29,17 @@ class Registration extends Component {
         email: event.target.email.value
       });
       this.props.registerUser(user);
-      window.location = "/account/" + this.props.user._id;
     }
   };
   render() {
+    console.log("Registration props:", this.props);
     return (
       <>
-        <div class="reg">
+        <div className="reg">
         <div className="form-group row formReg">
 
-          <form onSubmit={this.handleSubmit}>
+          <form className="formreg"
+          onSubmit={this.handleSubmit}>
         <h1 id="h1-form">Форма регистрации</h1>
             <div className="form-group mx-sm-3 mb-2">
               <label>Имя</label>
@@ -54,9 +65,9 @@ class Registration extends Component {
           </form>
           </div>
           
-          </div>
-          <div className="footer">
+         
         </div>
+     
       </>
     );
   }
@@ -71,7 +82,8 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    registerUser: user => dispatch(requestRegisterAC(user))
+    registerUser: user => dispatch(requestRegisterAC(user)),
+    clearMessage: () => dispatch(clearMessageAC())
   };
 }
 
