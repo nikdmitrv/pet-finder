@@ -114,10 +114,10 @@ class FilterForm extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="long">
+        <form className="long" onSubmit={this.handleSubmit}>
           <select name="breed">
-            <option value="">Select a breed</option>
+            <option value="">Выберите породу</option>
             {this.state.breedOptions.map((breed, index) => (
               <option key={index} value={breed}>
                 {breed}
@@ -134,7 +134,8 @@ class FilterForm extends Component {
           <label htmlFor="dateFilter">Дата</label>
           <input type="date" name="date" id="dateFilter" />
 
-          <button>Filter</button>
+          <button className="btn btn-info btn-filter">Фильтр</button>
+          
         </form>
       </div>
     );
