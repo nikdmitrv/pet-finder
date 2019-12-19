@@ -38,8 +38,8 @@ class Home extends Component {
             ? dog.dogData.description.slice(0, 30) + "..."
             : dog.dogData.description}</p>
           <span key={3}>{dog.dogData.sex}</span>
-          {/* <Link to={"/advert/found/" + dog._id}>Перейти к объявлению</Link> */}
-          <a href={"/advert/found/" + dog._id} class="btn btn-primary">Перейти к объявлению</a>
+          <Link to={"/advert/found/" + dog._id} class="btn btn-primary">Перейти к объявлению</Link>
+         
         </div>
       </div>
     );
@@ -60,8 +60,8 @@ class Home extends Component {
             ? dog.dogData.description.slice(0, 30) + "..."
             : dog.dogData.description}</p>
           <span key={3}>{dog.dogData.sex}</span>
-          {/* <Link to={"/advert/lost/" + dog._id}>Перейти к объявлению</Link> */}
-          <a href={"/advert/lost/" + dog._id} class="btn btn-primary">Перейти к объявлению</a>
+          <Link to={"/advert/lost/" + dog._id} class="btn btn-primary">Перейти к объявлению</Link>
+          
         </div>
       </div>
     );
