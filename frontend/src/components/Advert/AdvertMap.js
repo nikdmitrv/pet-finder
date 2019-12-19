@@ -8,8 +8,8 @@ class AdvertMap extends Component {
 
   render() {
     return (
-      <div className="maps-app">
-        <div className="map-container">
+      <div className="map" style={{ height: "500px", width: "1400px", padding: "30px" }}>
+        
           <Map
             google={this.props.google}
             zoom={10}
@@ -19,7 +19,7 @@ class AdvertMap extends Component {
           >
             {this.renderMarkers(this.props.location)}
           </Map>
-        </div>
+        
       </div>
     );
   }

@@ -371,6 +371,11 @@ img {
   src: url("../src/OpenSans-Bold.ttf");
 }
 
+.adv {
+  width: 50%;
+  
+}
+
 h1,
 h2,
 h3,
