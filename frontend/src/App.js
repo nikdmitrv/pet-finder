@@ -50,12 +50,12 @@ class App extends Component {
             </Link>
             <Link to="/lost-dogs">Потерялись</Link>
             <Link to="/found-dogs">Нашлись</Link>
-            {this.props.logged ? (
+            {/* {this.props.logged ? (
               <>
                 <Link to="/add-lost-dog">Добавить объявление о пропаже</Link>
                 <Link to="/add-found-dog">Добавить объявление о находке</Link>
               </>
-            ) : null}
+            ) : null} */}
             {this.props.logged ? (
               <>
                 <Link

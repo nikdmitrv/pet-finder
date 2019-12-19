@@ -308,3 +308,20 @@ img {
   margin-left: 15%;
   margin-top: 0.3%;
 }
+@font-face {
+  font-family: "OpenSans";
+  src:url("../src/OpenSans-Regular.ttf")
+}
+
+@font-face {
+  font-family: "OpenSansBold";
+  src:url("../src/OpenSans-Bold.ttf")
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "OpenSans";
+}
+
+a, span, div {
+  font-family: "OpenSans";
+}

@@ -115,16 +115,17 @@ class Account extends Component {
         </button>
         <h3>Ваши объявления о находке:</h3>
         {this.state.myFound.length > 0 
-        ? <div>{this.foundDogList()}</div>
+        ? <div className="sds">{this.foundDogList()}</div>
           : <div>У вас нет объявлений о находке</div>}
 
 
 
 
         <h3>Ваши объявления о пропаже:</h3>
-        <div>
+        {this.state.myLost.length > 0 
+        ?
           <div className="sds">{this.lostDogList()}</div>
-        </div>
+        : <div>У вас нет объявлений о пропаже</div>}
       </div>
     );
   }
