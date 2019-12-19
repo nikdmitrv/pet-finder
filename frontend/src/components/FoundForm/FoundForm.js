@@ -170,6 +170,8 @@ class FoundForm extends Component {
   render() {
     return (
       <div>
+         <h1>Добавить объявление о находке</h1>
+        <br></br>
         <form id="found-form" onSubmit={this.handleSubmit}>
           <label htmlFor="dog-breed">Порода:</label>
           <select

@@ -126,14 +126,6 @@ class FilterForm extends Component {
               ))}
             </select>
           </div>
-          <div className="form-group col-md-1">
-            <label>Пол:</label>
-            <span> </span>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="sex" id="sexFilterMale" value="М" />
-            <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="sex" id="sexFilterFemale" value="Ж" />
-          </div>
 
           <div className="form-group col-md-3">
             {/* <label htmlFor="dateFilter">Дата</label> */}
@@ -145,6 +137,13 @@ class FilterForm extends Component {
               className="form-control"
             />
           </div>
+          <div className="btn-group btn-group-toggle btn-group-toggle" data-toggle="buttons">
+          <input type="radio" value="Ж" id="sexFilterFemale" name="sex"/>
+            <label htmlFor="sexFilterFemale">Ж</label>
+            
+            <input value="М" type="radio" id="sexFilterMale" name="sex"/>
+            <label htmlFor="sexFilterMale">М</label>
+          </div>
           <div className="form-group col-md-1">
             <button className="btn btn-info btn-filter">Фильтр</button>
           </div>
@@ -155,3 +154,15 @@ class FilterForm extends Component {
 }
 
 export default FilterForm;
+
+{/* <div className="btn-group btn-group-toggle btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" checked> Active
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option2"> Radio
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option3"> Radio
+  </label>
+</div> */}

@@ -170,6 +170,8 @@ class LostForm extends Component {
   render() {
     return (
       <div>
+        <h1>Добавить объявление о пропаже</h1>
+        <br></br>
         <form className="form-group" onSubmit={this.handleSubmit}>
           <label htmlFor="dog-breed">Порода:</label>
           <select

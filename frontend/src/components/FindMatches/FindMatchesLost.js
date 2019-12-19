@@ -26,7 +26,8 @@ class FindMatchesLost extends Component {
   renderGuesses(advert) {
     const date = new Date(advert.createdAt);
     return (
-      <div key={advert._id}>
+      <div  className="card cardList" key={advert._id}>
+        
         <div>Собака найдена:</div>
         <img
           alt="dog"
@@ -34,11 +35,11 @@ class FindMatchesLost extends Component {
         ></img>
         <div>{advert.dogData.breed}</div>
         <div>{advert.dogData.sex}</div>
-        <div>
+        {/* <div>
           {advert.dogData.description.length > 30
             ? advert.dogData.description.slice(0, 30) + "..."
             : advert.dogData.description}
-        </div>
+        </div> */}
         <div>Нашедший:</div>
         <div>{advert.authorData.name}</div>
         <div>{advert.authorData.email}</div>
@@ -46,7 +47,9 @@ class FindMatchesLost extends Component {
         <div>{advert.authorData.address}</div>
         <div>Дата объявления:</div>
         <div>{date.toLocaleDateString("ru")}</div>
-        <Link to={"/advert/found/" + advert._id}>Перейти к объявлению</Link>
+        <Link className="btn btn-primary" to={"/advert/found/" + advert._id}>
+          Перейти к объявлению
+        </Link>
       </div>
     );
   }
