@@ -116,7 +116,7 @@ class Home extends Component {
       wheelScroll: 1,
       // autoplay: true,
       // duration: 300,
-      shift: 30,
+      // shift: 40,
       centerMode: true,
       arrowsScroll: 3
       //  centerPadding: 130,

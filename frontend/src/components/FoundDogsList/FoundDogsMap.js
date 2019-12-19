@@ -66,6 +66,7 @@ class FoundDogsMap extends Component {
   render() {
     return (
       <div className="maps-app">
+        
         <div
           className="map-container"
           style={{ position: "relative", height: "400px" }}
@@ -83,18 +84,15 @@ class FoundDogsMap extends Component {
           </Map>
         </div>
         <div className="maps-list-container">
-          <ol>
+        <h1>Список найденных собак</h1>
+          <ol className="list-group">
             {this.state.list &&
               this.state.list.map(dog => (
-                <li key={dog._id}>
-                  <span>{dog.dogData.breed} </span>
-                  <span>{dog.dogData.sex} </span>
-                  <span>
-                    {dog.dogData.description.length > 30
-                      ? dog.dogData.description.slice(0, 30) + "..."
-                      : dog.dogData.description}
-                  </span>
-                  <Link to={"/advert/found/" + dog._id}>Перейти к объявлению</Link>
+                <li className="list-group-item" key={dog._id}>
+                  <span><b>Порода:</b> "{dog.dogData.breed}" </span>
+                  
+                  <span><b>Пол:</b>: "{dog.dogData.sex}" </span>
+                  <Link className="btn-maps btn btn-info" to={"/advert/found/" + dog._id}>Перейти к объявлению</Link>
                 </li>
               ))}
           </ol>
