@@ -407,3 +407,11 @@ div {
 .btn-maps {
   margin-left: 60%;
 }
+.info-advert{
+  border-radius: 20px;
+  box-shadow: 0 8px 22px 12px rgba(0, 0, 0, 0.2);
+}
+.back{
+ margin:50px;
+width: 200px;
+}
