@@ -21,6 +21,7 @@ class EditFoundDog extends Component {
       sex: "",
       date: "",
       image: "",
+      location: {},
       breedOptions: [
         "Акита-ину",
         "Алабай",
@@ -119,20 +120,20 @@ class EditFoundDog extends Component {
         "Ягдтерьер",
         "Японский хин"
       ]
-
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/found/" + this.props.match.params.id)
+      .get("/api/found/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           breed: response.data.dogData.breed,
           description: response.data.dogData.description,
           sex: response.data.dogData.sex,
           date: response.data.dogData.date,
-          image: response.data.dogData.image
+          image: response.data.dogData.image,
+          location: response.data.location
         });
       })
       .catch(function(error) {
@@ -163,40 +164,37 @@ class EditFoundDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    
-      const dog = {
-        breed: e.target.dogBreed.value,
-        description: this.state.description,
-        sex: e.target.dogSex.value,
-        date: this.state.date,
-        location: {
-          lat: e.target.locationLat.value,
-          lng: e.target.locationLng.value
-        }
-      };
-      axios
-        .post(
-          "http://localhost:5000/api/found/update/" +
-            this.props.match.params.id,
-          dog
-        )
-        .then(() => (window.location = "/account/" + this.props.user._id));
-    
+
+    const dog = {
+      breed: e.target.dogBreed.value,
+      description: this.state.description,
+      sex: e.target.dogSex.value,
+      date: this.state.date,
+      location: {
+        lat: e.target.locationLat.value,
+        lng: e.target.locationLng.value
+      }
+    };
+    axios
+      .post("/api/found/update/" + this.props.match.params.id, dog)
+      .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   deleteFoundDog(id) {
     axios
-      .delete("http://localhost:5000/api/found/" + this.props.match.params.id)
+      .delete("/api/found/" + this.props.match.params.id)
       .then(response => {
         console.log(response.data);
       })
 
-    .then (() => this.setState({
-      breed: "",
-      description: "",
-      sex: "",
-    }))
-    .then(() => (window.location = "/account/" + this.props.user._id));
+      .then(() =>
+        this.setState({
+          breed: "",
+          description: "",
+          sex: ""
+        })
+      )
+      .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   getLocation = location => {
@@ -205,81 +203,87 @@ class EditFoundDog extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <>
-        
-      <div>
-      <h3>Редактировать данные о собаке</h3>
-        <form  className="form-group"onSubmit={this.onSubmit}>
-          <div>
-            <label>Порода: </label>
-            <select
-            name="dogBreed"
-            className="form-control"
-          >
-            <option value="">{this.state.breed}</option>
-            {this.state.breedOptions.map((breed, index) => (
-              <option key={index} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-          </div>
+        <div>
+          <h3>Редактировать данные о собаке</h3>
+          <form className="form-group" onSubmit={this.onSubmit}>
+            <div>
+              <label>Порода: </label>
+              <select name="dogBreed" className="form-control">
+                <option value={this.state.breed}>{this.state.breed}</option>
+                {this.state.breedOptions.map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="" data-toggle="buttons">
-          <input type="radio" value="Ж" id="sexFilterFemale" name="dogSex" checked/>
-            <label htmlFor="sexFilterFemale">Ж</label>
-            
-            <input value="М" type="radio" id="sexFilterMale" name="dogSex"/>
-            <label htmlFor="sexFilterMale">М</label>
-          </div>
+            <div className="" data-toggle="buttons">
+              <p style={{ marginTop: "10px", marginBottom: "2px" }}>Пол:</p>
+              <input
+                type="radio"
+                value="Ж"
+                id="sexFilterFemale"
+                name="dogSex"
+              />
+              <label htmlFor="sexFilterFemale">Ж</label>
 
-          <div>
-            <label>Описание: </label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              style={{ resize: "none", height: "100px", width: "400px" }}
-              value={this.state.description}
-              onChange={this.onChangeDescription}
-            />
-          </div>
+              <input value="М" type="radio" id="sexFilterMale" name="dogSex" />
+              <label htmlFor="sexFilterMale">М</label>
+            </div>
 
-          <input
-            id="location-input-lat"
-            name="locationLat"
-            hidden
-            value=""
-          ></input>
-          <input
-            id="location-input-lng"
-            name="locationLng"
-            hidden
-            value=""
-          ></input>
+            <div>
+              <label>Описание: </label>
+              <textarea
+                type="text"
+                required
+                className="form-control"
+                style={{ resize: "none", height: "100px", width: "400px" }}
+                value={this.state.description}
+                onChange={this.onChangeDescription}
+              />
+            </div>
 
-          <div className="form-group">
-            <button className="btn btn-primary btn-edit">Подтвредить изменения</button>           
+            <input
+              id="location-input-lat"
+              name="locationLat"
+              hidden
+              value={this.state.location.lat}
+            ></input>
+            <input
+              id="location-input-lng"
+              name="locationLng"
+              hidden
+              value={this.state.location.lng}
+            ></input>
+
+            <div className="form-group">
+              <button className="btn btn-primary btn-edit">
+                Подтвредить изменения
+              </button>
+            </div>
+
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-edit"
+                type="button"
+                onClick={() => {
+                  this.deleteFoundDog(this.state._id);
+                }}
+              >
+                Удалить объявление
+              </button>
+            </div>
+          </form>
+          <div className="error-message">{this.props.message}</div>
+          <div className="mapwrap">
+            <Map className="mapwrap" getLocation={this.getLocation} />
           </div>
-          
-          <div className="form-group">
-          <button
-            className="btn btn-primary btn-edit"
-            type="button"
-            onClick={() => {
-              this.deleteFoundDog(this.state._id);
-            }}
-          >
-             Удалить объявление
-          </button>
-          </div>
-        </form>
-        <div className="error-message">{this.props.message}</div>
-         {/* <div className="mapwrap"> 
-        <Map className="mapwrap" getLocation={this.getLocation} />
-        </div>   */}
-      </div>
+        </div>
       </>
     );
   }

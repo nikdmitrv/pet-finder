@@ -118,20 +118,22 @@ class EditLostDog extends Component {
       description: "",
       sex: "",
       date: "",
-      image: ""
+      image: "",
+      location: ""
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/lost/" + this.props.match.params.id)
+      .get("/api/lost/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           breed: response.data.dogData.breed,
           description: response.data.dogData.description,
           sex: response.data.dogData.sex,
           date: response.data.dogData.date,
-          image: response.data.dogData.image
+          image: response.data.dogData.image,
+          location: response.data.location
         });
       })
       .catch(function(error) {
@@ -161,11 +163,9 @@ class EditLostDog extends Component {
   }
 
   deleteLostDog(id) {
-    axios
-      .delete("http://localhost:5000/api/lost/" + this.props.match.params.id)
-      .then(response => {
-        console.log(response.data);
-      });
+    axios.delete("/api/lost/" + this.props.match.params.id).then(response => {
+      console.log(response.data);
+    });
 
     this.setState({
       breed: "",
@@ -177,24 +177,20 @@ class EditLostDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-  
-      const dog = {
-        breed: e.target.dogBreed.value,
-        description: this.state.description,
-        sex: e.target.dogSex.value,
-        date: this.state.date,
-        location: {
-          lat: e.target.locationLat.value,
-          lng: e.target.locationLng.value
-        }
-      };
-      axios
-        .post(
-          "http://localhost:5000/api/lost/update/" + this.props.match.params.id,
-          dog
-        )
-        .then(() => (window.location = "/account/" + this.props.user._id));
-    
+
+    const dog = {
+      breed: e.target.dogBreed.value,
+      description: this.state.description,
+      sex: e.target.dogSex.value,
+      date: this.state.date,
+      location: {
+        lat: e.target.locationLat.value,
+        lng: e.target.locationLng.value
+      }
+    };
+    axios
+      .post("/api/lost/update/" + this.props.match.params.id, dog)
+      .then(() => (window.location = "/account/" + this.props.user._id));
   }
 
   getLocation = location => {
@@ -205,24 +201,20 @@ class EditLostDog extends Component {
   render() {
     return (
       <>
-        
-      <div>
-      <h3>Редактировать данные о собаке</h3>
-        <form  className="form-group"onSubmit={this.onSubmit}>
-          <div>
-            <label>Порода: </label>
-            <select
-            name="dogBreed"
-            className="form-control"
-          >
-            <option value="">{this.state.breed}</option>
-            {this.state.breedOptions.map((breed, index) => (
-              <option key={index} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-          </div>
+        <div>
+          <h3>Редактировать данные о собаке</h3>
+          <form className="form-group" onSubmit={this.onSubmit}>
+            <div>
+              <label>Порода: </label>
+              <select name="dogBreed" className="form-control">
+                <option value="">{this.state.breed}</option>
+                {this.state.breedOptions.map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
 
           <div className="" data-toggle="buttons">
           <input type="radio" value="Ж" id="sexFilterFemale" name="dogSex"/>
@@ -232,52 +224,54 @@ class EditLostDog extends Component {
             <label htmlFor="sexFilterMale">М</label>
           </div>
 
-          <div>
-            <label>Описание: </label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              style={{ resize: "none", height: "100px", width: "400px" }}
-              value={this.state.description}
-              onChange={this.onChangeDescription}
-            />
-          </div>
+            <div>
+              <label>Описание: </label>
+              <textarea
+                type="text"
+                required
+                className="form-control"
+                style={{ resize: "none", height: "100px", width: "400px" }}
+                value={this.state.description}
+                onChange={this.onChangeDescription}
+              />
+            </div>
 
-          <input
-            id="location-input-lat"
-            name="locationLat"
-            hidden
-            value=""
-          ></input>
-          <input
-            id="location-input-lng"
-            name="locationLng"
-            hidden
-            value=""
-          ></input>
+            <input
+              id="location-input-lat"
+              name="locationLat"
+              hidden
+              value={this.state.location.lat}
+            ></input>
+            <input
+              id="location-input-lng"
+              name="locationLng"
+              hidden
+              value={this.state.location.lng}
+            ></input>
 
-          <div className="form-group">
-            <button className="btn btn-primary btn-edit">Подтвредить изменения</button>           
+            <div className="form-group">
+              <button className="btn btn-primary btn-edit">
+                Подтвредить изменения
+              </button>
+            </div>
+
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-edit"
+                type="button"
+                onClick={() => {
+                  this.deleteLostDog(this.state._id);
+                }}
+              >
+                Удалить объявление
+              </button>
+            </div>
+          </form>
+          <div className="error-message">{this.props.message}</div>
+          <div className="mapwrap">
+            <Map className="mapwrap" getLocation={this.getLocation} />
           </div>
-          
-          <div className="form-group">
-          <button
-            className="btn btn-primary btn-edit"
-            type="button"
-            onClick={() => {
-              this.deleteLostDog(this.state._id);
-            }}
-          >
-             Удалить объявление
-          </button>
-          </div>
-        </form>
-        <div className="error-message">{this.props.message}</div>
-         {/* <div className="mapwrap"> 
-        <Map className="mapwrap" getLocation={this.getLocation} />
-        </div>   */}
-      </div>
+        </div>
       </>
     );
   }

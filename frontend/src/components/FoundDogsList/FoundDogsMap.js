@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 class FoundDogsMap extends Component {
   constructor(props) {
     super(props);
@@ -65,43 +65,60 @@ class FoundDogsMap extends Component {
 
   render() {
     return (
-      <div className="maps-app">
-        
-        <div
-          className="map-container"
-          style={{ position: "relative", height: "400px" }}
-        >
-          <Map
-            google={this.props.google}
-            zoom={10}
-            initialCenter={{ lat: 55.752376, lng: 37.6722358 }}
-            onClick={this.onMapClicked}
-          >
-            {this.state.list &&
-              this.state.list.map((dog, index) =>
-                this.renderMarkers(dog, index)
-              )}
-          </Map>
-        </div>
-        <div className="maps-list-container">
+      <>
         <h1>Список найденных собак</h1>
-          <ol className="list-group">
-            {this.state.list &&
-              this.state.list.map(dog => (
-                <li className="list-group-item" key={dog._id}>
-                  <span><b>Порода:</b> "{dog.dogData.breed}" </span>
-                  
-                  <span><b>Пол:</b>: "{dog.dogData.sex}" </span>
-                  <Link className="btn-maps btn btn-info" to={"/advert/found/" + dog._id}>Перейти к объявлению</Link>
-                </li>
-              ))}
-          </ol>
+        <div className="maps-app">
+          <div
+            className="map-container"
+            style={{ position: "relative", height: "400px" }}
+          >
+            <Map
+              google={this.props.google}
+              zoom={10}
+              initialCenter={{ lat: 55.752376, lng: 37.6722358 }}
+              onClick={this.onMapClicked}
+            >
+              {this.state.list &&
+                this.state.list.map((dog, index) =>
+                  this.renderMarkers(dog, index)
+                )}
+            </Map>
+          </div>
+          <div className="maps-list-container">
+            <ol className="list-group">
+              {this.state.list &&
+                this.state.list.map((dog, index) => (
+                  <li className="list-group-item" key={dog._id}>
+                    <div>
+                      <div>
+                        <b>{index + 1}</b>
+                      </div>
+                      <div>
+                        <div>
+                          <b>Порода: </b> {dog.dogData.breed}{" "}
+                        </div>
+                        <b>Пол: </b> {dog.dogData.sex}{" "}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Link
+                        className="btn-maps btn btn-info"
+                        to={"/advert/found/" + dog._id}
+                      >
+                        Перейти к объявлению
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+            </ol>
+          </div>
         </div>
-      </div >
+      </>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyA4kMIIQwBwC_BN98wv7uDKLKjGG4WPdAU"
+  apiKey: process.env.REACT_APP_API_KEY
 })(FoundDogsMap);

@@ -55,21 +55,34 @@ class App extends Component {
               </Link>
             </div>
             <div id="nav-main">
-              <Link className="color" to="/lost-dogs">Потерянные</Link>
-              <Link className="color" to="/found-dogs">Найденные</Link>
+              <Link className="color" to="/lost-dogs">
+                Потерянные
+              </Link>
+              <Link className="color" to="/found-dogs">
+                Найденные
+              </Link>
             </div>
             <div className="nav-auth">
               {this.props.logged ? (
                 <>
-                  <Link className="color" to={"/account/" + this.props.user._id}>
+                  <Link
+                    className="color"
+                    to={"/account/" + this.props.user._id}
+                  >
                     Личный кабинет
                   </Link>
-                  <Link className="color" to="/logout">Выход</Link>
+                  <Link className="color" to="/logout">
+                    Выход
+                  </Link>
                 </>
               ) : (
                 <>
-                  <Link className="color" to="/registration">Регистрация</Link>
-                  <Link className="color" to="/login">Вход</Link>
+                  <Link className="color" to="/registration">
+                    Регистрация
+                  </Link>
+                  <Link className="color" to="/login">
+                    Вход
+                  </Link>
                 </>
               )}
             </div>

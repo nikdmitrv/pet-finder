@@ -1,16 +1,15 @@
 const express = require("express");
 
 const FoundDogAdvertModel = require("../../models/FoundDogAdvertModel");
-const { Animal, Author } = require("../../models/schemas/AdvertSchema");
 const User = require("../../models/schemas/UserSchema");
 const router = express.Router();
-const PaginationHelper = require('../../utils/PaginationHelper')
+const PaginationHelper = require("../../utils/PaginationHelper");
 
 router.get("/", async (req, res) => {
   const response = await FoundDogAdvertModel.getAll();
   if (req.query.pages) {
-    const helper = new PaginationHelper(response, 3)
-    res.json({ all: helper.collection, pages: helper.paginated })
+    const helper = new PaginationHelper(response, 3);
+    res.json({ all: helper.collection, pages: helper.paginated });
   }
   res.json(response);
 });
@@ -52,7 +51,7 @@ router.route("/update/:id").post((req, res) => {
       dog.dogData.description = req.body.description;
       dog.dogData.sex = req.body.sex;
       dog.dogData.date = req.body.date;
-      // dog.location = req.body.location;
+      dog.location = req.body.location;
 
       dog
         .save()

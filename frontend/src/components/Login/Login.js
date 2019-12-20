@@ -26,10 +26,12 @@ class Login extends Component {
   render() {
     return (
       <>
-        <div class="reg">
+        <div className="reg">
           <div className="form-group row formReg">
             <form onSubmit={this.handleSubmit}>
-              <h1><b>Вход в профиль</b></h1>
+              <h1>
+                <b>Вход в профиль</b>
+              </h1>
               <div className="form-group mx-sm-3 mb-2">
                 <label>Email</label>
                 <input
