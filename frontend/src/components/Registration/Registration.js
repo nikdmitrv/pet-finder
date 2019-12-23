@@ -41,7 +41,9 @@ class Registration extends Component {
         <div className="reg">
           <div className="form-group row formReg">
             <form onSubmit={this.handleSubmit}>
-              <h1 id="h1-form">Форма регистрации</h1>
+              <h1 id="h1-form">
+                <b>Форма регистрации</b>
+              </h1>
               <div className="form-group mx-sm-3 mb-2">
                 <label>Имя</label>
                 <input className="form-control" name="name" required></input>
@@ -72,12 +74,12 @@ class Registration extends Component {
                   type="password"
                 ></input>
               </div>
-              <p>
+              <div>
                 <div className="error-message">{this.props.message}</div>
                 <button className="btn btn-info mb-2" type="submit">
                   Отправить
                 </button>
-              </p>
+              </div>
             </form>
           </div>
         </div>

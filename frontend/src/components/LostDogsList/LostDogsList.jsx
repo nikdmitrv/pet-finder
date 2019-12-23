@@ -41,10 +41,7 @@ class LostDogsList extends Component {
     const date = new Date(advert.createdAt);
     return (
       <div className="card cardList" key={advert._id}>
-        <img
-          alt="dog"
-          src={"/api/images/" + advert.dogData.image}
-        ></img>
+        <img alt="dog" src={"/api/images/" + advert.dogData.image}></img>
         <div>
           <b>Порода: </b>
           {advert.dogData.breed}
@@ -69,14 +66,18 @@ class LostDogsList extends Component {
   render() {
     return (
       <div>
-        <div className="filter-found">
-          <div>Поиск по фильтру</div>
-          <FilterForm handleFiltration={this.handleFiltration} />
-        </div>
-        <button className="btn btn-info btn-map">
-          <Link to="/lost-dogs/map">Посмотреть на карте</Link>
-        </button>
-        <h1>Список потерянных собак:</h1>
+        {this.state.allAdverts.length > 0 ? (
+          <>
+            <div className="filter-found">
+              <div>Поиск по фильтру</div>
+              <FilterForm handleFiltration={this.handleFiltration} />
+            </div>
+            <button className="btn btn-info btn-map">
+              <Link to="/found-dogs/map">Посмотреть на карте</Link>
+            </button>
+            <h1>Список потерянных собак:</h1>
+          </>
+        ) : null}
         <ul>
           {this.state.allAdverts && this.state.filtered
             ? this.state.filtered.map(advert => this.renderList(advert))

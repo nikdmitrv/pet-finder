@@ -215,7 +215,6 @@ export const fetchSessionAC = () => {
         const result = await response.json();
         dispatch(loginUserSuccessAC(result.currentUser));
       } else {
-        console.log(response);
         dispatch(logoutUserAC());
       }
     } catch (error) {

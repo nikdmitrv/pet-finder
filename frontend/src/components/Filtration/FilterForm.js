@@ -126,17 +126,8 @@ class FilterForm extends Component {
               ))}
             </select>
           </div>
-          <div className="form-group col-md-1">
-            <label>Пол:</label>
-            <span> </span>
-            <label htmlFor="sexFilterMale">М</label>
-            <input type="radio" name="sex" id="sexFilterMale" value="М" />
-            <label htmlFor="sexFilterFemale">Ж</label>
-            <input type="radio" name="sex" id="sexFilterFemale" value="Ж" />
-          </div>
 
           <div className="form-group col-md-3">
-            {/* <label htmlFor="dateFilter">Дата</label> */}
             <input
               placeholder="Дата"
               type="date"
@@ -144,6 +135,16 @@ class FilterForm extends Component {
               id="dateFilter"
               className="form-control"
             />
+          </div>
+          <div
+            className="btn-group btn-group-toggle btn-group-toggle"
+            data-toggle="buttons"
+          >
+            <input type="radio" value="Ж" id="sexFilterFemale" name="sex" />
+            <label htmlFor="sexFilterFemale">Ж</label>
+
+            <input value="М" type="radio" id="sexFilterMale" name="sex" />
+            <label htmlFor="sexFilterMale">М</label>
           </div>
           <div className="form-group col-md-1">
             <button className="btn btn-info btn-filter">Фильтр</button>

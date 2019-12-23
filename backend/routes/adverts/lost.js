@@ -1,7 +1,6 @@
 const express = require("express");
 
 const LostDogAdvertModel = require("../../models/LostDogAdvertModel");
-const { Animal, Author } = require("../../models/schemas/AdvertSchema");
 const User = require("../../models/schemas/UserSchema");
 const router = express.Router();
 
@@ -40,7 +39,7 @@ router.route("/update/:id").post((req, res) => {
       dog.dogData.description = req.body.description;
       dog.dogData.sex = req.body.sex;
       dog.dogData.date = req.body.date;
-      // dog.location = req.body.location;
+      dog.location = req.body.location;
 
       dog
         .save()

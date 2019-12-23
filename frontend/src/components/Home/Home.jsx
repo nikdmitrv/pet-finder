@@ -32,7 +32,7 @@ class Home extends Component {
             <b>Порода: </b>
             {dog.dogData.breed}
           </h5>
-          <p class="card-text">
+          <p className="card-text">
             <b>Описание: </b>
             {dog.dogData.description.length > 30
               ? dog.dogData.description.slice(0, 30) + "..."
@@ -42,7 +42,7 @@ class Home extends Component {
             <b>Пол: </b>
             {dog.dogData.sex}
           </span>
-          <Link to={"/advert/found/" + dog._id} class="btn btn-primary">
+          <Link to={"/advert/found/" + dog._id} className="btn btn-primary">
             Перейти к объявлению
           </Link>
         </div>
@@ -63,7 +63,7 @@ class Home extends Component {
             <b>Порода: </b>
             {dog.dogData.breed}
           </h5>
-          <p class="card-text">
+          <p className="card-text">
             <b>Описание: </b>
             {dog.dogData.description.length > 30
               ? dog.dogData.description.slice(0, 30) + "..."
@@ -73,7 +73,7 @@ class Home extends Component {
             <b>Пол: </b>
             {dog.dogData.sex}
           </span>
-          <Link to={"/advert/lost/" + dog._id} class="btn btn-primary">
+          <Link to={"/advert/lost/" + dog._id} className="btn btn-primary">
             Перейти к объявлению
           </Link>
         </div>
@@ -111,15 +111,19 @@ class Home extends Component {
 
   render() {
     const settings = {
+      row: 2,
       dots: true,
+      swipe: true,
       slidesPerRow: 3,
-      wheelScroll: 1,
-      // autoplay: true,
-      // duration: 300,
-      // shift: 40,
+      // slidesToShow: 3,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      pauseOnHover: true,
+      duration: 20,
+      shift: 800,
       centerMode: true,
-      arrowsScroll: 3
-      //  centerPadding: 130,
+      centerPadding: 30,
+      initialSlide: 1
     };
     return (
       <>
@@ -132,7 +136,7 @@ class Home extends Component {
         </div>
         <div className="App">
           <div className="homeMain">
-            <h2>Последние потерянные </h2>
+            <h1>Последние потерянные </h1>
 
             <Slider {...settings}>
               {this.state.lostDogs.length > 0 ? (
@@ -142,7 +146,7 @@ class Home extends Component {
               )}
             </Slider>
 
-            <h2>Последние найденные</h2>
+            <h1>Последние найденные</h1>
 
             <Slider {...settings}>
               {this.state.foundDogs.length > 0 ? (

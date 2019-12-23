@@ -27,24 +27,31 @@ class FindMatchesFound extends Component {
     const date = new Date(advert.createdAt);
     return (
       <div className="card cardList" key={advert._id}>
-        <div>Собака найдена:</div>
-        <img
-          alt="dog"
-          src={"/api/images/" + advert.dogData.image}
-        ></img>
-        <div>Порода: {advert.dogData.breed}</div>
-        <div>Пол: {advert.dogData.sex}</div>
+        <img alt="dog" src={"/api/images/" + advert.dogData.image}></img>
+        <div>
+          <b>Порода: </b>
+          {advert.dogData.breed}
+        </div>
+        <div>
+          <b>Пол: </b>
+          {advert.dogData.sex}
+        </div>
         {/* <div>
           {advert.dogData.description.length > 30
             ? advert.dogData.description.slice(0, 30) + "..."
             : advert.dogData.description}
         </div> */}
-        <div>Нашедший:</div>
-        <div>{advert.authorData.name}, {advert.authorData.email}</div>
+        <div>
+          <b>Нашедший: </b>{advert.authorData.name}, {advert.authorData.email}
+        </div>
+        {/* <div>{advert.authorData.name},</div>
         <div>{advert.authorData.email}</div>
-        <div>{advert.authorData.phoneNumber}</div>
-        <div>Дата объявления:</div>
-        <div>{date.toLocaleDateString("ru")}</div>
+        <div>{advert.authorData.phoneNumber}</div> */}
+        <div>
+          <b>Дата объявления: </b>
+          {date.toLocaleDateString("ru")}
+        </div>
+
         <Link className="btn btn-primary" to={"/advert/lost/" + advert._id}>
           Перейти к объявлению
         </Link>
