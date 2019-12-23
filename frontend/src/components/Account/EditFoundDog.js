@@ -164,7 +164,6 @@ class EditFoundDog extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const dog = {
       breed: e.target.dogBreed.value,
       description: this.state.description,

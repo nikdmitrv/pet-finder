@@ -167,6 +167,7 @@ class EditLostDog extends Component {
       console.log(response.data);
     });
 
+
     this.setState({
       breed: "",
       description: "",
@@ -191,6 +192,7 @@ class EditLostDog extends Component {
     axios
       .post("/api/lost/update/" + this.props.match.params.id, dog)
       .then(() => (window.location = "/account/" + this.props.user._id));
+
   }
 
   getLocation = location => {
@@ -248,7 +250,6 @@ class EditLostDog extends Component {
               hidden
               value={this.state.location.lng}
             ></input>
-
             <div className="form-group">
               <button className="btn btn-primary btn-edit">
                 Подтвредить изменения

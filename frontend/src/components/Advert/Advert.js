@@ -69,6 +69,7 @@ class Advert extends Component {
             Назад
           </Link>
           <AdvertMap location={this.state.advertData.location} />
+
         </div>
       </div>
     ) : (
