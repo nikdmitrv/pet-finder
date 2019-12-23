@@ -1,5 +1,5 @@
-# Ищейка
 ![Petfinder Logo](https://downloader.disk.yandex.ru/preview/cd76302508faff9a3e046a6f83034c53a923600ef4ee4914a23c02a881d69cbb/5e00f00d/Kcr1DKrPn6SBsxdLj7VUWgmw6NnbJdKK2wEXo6mA_jJxa8cuiwbhy7ZX9ZaRrGxQNPRIgS82xX_HoHepYKZRTw==?uid=0&filename=Ischeika+Project.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&owner_uid=110882331&size=1440x789)
+# Ищейка
 Ищейка - это веб-приложение которое помогает найти потерянных животных. 
 
 ## Наша миссия
